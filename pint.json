@@ -1,0 +1,24 @@
+{
+    "preset": "laravel",
+    "rules": {
+        "blank_line_before_statement": {
+            "statements": [
+                "continue",
+                "declare",
+                "return",
+                "throw",
+                "try"
+            ]
+        },
+        "concat_space": {
+            "spacing": "none"
+        },
+        "method_argument_space": {
+            "on_multiline": "ensure_fully_multiline"
+        },
+        "ordered_imports": {
+            "sort_algorithm": "alpha"
+        },
+        "single_trait_insert_per_statement": true
+    }
+}
