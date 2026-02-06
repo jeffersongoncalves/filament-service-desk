@@ -31,21 +31,21 @@ class ServiceDeskUserPlugin implements Plugin
     public function register(Panel $panel): void
     {
         $resources = [
-            Resources\User\TicketResource::class,
+            User\Resources\TicketResource::class,
         ];
 
         $pages = [];
 
         $widgets = [
-            Widgets\User\MyTicketsOverviewWidget::class,
+            User\Widgets\MyTicketsOverviewWidget::class,
         ];
 
         if ($this->hasServiceCatalog()) {
-            $resources[] = Resources\User\ServiceRequestResource::class;
+            $resources[] = User\Resources\ServiceRequestResource::class;
         }
 
         if ($this->hasKnowledgeBase()) {
-            $pages[] = Pages\User\KnowledgeBasePage::class;
+            $pages[] = User\Pages\KnowledgeBasePage::class;
         }
 
         $panel

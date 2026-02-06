@@ -31,45 +31,45 @@ class ServiceDeskPlugin implements Plugin
     public function register(Panel $panel): void
     {
         $resources = [
-            Resources\Admin\DepartmentResource::class,
-            Resources\Admin\CategoryResource::class,
-            Resources\Admin\TagResource::class,
-            Resources\Admin\CannedResponseResource::class,
-            Resources\Admin\TicketResource::class,
+            Admin\Resources\DepartmentResource::class,
+            Admin\Resources\CategoryResource::class,
+            Admin\Resources\TagResource::class,
+            Admin\Resources\CannedResponseResource::class,
+            Admin\Resources\TicketResource::class,
         ];
 
         $widgets = [
-            Widgets\Admin\ServiceDeskOverviewWidget::class,
+            Admin\Widgets\ServiceDeskOverviewWidget::class,
         ];
 
         if ($this->hasSla()) {
             $resources = array_merge($resources, [
-                Resources\Admin\SlaPolicyResource::class,
-                Resources\Admin\EscalationRuleResource::class,
-                Resources\Admin\BusinessHoursScheduleResource::class,
+                Admin\Resources\SlaPolicyResource::class,
+                Admin\Resources\EscalationRuleResource::class,
+                Admin\Resources\BusinessHoursScheduleResource::class,
             ]);
-            $widgets[] = Widgets\Admin\SlaComplianceWidget::class;
+            $widgets[] = Admin\Widgets\SlaComplianceWidget::class;
         }
 
         if ($this->hasEmailChannels()) {
-            $resources[] = Resources\Admin\EmailChannelResource::class;
+            $resources[] = Admin\Resources\EmailChannelResource::class;
         }
 
         if ($this->hasKnowledgeBase()) {
             $resources = array_merge($resources, [
-                Resources\Admin\KbArticleResource::class,
-                Resources\Admin\KbCategoryResource::class,
+                Admin\Resources\KbArticleResource::class,
+                Admin\Resources\KbCategoryResource::class,
             ]);
         }
 
         if ($this->hasServiceCatalog()) {
             $resources = array_merge($resources, [
-                Resources\Admin\ServiceResource::class,
-                Resources\Admin\ServiceCategoryResource::class,
+                Admin\Resources\ServiceResource::class,
+                Admin\Resources\ServiceCategoryResource::class,
             ]);
         }
 
-        $widgets[] = Widgets\Admin\TicketsByDepartmentWidget::class;
+        $widgets[] = Admin\Widgets\TicketsByDepartmentWidget::class;
 
         $panel
             ->resources($resources)
