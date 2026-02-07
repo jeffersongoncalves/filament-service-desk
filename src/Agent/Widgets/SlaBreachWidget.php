@@ -13,7 +13,7 @@ class SlaBreachWidget extends TableWidget
 
     protected int | string | array $columnSpan = 'full';
 
-    protected static ?string $heading = null;
+    protected ?string $heading = null;
 
     public function getTableHeading(): ?string
     {

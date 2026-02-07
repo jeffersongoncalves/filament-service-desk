@@ -7,7 +7,7 @@ use JeffersonGoncalves\ServiceDesk\Models\Department;
 
 class TicketsByDepartmentWidget extends ChartWidget
 {
-    protected static ?string $heading = null;
+    protected ?string $heading = null;
 
     protected static ?int $sort = 3;
 
