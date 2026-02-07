@@ -3,8 +3,10 @@
 namespace JeffersonGoncalves\FilamentServiceDesk\Admin\Resources;
 
 use BackedEnum;
+use Filament\Actions;
 use Filament\Forms;
 use Filament\Resources\Resource;
+use Filament\Schemas;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables;
@@ -40,9 +42,9 @@ class ServiceResource extends Resource
     {
         return $schema
             ->schema([
-                Forms\Components\Group::make()
+                Schemas\Components\Group::make()
                     ->schema([
-                        Forms\Components\Section::make(__('filament-service-desk::service-desk.sections.general'))
+                        Schemas\Components\Section::make(__('filament-service-desk::service-desk.sections.general'))
                             ->schema([
                                 Forms\Components\TextInput::make('name')
                                     ->label(__('filament-service-desk::service-desk.fields.name'))
@@ -64,9 +66,9 @@ class ServiceResource extends Resource
                     ])
                     ->columnSpan(['lg' => 2]),
 
-                Forms\Components\Group::make()
+                Schemas\Components\Group::make()
                     ->schema([
-                        Forms\Components\Section::make(__('filament-service-desk::service-desk.sections.settings'))
+                        Schemas\Components\Section::make(__('filament-service-desk::service-desk.sections.settings'))
                             ->schema([
                                 Forms\Components\Select::make('category_id')
                                     ->label(__('filament-service-desk::service-desk.fields.category'))
@@ -156,12 +158,12 @@ class ServiceResource extends Resource
                     ->label(__('filament-service-desk::service-desk.fields.is_active')),
             ])
             ->recordActions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Actions\EditAction::make(),
+                Actions\DeleteAction::make(),
             ])
             ->toolbarActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+                Actions\BulkActionGroup::make([
+                    Actions\DeleteBulkAction::make(),
                 ]),
             ]);
     }

@@ -3,8 +3,10 @@
 namespace JeffersonGoncalves\FilamentServiceDesk\Admin\Resources;
 
 use BackedEnum;
+use Filament\Actions;
 use Filament\Forms;
 use Filament\Resources\Resource;
+use Filament\Schemas;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables;
@@ -39,7 +41,7 @@ class BusinessHoursScheduleResource extends Resource
     {
         return $schema
             ->schema([
-                Forms\Components\Section::make()
+                Schemas\Components\Section::make()
                     ->schema([
                         Forms\Components\TextInput::make('name')
                             ->label(__('filament-service-desk::service-desk.fields.name'))
@@ -94,12 +96,12 @@ class BusinessHoursScheduleResource extends Resource
                     ->label(__('filament-service-desk::service-desk.fields.is_active')),
             ])
             ->recordActions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Actions\EditAction::make(),
+                Actions\DeleteAction::make(),
             ])
             ->toolbarActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+                Actions\BulkActionGroup::make([
+                    Actions\DeleteBulkAction::make(),
                 ]),
             ]);
     }

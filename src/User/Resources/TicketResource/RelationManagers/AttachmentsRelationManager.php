@@ -2,6 +2,7 @@
 
 namespace JeffersonGoncalves\FilamentServiceDesk\User\Resources\TicketResource\RelationManagers;
 
+use Filament\Actions;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables;
@@ -34,7 +35,7 @@ class AttachmentsRelationManager extends RelationManager
             ])
             ->defaultSort('created_at', 'desc')
             ->recordActions([
-                Tables\Actions\Action::make('download')
+                Actions\Action::make('download')
                     ->label(__('filament-service-desk::service-desk.actions.download'))
                     ->icon(Heroicon::ArrowDownTray)
                     ->url(fn ($record) => $record->getUrl())

@@ -3,8 +3,10 @@
 namespace JeffersonGoncalves\FilamentServiceDesk\Admin\Resources;
 
 use BackedEnum;
+use Filament\Actions;
 use Filament\Forms;
 use Filament\Resources\Resource;
+use Filament\Schemas;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables;
@@ -38,7 +40,7 @@ class EmailChannelResource extends Resource
     {
         return $schema
             ->schema([
-                Forms\Components\Section::make(__('filament-service-desk::service-desk.sections.general'))
+                Schemas\Components\Section::make(__('filament-service-desk::service-desk.sections.general'))
                     ->schema([
                         Forms\Components\TextInput::make('name')
                             ->label(__('filament-service-desk::service-desk.fields.name'))
@@ -72,7 +74,7 @@ class EmailChannelResource extends Resource
                     ])
                     ->columns(2),
 
-                Forms\Components\Section::make(__('filament-service-desk::service-desk.sections.imap_settings'))
+                Schemas\Components\Section::make(__('filament-service-desk::service-desk.sections.imap_settings'))
                     ->schema([
                         Forms\Components\TextInput::make('settings.host')
                             ->label(__('filament-service-desk::service-desk.fields.host'))
@@ -103,7 +105,7 @@ class EmailChannelResource extends Resource
                     ->columns(2)
                     ->visible(fn (Forms\Get $get) => $get('driver') === 'imap'),
 
-                Forms\Components\Section::make(__('filament-service-desk::service-desk.sections.api_settings'))
+                Schemas\Components\Section::make(__('filament-service-desk::service-desk.sections.api_settings'))
                     ->schema([
                         Forms\Components\TextInput::make('settings.api_key')
                             ->label(__('filament-service-desk::service-desk.fields.api_key'))
@@ -166,12 +168,12 @@ class EmailChannelResource extends Resource
                     ->label(__('filament-service-desk::service-desk.fields.is_active')),
             ])
             ->recordActions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Actions\EditAction::make(),
+                Actions\DeleteAction::make(),
             ])
             ->toolbarActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+                Actions\BulkActionGroup::make([
+                    Actions\DeleteBulkAction::make(),
                 ]),
             ]);
     }

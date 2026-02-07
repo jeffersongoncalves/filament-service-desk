@@ -3,6 +3,7 @@
 namespace JeffersonGoncalves\FilamentServiceDesk\Agent\Resources;
 
 use BackedEnum;
+use Filament\Actions;
 use Filament\Resources\Resource;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables;
@@ -60,7 +61,7 @@ class CannedResponseResource extends Resource
                     ->relationship('department', 'name'),
             ])
             ->recordActions([
-                Tables\Actions\ViewAction::make(),
+                Actions\ViewAction::make(),
             ]);
     }
 

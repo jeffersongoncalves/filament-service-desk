@@ -2,6 +2,7 @@
 
 namespace JeffersonGoncalves\FilamentServiceDesk\Agent\Resources\TicketResource\RelationManagers;
 
+use Filament\Actions;
 use Filament\Forms;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
@@ -52,7 +53,7 @@ class CommentsRelationManager extends RelationManager
             ])
             ->defaultSort('created_at', 'desc')
             ->headerActions([
-                Tables\Actions\Action::make('addReply')
+                Actions\Action::make('addReply')
                     ->label(__('filament-service-desk::service-desk.actions.add_reply'))
                     ->form([
                         Forms\Components\RichEditor::make('body')
@@ -66,7 +67,7 @@ class CommentsRelationManager extends RelationManager
                             $data['body'],
                         );
                     }),
-                Tables\Actions\Action::make('addNote')
+                Actions\Action::make('addNote')
                     ->label(__('filament-service-desk::service-desk.actions.add_note'))
                     ->color('warning')
                     ->form([

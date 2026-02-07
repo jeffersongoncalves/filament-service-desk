@@ -2,6 +2,7 @@
 
 namespace JeffersonGoncalves\FilamentServiceDesk\User\Resources\TicketResource\RelationManagers;
 
+use Filament\Actions;
 use Filament\Forms;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
@@ -38,7 +39,7 @@ class CommentsRelationManager extends RelationManager
             ])
             ->defaultSort('created_at', 'desc')
             ->headerActions([
-                Tables\Actions\Action::make('reply')
+                Actions\Action::make('reply')
                     ->label(__('filament-service-desk::service-desk.actions.reply'))
                     ->form([
                         Forms\Components\RichEditor::make('body')

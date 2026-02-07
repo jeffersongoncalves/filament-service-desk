@@ -3,9 +3,11 @@
 namespace JeffersonGoncalves\FilamentServiceDesk\Agent\Resources;
 
 use BackedEnum;
+use Filament\Actions;
 use Filament\Forms;
 use Filament\Infolists;
 use Filament\Resources\Resource;
+use Filament\Schemas;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables;
@@ -64,26 +66,27 @@ class TicketResource extends Resource
     {
         return $schema
             ->schema([
-                Forms\Components\Group::make()
+                Schemas\Components\Group::make()
                     ->schema([
-                        Forms\Components\Section::make(__('filament-service-desk::service-desk.sections.ticket_details'))
+                        Schemas\Components\Section::make(__('filament-service-desk::service-desk.sections.ticket_details'))
                             ->schema([
-                                Forms\Components\Placeholder::make('title')
+                                Infolists\Components\TextEntry::make('title')
                                     ->label(__('filament-service-desk::service-desk.fields.title'))
-                                    ->content(fn (Ticket $record) => $record->title),
-                                Forms\Components\Placeholder::make('description')
+                                    ->state(fn (Ticket $record) => $record->title),
+                                Infolists\Components\TextEntry::make('description')
                                     ->label(__('filament-service-desk::service-desk.fields.description'))
-                                    ->content(fn (Ticket $record) => new \Illuminate\Support\HtmlString($record->description)),
-                                Forms\Components\Placeholder::make('user_name')
+                                    ->html()
+                                    ->state(fn (Ticket $record) => $record->description),
+                                Infolists\Components\TextEntry::make('user_name')
                                     ->label(__('filament-service-desk::service-desk.fields.requester'))
-                                    ->content(fn (Ticket $record) => $record->user?->name ?? '—'),
+                                    ->state(fn (Ticket $record) => $record->user?->name ?? '—'),
                             ]),
                     ])
                     ->columnSpan(['lg' => 2]),
 
-                Forms\Components\Group::make()
+                Schemas\Components\Group::make()
                     ->schema([
-                        Forms\Components\Section::make(__('filament-service-desk::service-desk.sections.manage'))
+                        Schemas\Components\Section::make(__('filament-service-desk::service-desk.sections.manage'))
                             ->schema([
                                 Forms\Components\Select::make('status')
                                     ->label(__('filament-service-desk::service-desk.fields.status'))
@@ -94,23 +97,24 @@ class TicketResource extends Resource
                                     ->options(collect(TicketPriority::cases())->mapWithKeys(fn ($p) => [$p->value => $p->label()]))
                                     ->required(),
                             ]),
-                        Forms\Components\Section::make(__('filament-service-desk::service-desk.sections.info'))
+                        Schemas\Components\Section::make(__('filament-service-desk::service-desk.sections.info'))
                             ->schema([
-                                Forms\Components\Placeholder::make('reference_number')
+                                Infolists\Components\TextEntry::make('reference_number')
                                     ->label(__('filament-service-desk::service-desk.fields.reference_number'))
-                                    ->content(fn (Ticket $record) => $record->reference_number),
-                                Forms\Components\Placeholder::make('department_name')
+                                    ->state(fn (Ticket $record) => $record->reference_number),
+                                Infolists\Components\TextEntry::make('department.name')
                                     ->label(__('filament-service-desk::service-desk.fields.department'))
-                                    ->content(fn (Ticket $record) => $record->department?->name ?? '—'),
-                                Forms\Components\Placeholder::make('category_name')
+                                    ->placeholder('—'),
+                                Infolists\Components\TextEntry::make('category.name')
                                     ->label(__('filament-service-desk::service-desk.fields.category'))
-                                    ->content(fn (Ticket $record) => $record->category?->name ?? '—'),
-                                Forms\Components\Placeholder::make('created_at')
+                                    ->placeholder('—'),
+                                Infolists\Components\TextEntry::make('created_at')
                                     ->label(__('filament-service-desk::service-desk.fields.created_at'))
-                                    ->content(fn (Ticket $record) => $record->created_at?->diffForHumans()),
-                                Forms\Components\Placeholder::make('due_at')
+                                    ->since(),
+                                Infolists\Components\TextEntry::make('due_at')
                                     ->label(__('filament-service-desk::service-desk.fields.due_at'))
-                                    ->content(fn (Ticket $record) => $record->due_at?->diffForHumans() ?? '—'),
+                                    ->since()
+                                    ->placeholder('—'),
                             ]),
                     ])
                     ->columnSpan(['lg' => 1]),
@@ -122,9 +126,9 @@ class TicketResource extends Resource
     {
         return $schema
             ->schema([
-                Infolists\Components\Group::make()
+                Schemas\Components\Group::make()
                     ->schema([
-                        Infolists\Components\Section::make(__('filament-service-desk::service-desk.sections.ticket_details'))
+                        Schemas\Components\Section::make(__('filament-service-desk::service-desk.sections.ticket_details'))
                             ->schema([
                                 Infolists\Components\TextEntry::make('title')
                                     ->label(__('filament-service-desk::service-desk.fields.title'))
@@ -140,9 +144,9 @@ class TicketResource extends Resource
                     ])
                     ->columnSpan(['lg' => 2]),
 
-                Infolists\Components\Group::make()
+                Schemas\Components\Group::make()
                     ->schema([
-                        Infolists\Components\Section::make(__('filament-service-desk::service-desk.sections.manage'))
+                        Schemas\Components\Section::make(__('filament-service-desk::service-desk.sections.manage'))
                             ->schema([
                                 Infolists\Components\TextEntry::make('status')
                                     ->label(__('filament-service-desk::service-desk.fields.status'))
@@ -167,7 +171,7 @@ class TicketResource extends Resource
                                         TicketPriority::Urgent => 'danger',
                                     }),
                             ]),
-                        Infolists\Components\Section::make(__('filament-service-desk::service-desk.sections.info'))
+                        Schemas\Components\Section::make(__('filament-service-desk::service-desk.sections.info'))
                             ->schema([
                                 Infolists\Components\TextEntry::make('reference_number')
                                     ->label(__('filament-service-desk::service-desk.fields.reference_number')),
@@ -246,9 +250,9 @@ class TicketResource extends Resource
                     ->options(collect(TicketPriority::cases())->mapWithKeys(fn ($p) => [$p->value => $p->label()])),
             ])
             ->recordActions([
-                Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\Action::make('close')
+                Actions\ViewAction::make(),
+                Actions\EditAction::make(),
+                Actions\Action::make('close')
                     ->label(__('filament-service-desk::service-desk.actions.close'))
                     ->icon(Heroicon::XCircle)
                     ->color('danger')
