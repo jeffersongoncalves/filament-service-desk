@@ -70,13 +70,13 @@ class TicketResource extends Resource
                             ->searchable()
                             ->preload()
                             ->live()
-                            ->afterStateUpdated(fn (Forms\Set $set) => $set('category_id', null)),
+                            ->afterStateUpdated(fn (Schemas\Components\Utilities\Set $set) => $set('category_id', null)),
                         Forms\Components\Select::make('category_id')
                             ->label(__('filament-service-desk::service-desk.fields.category'))
                             ->relationship(
                                 'category',
                                 'name',
-                                fn ($query, Forms\Get $get) => $query
+                                fn ($query, Schemas\Components\Utilities\Get $get) => $query
                                     ->where('department_id', $get('department_id'))
                                     ->where('is_active', true)
                             )

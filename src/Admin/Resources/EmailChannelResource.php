@@ -103,7 +103,7 @@ class EmailChannelResource extends Resource
                             ->default('INBOX'),
                     ])
                     ->columns(2)
-                    ->visible(fn (Forms\Get $get) => $get('driver') === 'imap'),
+                    ->visible(fn (Schemas\Components\Utilities\Get $get) => $get('driver') === 'imap'),
 
                 Schemas\Components\Section::make(__('filament-service-desk::service-desk.sections.api_settings'))
                     ->schema([
@@ -113,13 +113,13 @@ class EmailChannelResource extends Resource
                             ->required(),
                         Forms\Components\TextInput::make('settings.domain')
                             ->label(__('filament-service-desk::service-desk.fields.domain'))
-                            ->visible(fn (Forms\Get $get) => $get('driver') === 'mailgun'),
+                            ->visible(fn (Schemas\Components\Utilities\Get $get) => $get('driver') === 'mailgun'),
                         Forms\Components\TextInput::make('settings.webhook_secret')
                             ->label(__('filament-service-desk::service-desk.fields.webhook_secret'))
                             ->password(),
                     ])
                     ->columns(2)
-                    ->visible(fn (Forms\Get $get) => in_array($get('driver'), ['mailgun', 'sendgrid', 'resend', 'postmark'])),
+                    ->visible(fn (Schemas\Components\Utilities\Get $get) => in_array($get('driver'), ['mailgun', 'sendgrid', 'resend', 'postmark'])),
             ]);
     }
 
