@@ -12,7 +12,7 @@ class AgentDashboardPage extends Page
 
     protected static ?int $navigationSort = -1;
 
-    protected static string $view = 'filament-service-desk::pages.agent.dashboard';
+    protected string $view = 'filament-service-desk::pages.agent.dashboard';
 
     public static function getNavigationGroup(): ?string
     {

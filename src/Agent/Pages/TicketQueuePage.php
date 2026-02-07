@@ -25,7 +25,7 @@ class TicketQueuePage extends Page implements HasTable
 
     protected static ?int $navigationSort = 1;
 
-    protected static string $view = 'filament-service-desk::pages.agent.ticket-queue';
+    protected string $view = 'filament-service-desk::pages.agent.ticket-queue';
 
     public static function getNavigationGroup(): ?string
     {

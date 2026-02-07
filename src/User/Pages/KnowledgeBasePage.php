@@ -16,7 +16,7 @@ class KnowledgeBasePage extends Page
 
     protected static ?int $navigationSort = 10;
 
-    protected static string $view = 'filament-service-desk::pages.user.knowledge-base';
+    protected string $view = 'filament-service-desk::pages.user.knowledge-base';
 
     #[Url]
     public ?string $search = null;
