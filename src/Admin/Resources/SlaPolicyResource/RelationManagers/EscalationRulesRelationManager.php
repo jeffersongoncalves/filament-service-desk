@@ -43,7 +43,7 @@ class EscalationRulesRelationManager extends RelationManager
                     ->label(__('filament-service-desk::service-desk.fields.action'))
                     ->options(collect(EscalationAction::cases())->mapWithKeys(fn ($a) => [$a->value => $a->name]))
                     ->required()
-                    ->reactive(),
+                    ->live(),
                 Forms\Components\KeyValue::make('action_config')
                     ->label(__('filament-service-desk::service-desk.fields.action_config'))
                     ->columnSpanFull(),

@@ -5,6 +5,7 @@ namespace JeffersonGoncalves\FilamentServiceDesk\Admin\Resources\TicketResource\
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
+use Filament\Support\Icons\Heroicon;
 use Filament\Tables;
 use Filament\Tables\Table;
 use JeffersonGoncalves\ServiceDesk\Services\AttachmentService;
@@ -55,7 +56,7 @@ class AttachmentsRelationManager extends RelationManager
             ->actions([
                 Tables\Actions\Action::make('download')
                     ->label(__('filament-service-desk::service-desk.actions.download'))
-                    ->icon('heroicon-o-arrow-down-tray')
+                    ->icon(Heroicon::ArrowDownTray)
                     ->url(fn ($record) => $record->getUrl())
                     ->openUrlInNewTab(),
                 Tables\Actions\DeleteAction::make()

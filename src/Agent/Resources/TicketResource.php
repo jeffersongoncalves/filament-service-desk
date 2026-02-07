@@ -7,6 +7,7 @@ use Filament\Forms\Form;
 use Filament\Infolists;
 use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
+use Filament\Support\Icons\Heroicon;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -249,7 +250,7 @@ class TicketResource extends Resource
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\Action::make('close')
                     ->label(__('filament-service-desk::service-desk.actions.close'))
-                    ->icon('heroicon-o-x-circle')
+                    ->icon(Heroicon::XCircle)
                     ->color('danger')
                     ->requiresConfirmation()
                     ->action(fn (Ticket $record) => app(TicketService::class)->close($record, auth()->user()))

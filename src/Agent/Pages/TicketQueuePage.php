@@ -3,6 +3,7 @@
 namespace JeffersonGoncalves\FilamentServiceDesk\Agent\Pages;
 
 use Filament\Pages\Page;
+use Filament\Support\Icons\Heroicon;
 use Filament\Tables;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
@@ -97,7 +98,7 @@ class TicketQueuePage extends Page implements HasTable
             ->actions([
                 Tables\Actions\Action::make('claim')
                     ->label(__('filament-service-desk::service-desk.actions.claim'))
-                    ->icon('heroicon-o-hand-raised')
+                    ->icon(Heroicon::HandRaised)
                     ->color('primary')
                     ->requiresConfirmation()
                     ->action(function (Ticket $record) {

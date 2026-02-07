@@ -1,0 +1,13 @@
+/* Filament Service Desk - Custom Styles */
+
+.fi-service-desk-kb .prose {
+    max-width: none;
+}
+
+.fi-service-desk-kb-category {
+    cursor: pointer;
+}
+
+.fi-service-desk-kb-article {
+    cursor: pointer;
+}

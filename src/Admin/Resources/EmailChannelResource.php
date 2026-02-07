@@ -63,7 +63,7 @@ class EmailChannelResource extends Resource
                                 'postmark' => 'Postmark',
                             ])
                             ->required()
-                            ->reactive(),
+                            ->live(),
                         Forms\Components\Toggle::make('is_active')
                             ->label(__('filament-service-desk::service-desk.fields.is_active'))
                             ->default(true),

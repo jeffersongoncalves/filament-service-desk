@@ -4,6 +4,7 @@ namespace JeffersonGoncalves\FilamentServiceDesk\Admin\Resources\KbArticleResour
 
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
+use Filament\Support\Icons\Heroicon;
 use JeffersonGoncalves\FilamentServiceDesk\Admin\Resources\KbArticleResource;
 use JeffersonGoncalves\ServiceDesk\Services\KnowledgeBaseService;
 
@@ -16,13 +17,13 @@ class EditKbArticle extends EditRecord
         return [
             Actions\Action::make('publish')
                 ->label(__('filament-service-desk::service-desk.actions.publish'))
-                ->icon('heroicon-o-globe-alt')
+                ->icon(Heroicon::GlobeAlt)
                 ->color('success')
                 ->action(fn () => app(KnowledgeBaseService::class)->publishArticle($this->record))
                 ->visible(fn () => $this->record->status !== \JeffersonGoncalves\ServiceDesk\Enums\ArticleStatus::Published),
             Actions\Action::make('archive')
                 ->label(__('filament-service-desk::service-desk.actions.archive'))
-                ->icon('heroicon-o-archive-box')
+                ->icon(Heroicon::ArchiveBox)
                 ->color('warning')
                 ->action(fn () => app(KnowledgeBaseService::class)->archiveArticle($this->record))
                 ->visible(fn () => $this->record->status === \JeffersonGoncalves\ServiceDesk\Enums\ArticleStatus::Published),

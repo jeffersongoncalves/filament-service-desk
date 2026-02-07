@@ -3,6 +3,7 @@
 namespace JeffersonGoncalves\FilamentServiceDesk\Agent\Resources\TicketResource\RelationManagers;
 
 use Filament\Resources\RelationManagers\RelationManager;
+use Filament\Support\Icons\Heroicon;
 use Filament\Tables;
 use Filament\Tables\Table;
 
@@ -37,7 +38,7 @@ class AttachmentsRelationManager extends RelationManager
             ->actions([
                 Tables\Actions\Action::make('download')
                     ->label(__('filament-service-desk::service-desk.actions.download'))
-                    ->icon('heroicon-o-arrow-down-tray')
+                    ->icon(Heroicon::ArrowDownTray)
                     ->url(fn ($record) => $record->getUrl())
                     ->openUrlInNewTab(),
             ]);

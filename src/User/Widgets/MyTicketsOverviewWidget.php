@@ -2,6 +2,7 @@
 
 namespace JeffersonGoncalves\FilamentServiceDesk\User\Widgets;
 
+use Filament\Support\Icons\Heroicon;
 use Filament\Widgets\StatsOverviewWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 use JeffersonGoncalves\ServiceDesk\Enums\TicketStatus;
@@ -23,14 +24,14 @@ class MyTicketsOverviewWidget extends StatsOverviewWidget
                 __('filament-service-desk::service-desk.widgets.my_tickets.total'),
                 (clone $myTicketsQuery)->count()
             )
-                ->icon('heroicon-o-ticket'),
+                ->icon(Heroicon::Ticket),
             Stat::make(
                 __('filament-service-desk::service-desk.widgets.my_tickets.open'),
                 (clone $myTicketsQuery)
                     ->whereNotIn('status', [TicketStatus::Closed->value, TicketStatus::Resolved->value])
                     ->count()
             )
-                ->icon('heroicon-o-exclamation-circle')
+                ->icon(Heroicon::ExclamationCircle)
                 ->color('info'),
             Stat::make(
                 __('filament-service-desk::service-desk.widgets.my_tickets.resolved'),
@@ -38,7 +39,7 @@ class MyTicketsOverviewWidget extends StatsOverviewWidget
                     ->whereIn('status', [TicketStatus::Resolved->value, TicketStatus::Closed->value])
                     ->count()
             )
-                ->icon('heroicon-o-check-circle')
+                ->icon(Heroicon::CheckCircle)
                 ->color('success'),
         ];
     }

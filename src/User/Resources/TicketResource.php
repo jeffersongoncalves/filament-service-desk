@@ -66,7 +66,7 @@ class TicketResource extends Resource
                             ->required()
                             ->searchable()
                             ->preload()
-                            ->reactive()
+                            ->live()
                             ->afterStateUpdated(fn (Forms\Set $set) => $set('category_id', null)),
                         Forms\Components\Select::make('category_id')
                             ->label(__('filament-service-desk::service-desk.fields.category'))

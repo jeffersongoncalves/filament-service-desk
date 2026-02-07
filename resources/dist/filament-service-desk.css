@@ -1,0 +1,15 @@
+/* Filament Service Desk - Custom Styles */
+
+.fi-service-desk-kb .prose {
+    max-width: none;
+}
+
+.fi-service-desk-kb-category {
+    cursor: pointer;
+}
+
+.fi-service-desk-kb-article {
+    cursor: pointer;
+}
+
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uL2Nzcy9pbmRleC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEiLCJmaWxlIjoiZmlsYW1lbnQtc2VydmljZS1kZXNrLmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi8qIEZpbGFtZW50IFNlcnZpY2UgRGVzayAtIEN1c3RvbSBTdHlsZXMgKi9cblxuLmZpLXNlcnZpY2UtZGVzay1rYiAucHJvc2Uge1xuICAgIG1heC13aWR0aDogbm9uZTtcbn1cblxuLmZpLXNlcnZpY2UtZGVzay1rYi1jYXRlZ29yeSB7XG4gICAgY3Vyc29yOiBwb2ludGVyO1xufVxuXG4uZmktc2VydmljZS1kZXNrLWtiLWFydGljbGUge1xuICAgIGN1cnNvcjogcG9pbnRlcjtcbn1cbiJdfQ== */

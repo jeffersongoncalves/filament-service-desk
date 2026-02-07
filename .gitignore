@@ -8,6 +8,7 @@
 /.phpunit.cache/
 /.php-cs-fixer.cache
 /composer.lock
+/pnpm-lock.yaml
 *.swp
 *.swo
 .DS_Store

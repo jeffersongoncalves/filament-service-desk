@@ -7,9 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.0] - 2026-02-06
+
 ### Changed
 
-- Add `build/` and `.claude/` to `.gitignore`
+- **BREAKING:** Requires PHP ^8.2, Filament ^4.0, Laravel 11+
+- **BREAKING:** Heroicon strings in `->icon()` calls replaced with `Filament\Support\Icons\Heroicon` enum
+- **BREAKING:** Heroicon strings in Blade `icon=""` attributes replaced with `:icon="Heroicon::..."` enum binding
+- Replace `->reactive()` with `->live()` across all form components
+- Register CSS asset via `FilamentAsset` for Filament v4 compatibility
+- Add `package.json` with PostCSS build pipeline for custom styles
+- Add `pnpm-lock.yaml` to `.gitignore`
+
+### Migration Guide
+
+If upgrading from 1.x, ensure your project meets these requirements:
+- PHP 8.2 or higher
+- Laravel 11 or higher
+- Filament 4.x
 
 ## [1.0.2] - 2026-02-06
 

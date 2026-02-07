@@ -2,6 +2,7 @@
 
 namespace JeffersonGoncalves\FilamentServiceDesk\Agent\Widgets;
 
+use Filament\Support\Icons\Heroicon;
 use Filament\Widgets\StatsOverviewWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 use JeffersonGoncalves\ServiceDesk\Enums\TicketStatus;
@@ -23,13 +24,13 @@ class AgentTicketStatsWidget extends StatsOverviewWidget
                 __('filament-service-desk::service-desk.widgets.agent_stats.my_open'),
                 (clone $myTicketsQuery)->where('status', TicketStatus::Open)->count()
             )
-                ->icon('heroicon-o-ticket')
+                ->icon(Heroicon::Ticket)
                 ->color('info'),
             Stat::make(
                 __('filament-service-desk::service-desk.widgets.agent_stats.my_in_progress'),
                 (clone $myTicketsQuery)->where('status', TicketStatus::InProgress)->count()
             )
-                ->icon('heroicon-o-arrow-path')
+                ->icon(Heroicon::ArrowPath)
                 ->color('primary'),
             Stat::make(
                 __('filament-service-desk::service-desk.widgets.agent_stats.resolved_today'),
@@ -38,7 +39,7 @@ class AgentTicketStatsWidget extends StatsOverviewWidget
                     ->whereDate('resolved_at', today())
                     ->count()
             )
-                ->icon('heroicon-o-check-circle')
+                ->icon(Heroicon::CheckCircle)
                 ->color('success'),
             Stat::make(
                 __('filament-service-desk::service-desk.widgets.agent_stats.queue_size'),
@@ -46,7 +47,7 @@ class AgentTicketStatsWidget extends StatsOverviewWidget
                     ->whereNotIn('status', [TicketStatus::Closed->value, TicketStatus::Resolved->value])
                     ->count()
             )
-                ->icon('heroicon-o-queue-list')
+                ->icon(Heroicon::QueueList)
                 ->color('warning'),
         ];
     }

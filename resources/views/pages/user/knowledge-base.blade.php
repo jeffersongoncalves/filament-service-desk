@@ -16,7 +16,7 @@
             <div>
                 <x-filament::button
                     wire:click="backToList"
-                    icon="heroicon-o-arrow-left"
+                    :icon="\Filament\Support\Icons\Heroicon::ArrowLeft"
                     color="gray"
                     size="sm"
                 >
@@ -40,7 +40,7 @@
                         </span>
                         <x-filament::button
                             wire:click="submitFeedback({{ $article->id }}, true)"
-                            icon="heroicon-o-hand-thumb-up"
+                            :icon="\Filament\Support\Icons\Heroicon::HandThumbUp"
                             color="success"
                             size="sm"
                         >
@@ -48,7 +48,7 @@
                         </x-filament::button>
                         <x-filament::button
                             wire:click="submitFeedback({{ $article->id }}, false)"
-                            icon="heroicon-o-hand-thumb-down"
+                            :icon="\Filament\Support\Icons\Heroicon::HandThumbDown"
                             color="danger"
                             size="sm"
                         >
@@ -102,7 +102,7 @@
                 <div>
                     <x-filament::button
                         wire:click="selectCategory(null)"
-                        icon="heroicon-o-arrow-left"
+                        :icon="\Filament\Support\Icons\Heroicon::ArrowLeft"
                         color="gray"
                         size="sm"
                     >

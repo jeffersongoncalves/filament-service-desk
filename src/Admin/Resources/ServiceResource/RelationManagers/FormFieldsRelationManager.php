@@ -34,7 +34,7 @@ class FormFieldsRelationManager extends RelationManager
                     ->label(__('filament-service-desk::service-desk.fields.type'))
                     ->options(collect(FormFieldType::cases())->mapWithKeys(fn ($t) => [$t->value => $t->name]))
                     ->required()
-                    ->reactive(),
+                    ->live(),
                 Forms\Components\Toggle::make('is_required')
                     ->label(__('filament-service-desk::service-desk.fields.is_required'))
                     ->default(false),

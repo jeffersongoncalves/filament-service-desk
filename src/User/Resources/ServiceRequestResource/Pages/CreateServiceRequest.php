@@ -6,6 +6,7 @@ use Filament\Forms;
 use Filament\Forms\Components\Wizard;
 use Filament\Forms\Form;
 use Filament\Resources\Pages\CreateRecord;
+use Filament\Support\Icons\Heroicon;
 use JeffersonGoncalves\FilamentServiceDesk\User\Resources\ServiceRequestResource;
 use JeffersonGoncalves\ServiceDesk\Enums\FormFieldType;
 use JeffersonGoncalves\ServiceDesk\Models\Service;
@@ -23,7 +24,7 @@ class CreateServiceRequest extends CreateRecord
             ->schema([
                 Wizard::make([
                     Wizard\Step::make(__('filament-service-desk::service-desk.wizard.select_service'))
-                        ->icon('heroicon-o-squares-2x2')
+                        ->icon(Heroicon::Squares2x2)
                         ->schema([
                             Forms\Components\Select::make('service_id')
                                 ->label(__('filament-service-desk::service-desk.fields.service'))
@@ -35,7 +36,7 @@ class CreateServiceRequest extends CreateRecord
                                 ->required()
                                 ->searchable()
                                 ->preload()
-                                ->reactive()
+                                ->live()
                                 ->afterStateUpdated(fn (Forms\Set $set) => $set('form_data', [])),
                             Forms\Components\Placeholder::make('service_description')
                                 ->label(__('filament-service-desk::service-desk.fields.description'))
@@ -48,7 +49,7 @@ class CreateServiceRequest extends CreateRecord
                         ]),
 
                     Wizard\Step::make(__('filament-service-desk::service-desk.wizard.fill_form'))
-                        ->icon('heroicon-o-document-text')
+                        ->icon(Heroicon::DocumentText)
                         ->schema(function (Forms\Get $get): array {
                             $service = Service::find($get('service_id'));
 
@@ -68,7 +69,7 @@ class CreateServiceRequest extends CreateRecord
                         }),
 
                     Wizard\Step::make(__('filament-service-desk::service-desk.wizard.review'))
-                        ->icon('heroicon-o-check-circle')
+                        ->icon(Heroicon::CheckCircle)
                         ->schema([
                             Forms\Components\Placeholder::make('review_service')
                                 ->label(__('filament-service-desk::service-desk.fields.service'))
