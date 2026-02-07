@@ -2,9 +2,11 @@
 
 namespace JeffersonGoncalves\FilamentServiceDesk\Admin\Resources;
 
+use BackedEnum;
 use Filament\Forms;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
+use Filament\Support\Icons\Heroicon;
 use Filament\Tables;
 use Filament\Tables\Table;
 use JeffersonGoncalves\FilamentServiceDesk\Admin\Resources\ServiceResource\Pages;
@@ -16,7 +18,7 @@ class ServiceResource extends Resource
 {
     protected static ?string $model = Service::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-squares-2x2';
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedSquares2x2;
     protected static ?int $navigationSort = 40;
 
     public static function getNavigationGroup(): ?string

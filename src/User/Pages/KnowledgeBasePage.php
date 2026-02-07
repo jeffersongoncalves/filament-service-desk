@@ -2,7 +2,9 @@
 
 namespace JeffersonGoncalves\FilamentServiceDesk\User\Pages;
 
+use BackedEnum;
 use Filament\Pages\Page;
+use Filament\Support\Icons\Heroicon;
 use JeffersonGoncalves\ServiceDesk\Models\KbArticle;
 use JeffersonGoncalves\ServiceDesk\Models\KbCategory;
 use JeffersonGoncalves\ServiceDesk\Services\KnowledgeBaseService;
@@ -10,7 +12,7 @@ use Livewire\Attributes\Url;
 
 class KnowledgeBasePage extends Page
 {
-    protected static ?string $navigationIcon = 'heroicon-o-book-open';
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBookOpen;
 
     protected static ?int $navigationSort = 10;
 

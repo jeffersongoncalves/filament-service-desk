@@ -2,6 +2,7 @@
 
 namespace JeffersonGoncalves\FilamentServiceDesk\Agent\Resources;
 
+use BackedEnum;
 use Filament\Forms;
 use Filament\Infolists;
 use Filament\Resources\Resource;
@@ -21,7 +22,7 @@ class TicketResource extends Resource
 {
     protected static ?string $model = Ticket::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-ticket';
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedTicket;
     protected static ?int $navigationSort = 0;
 
     public static function getNavigationGroup(): ?string

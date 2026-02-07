@@ -2,7 +2,9 @@
 
 namespace JeffersonGoncalves\FilamentServiceDesk\Agent\Resources;
 
+use BackedEnum;
 use Filament\Resources\Resource;
+use Filament\Support\Icons\Heroicon;
 use Filament\Tables;
 use Filament\Tables\Table;
 use JeffersonGoncalves\FilamentServiceDesk\Agent\Resources\CannedResponseResource\Pages;
@@ -12,7 +14,7 @@ class CannedResponseResource extends Resource
 {
     protected static ?string $model = CannedResponse::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-chat-bubble-bottom-center-text';
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedChatBubbleBottomCenterText;
     protected static ?int $navigationSort = 5;
 
     public static function getNavigationGroup(): ?string

@@ -2,9 +2,11 @@
 
 namespace JeffersonGoncalves\FilamentServiceDesk\Admin\Resources;
 
+use BackedEnum;
 use Filament\Forms;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
+use Filament\Support\Icons\Heroicon;
 use Filament\Tables;
 use Filament\Tables\Table;
 use JeffersonGoncalves\FilamentServiceDesk\Admin\Resources\SlaPolicyResource\Pages;
@@ -15,7 +17,7 @@ class SlaPolicyResource extends Resource
 {
     protected static ?string $model = SlaPolicy::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-clock';
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedClock;
     protected static ?int $navigationSort = 10;
 
     public static function getNavigationGroup(): ?string

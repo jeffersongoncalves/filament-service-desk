@@ -2,11 +2,13 @@
 
 namespace JeffersonGoncalves\FilamentServiceDesk\Agent\Pages;
 
+use BackedEnum;
 use Filament\Pages\Page;
+use Filament\Support\Icons\Heroicon;
 
 class AgentDashboardPage extends Page
 {
-    protected static ?string $navigationIcon = 'heroicon-o-chart-bar';
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedChartBar;
 
     protected static ?int $navigationSort = -1;
 

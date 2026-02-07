@@ -2,9 +2,11 @@
 
 namespace JeffersonGoncalves\FilamentServiceDesk\Admin\Resources;
 
+use BackedEnum;
 use Filament\Forms;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
+use Filament\Support\Icons\Heroicon;
 use Filament\Tables;
 use Filament\Tables\Table;
 use JeffersonGoncalves\FilamentServiceDesk\Admin\Resources\BusinessHoursScheduleResource\Pages;
@@ -15,7 +17,7 @@ class BusinessHoursScheduleResource extends Resource
 {
     protected static ?string $model = BusinessHoursSchedule::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-calendar-days';
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCalendarDays;
     protected static ?int $navigationSort = 12;
 
     public static function getNavigationGroup(): ?string

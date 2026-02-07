@@ -2,9 +2,11 @@
 
 namespace JeffersonGoncalves\FilamentServiceDesk\Admin\Resources;
 
+use BackedEnum;
 use Filament\Forms;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
+use Filament\Support\Icons\Heroicon;
 use Filament\Tables;
 use Filament\Tables\Table;
 use JeffersonGoncalves\FilamentServiceDesk\Admin\Resources\EmailChannelResource\Pages;
@@ -14,7 +16,7 @@ class EmailChannelResource extends Resource
 {
     protected static ?string $model = EmailChannel::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-envelope';
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedEnvelope;
     protected static ?int $navigationSort = 20;
 
     public static function getNavigationGroup(): ?string
