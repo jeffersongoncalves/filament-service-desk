@@ -3,7 +3,7 @@
 namespace JeffersonGoncalves\FilamentServiceDesk\User\Resources\ServiceRequestResource\Pages;
 
 use Filament\Forms;
-use Filament\Forms\Components\Wizard;
+use Filament\Schemas\Components\Wizard;
 use Filament\Infolists;
 use Filament\Resources\Pages\CreateRecord;
 use Filament\Schemas;
