@@ -5,6 +5,7 @@ namespace JeffersonGoncalves\FilamentServiceDesk\Admin\Resources\ServiceResource
 use Filament\Actions;
 use Filament\Forms;
 use Filament\Resources\RelationManagers\RelationManager;
+use Filament\Schemas;
 use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -41,7 +42,7 @@ class FormFieldsRelationManager extends RelationManager
                     ->default(false),
                 Forms\Components\KeyValue::make('options')
                     ->label(__('filament-service-desk::service-desk.fields.options'))
-                    ->visible(fn (Forms\Get $get) => in_array($get('type'), [
+                    ->visible(fn (Schemas\Components\Utilities\Get $get) => in_array($get('type'), [
                         FormFieldType::Select->value,
                         FormFieldType::Radio->value,
                         FormFieldType::Checkbox->value,
