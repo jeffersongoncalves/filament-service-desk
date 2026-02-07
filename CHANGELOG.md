@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.0] - 2026-02-06
+
+### Changed
+
+- **BREAKING:** Requires Filament ^5.0 (Livewire v4)
+- **BREAKING:** Requires Laravel 11.28+
+- Update `orchestra/testbench` to `^10.0|^11.0`
+
 ## [2.0.0] - 2026-02-06
 
 ### Changed
