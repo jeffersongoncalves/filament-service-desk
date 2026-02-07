@@ -48,7 +48,7 @@ class HistoryRelationManager extends RelationManager
             ])
             ->defaultSort('created_at', 'desc')
             ->filters([])
-            ->actions([]);
+            ->recordActions([]);
     }
 
     public function isReadOnly(): bool

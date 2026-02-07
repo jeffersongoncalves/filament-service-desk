@@ -3,8 +3,8 @@
 namespace JeffersonGoncalves\FilamentServiceDesk\Admin\Resources\BusinessHoursScheduleResource\RelationManagers;
 
 use Filament\Forms;
-use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
+use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
 
@@ -17,9 +17,9 @@ class HolidaysRelationManager extends RelationManager
         return __('filament-service-desk::service-desk.relations.holidays');
     }
 
-    public function form(Form $form): Form
+    public function form(Schema $schema): Schema
     {
-        return $form
+        return $schema
             ->schema([
                 Forms\Components\TextInput::make('name')
                     ->label(__('filament-service-desk::service-desk.fields.name'))
@@ -54,7 +54,7 @@ class HolidaysRelationManager extends RelationManager
             ->headerActions([
                 Tables\Actions\CreateAction::make(),
             ])
-            ->actions([
+            ->recordActions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ]);

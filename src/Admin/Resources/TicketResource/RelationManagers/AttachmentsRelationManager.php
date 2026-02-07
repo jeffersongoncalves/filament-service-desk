@@ -3,8 +3,8 @@
 namespace JeffersonGoncalves\FilamentServiceDesk\Admin\Resources\TicketResource\RelationManagers;
 
 use Filament\Forms;
-use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
+use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -19,9 +19,9 @@ class AttachmentsRelationManager extends RelationManager
         return __('filament-service-desk::service-desk.relations.attachments');
     }
 
-    public function form(Form $form): Form
+    public function form(Schema $schema): Schema
     {
-        return $form
+        return $schema
             ->schema([
                 Forms\Components\FileUpload::make('file')
                     ->label(__('filament-service-desk::service-desk.fields.file'))
@@ -53,7 +53,7 @@ class AttachmentsRelationManager extends RelationManager
             ->defaultSort('created_at', 'desc')
             ->filters([])
             ->headerActions([])
-            ->actions([
+            ->recordActions([
                 Tables\Actions\Action::make('download')
                     ->label(__('filament-service-desk::service-desk.actions.download'))
                     ->icon(Heroicon::ArrowDownTray)

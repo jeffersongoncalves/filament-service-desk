@@ -4,8 +4,8 @@ namespace JeffersonGoncalves\FilamentServiceDesk\User\Resources\ServiceRequestRe
 
 use Filament\Forms;
 use Filament\Forms\Components\Wizard;
-use Filament\Forms\Form;
 use Filament\Resources\Pages\CreateRecord;
+use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use JeffersonGoncalves\FilamentServiceDesk\User\Resources\ServiceRequestResource;
 use JeffersonGoncalves\ServiceDesk\Enums\FormFieldType;
@@ -18,9 +18,9 @@ class CreateServiceRequest extends CreateRecord
 
     protected static string $resource = ServiceRequestResource::class;
 
-    public function form(Form $form): Form
+    public function form(Schema $schema): Schema
     {
-        return parent::form($form)
+        return parent::form($schema)
             ->schema([
                 Wizard::make([
                     Wizard\Step::make(__('filament-service-desk::service-desk.wizard.select_service'))

@@ -53,6 +53,6 @@ class CommentsRelationManager extends RelationManager
                         );
                     }),
             ])
-            ->actions([]);
+            ->recordActions([]);
     }
 }

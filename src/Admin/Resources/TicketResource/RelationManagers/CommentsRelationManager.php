@@ -3,8 +3,8 @@
 namespace JeffersonGoncalves\FilamentServiceDesk\Admin\Resources\TicketResource\RelationManagers;
 
 use Filament\Forms;
-use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
+use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
 use JeffersonGoncalves\ServiceDesk\Enums\CommentType;
@@ -19,9 +19,9 @@ class CommentsRelationManager extends RelationManager
         return __('filament-service-desk::service-desk.relations.comments');
     }
 
-    public function form(Form $form): Form
+    public function form(Schema $schema): Schema
     {
-        return $form
+        return $schema
             ->schema([
                 Forms\Components\RichEditor::make('body')
                     ->label(__('filament-service-desk::service-desk.fields.body'))
@@ -106,7 +106,7 @@ class CommentsRelationManager extends RelationManager
                         );
                     }),
             ])
-            ->actions([
+            ->recordActions([
                 Tables\Actions\DeleteAction::make(),
             ]);
     }

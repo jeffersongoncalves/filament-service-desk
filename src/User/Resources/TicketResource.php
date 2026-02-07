@@ -3,10 +3,9 @@
 namespace JeffersonGoncalves\FilamentServiceDesk\User\Resources;
 
 use Filament\Forms;
-use Filament\Forms\Form;
 use Filament\Infolists;
-use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
+use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -54,9 +53,9 @@ class TicketResource extends Resource
             ->where('user_type', $user->getMorphClass());
     }
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form
+        return $schema
             ->schema([
                 Forms\Components\Section::make(__('filament-service-desk::service-desk.sections.new_ticket'))
                     ->schema([
@@ -99,9 +98,9 @@ class TicketResource extends Resource
             ]);
     }
 
-    public static function infolist(Infolist $infolist): Infolist
+    public static function infolist(Schema $schema): Schema
     {
-        return $infolist
+        return $schema
             ->schema([
                 Infolists\Components\Section::make(__('filament-service-desk::service-desk.sections.ticket_details'))
                     ->schema([
@@ -206,7 +205,7 @@ class TicketResource extends Resource
                     ->label(__('filament-service-desk::service-desk.fields.status'))
                     ->options(collect(TicketStatus::cases())->mapWithKeys(fn ($s) => [$s->value => $s->label()])),
             ])
-            ->actions([
+            ->recordActions([
                 Tables\Actions\ViewAction::make(),
             ]);
     }

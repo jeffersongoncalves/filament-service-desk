@@ -35,7 +35,7 @@ class AttachmentsRelationManager extends RelationManager
                     ->sortable(),
             ])
             ->defaultSort('created_at', 'desc')
-            ->actions([
+            ->recordActions([
                 Tables\Actions\Action::make('download')
                     ->label(__('filament-service-desk::service-desk.actions.download'))
                     ->icon(Heroicon::ArrowDownTray)

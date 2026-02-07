@@ -3,10 +3,9 @@
 namespace JeffersonGoncalves\FilamentServiceDesk\Admin\Resources;
 
 use Filament\Forms;
-use Filament\Forms\Form;
 use Filament\Infolists;
-use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
+use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
 use JeffersonGoncalves\FilamentServiceDesk\Admin\Resources\TicketResource\Pages;
@@ -43,9 +42,9 @@ class TicketResource extends Resource
         return static::getModel()::where('status', TicketStatus::Open)->count() ?: null;
     }
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form
+        return $schema
             ->schema([
                 Forms\Components\Group::make()
                     ->schema([
@@ -135,9 +134,9 @@ class TicketResource extends Resource
             ->columns(3);
     }
 
-    public static function infolist(Infolist $infolist): Infolist
+    public static function infolist(Schema $schema): Schema
     {
-        return $infolist
+        return $schema
             ->schema([
                 Infolists\Components\Group::make()
                     ->schema([
@@ -308,11 +307,11 @@ class TicketResource extends Resource
                     ->query(fn ($query) => $query->where('due_at', '<', now())->whereNotIn('status', [TicketStatus::Closed->value, TicketStatus::Resolved->value]))
                     ->toggle(),
             ])
-            ->actions([
+            ->recordActions([
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
             ])
-            ->bulkActions([
+            ->toolbarActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),

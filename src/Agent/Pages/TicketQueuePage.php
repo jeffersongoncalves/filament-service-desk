@@ -95,7 +95,7 @@ class TicketQueuePage extends Page implements HasTable
                     ->label(__('filament-service-desk::service-desk.fields.priority'))
                     ->options(collect(TicketPriority::cases())->mapWithKeys(fn ($p) => [$p->value => $p->label()])),
             ])
-            ->actions([
+            ->recordActions([
                 Tables\Actions\Action::make('claim')
                     ->label(__('filament-service-desk::service-desk.actions.claim'))
                     ->icon(Heroicon::HandRaised)
