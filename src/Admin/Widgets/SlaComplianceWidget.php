@@ -7,7 +7,7 @@ use JeffersonGoncalves\ServiceDesk\Models\TicketSla;
 
 class SlaComplianceWidget extends ChartWidget
 {
-    protected static ?string $heading = null;
+    protected ?string $heading = null;
 
     protected static ?int $sort = 2;
 
