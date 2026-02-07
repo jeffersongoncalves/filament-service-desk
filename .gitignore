@@ -1,8 +1,10 @@
 /vendor/
 /node_modules/
+/build/
 /.idea/
 /.vscode/
 /.fleet/
+/.claude/
 /.phpunit.cache/
 /.php-cs-fixer.cache
 /composer.lock
