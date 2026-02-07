@@ -13,10 +13,6 @@ A Filament plugin for [jeffersongoncalves/laravel-service-desk](https://github.c
 ## Installation
 
 ```bash
-# Filament v4 (latest)
-composer require jeffersongoncalves/filament-service-desk:"^2.0"
-
-# Filament v3
 composer require jeffersongoncalves/filament-service-desk:"^1.0"
 ```
 
