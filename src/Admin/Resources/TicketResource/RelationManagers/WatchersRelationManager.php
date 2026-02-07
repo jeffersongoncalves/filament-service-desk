@@ -2,6 +2,7 @@
 
 namespace JeffersonGoncalves\FilamentServiceDesk\Admin\Resources\TicketResource\RelationManagers;
 
+use Filament\Actions;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -33,7 +34,7 @@ class WatchersRelationManager extends RelationManager
             ->defaultSort('created_at', 'desc')
             ->filters([])
             ->headerActions([
-                Tables\Actions\Action::make('addWatcher')
+                Actions\Action::make('addWatcher')
                     ->label(__('filament-service-desk::service-desk.actions.add_watcher'))
                     ->form([
                         \Filament\Forms\Components\Select::make('watcher_id')
@@ -49,7 +50,7 @@ class WatchersRelationManager extends RelationManager
                     }),
             ])
             ->recordActions([
-                Tables\Actions\DeleteAction::make()
+                Actions\DeleteAction::make()
                     ->label(__('filament-service-desk::service-desk.actions.remove_watcher'))
                     ->action(function ($record) {
                         app(TicketService::class)->removeWatcher($this->getOwnerRecord(), $record->watcher);

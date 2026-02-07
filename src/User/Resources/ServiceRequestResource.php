@@ -3,9 +3,10 @@
 namespace JeffersonGoncalves\FilamentServiceDesk\User\Resources;
 
 use BackedEnum;
-use Filament\Forms;
+use Filament\Actions;
 use Filament\Infolists;
 use Filament\Resources\Resource;
+use Filament\Schemas;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables;
@@ -50,7 +51,7 @@ class ServiceRequestResource extends Resource
     {
         return $schema
             ->schema([
-                Infolists\Components\Section::make(__('filament-service-desk::service-desk.resources.service_request.label'))
+                Schemas\Components\Section::make(__('filament-service-desk::service-desk.resources.service_request.label'))
                     ->schema([
                         Infolists\Components\TextEntry::make('service.name')
                             ->label(__('filament-service-desk::service-desk.fields.service')),
@@ -129,7 +130,7 @@ class ServiceRequestResource extends Resource
                     ->options(collect(ServiceRequestStatus::cases())->mapWithKeys(fn ($s) => [$s->value => $s->name])),
             ])
             ->recordActions([
-                Tables\Actions\ViewAction::make(),
+                Actions\ViewAction::make(),
             ]);
     }
 

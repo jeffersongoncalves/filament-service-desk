@@ -3,8 +3,11 @@
 namespace JeffersonGoncalves\FilamentServiceDesk\Admin\Resources;
 
 use BackedEnum;
+use Filament\Actions;
 use Filament\Forms;
+use Filament\Infolists;
 use Filament\Resources\Resource;
+use Filament\Schemas;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables;
@@ -41,9 +44,9 @@ class KbArticleResource extends Resource
     {
         return $schema
             ->schema([
-                Forms\Components\Group::make()
+                Schemas\Components\Group::make()
                     ->schema([
-                        Forms\Components\Section::make(__('filament-service-desk::service-desk.sections.content'))
+                        Schemas\Components\Section::make(__('filament-service-desk::service-desk.sections.content'))
                             ->schema([
                                 Forms\Components\TextInput::make('title')
                                     ->label(__('filament-service-desk::service-desk.fields.title'))
@@ -63,7 +66,7 @@ class KbArticleResource extends Resource
                                     ->columnSpanFull(),
                             ])
                             ->columns(2),
-                        Forms\Components\Section::make(__('filament-service-desk::service-desk.sections.seo'))
+                        Schemas\Components\Section::make(__('filament-service-desk::service-desk.sections.seo'))
                             ->schema([
                                 Forms\Components\TextInput::make('seo_title')
                                     ->label(__('filament-service-desk::service-desk.fields.seo_title'))
@@ -78,9 +81,9 @@ class KbArticleResource extends Resource
                     ])
                     ->columnSpan(['lg' => 2]),
 
-                Forms\Components\Group::make()
+                Schemas\Components\Group::make()
                     ->schema([
-                        Forms\Components\Section::make(__('filament-service-desk::service-desk.sections.settings'))
+                        Schemas\Components\Section::make(__('filament-service-desk::service-desk.sections.settings'))
                             ->schema([
                                 Forms\Components\Select::make('category_id')
                                     ->label(__('filament-service-desk::service-desk.fields.category'))
@@ -107,17 +110,17 @@ class KbArticleResource extends Resource
                                 Forms\Components\DateTimePicker::make('published_at')
                                     ->label(__('filament-service-desk::service-desk.fields.published_at')),
                             ]),
-                        Forms\Components\Section::make(__('filament-service-desk::service-desk.sections.stats'))
+                        Schemas\Components\Section::make(__('filament-service-desk::service-desk.sections.stats'))
                             ->schema([
-                                Forms\Components\Placeholder::make('view_count')
+                                Infolists\Components\TextEntry::make('view_count')
                                     ->label(__('filament-service-desk::service-desk.fields.view_count'))
-                                    ->content(fn (?KbArticle $record) => $record?->view_count ?? 0),
-                                Forms\Components\Placeholder::make('helpful_count')
+                                    ->state(fn (?KbArticle $record) => $record?->view_count ?? 0),
+                                Infolists\Components\TextEntry::make('helpful_count')
                                     ->label(__('filament-service-desk::service-desk.fields.helpful_count'))
-                                    ->content(fn (?KbArticle $record) => $record?->helpful_count ?? 0),
-                                Forms\Components\Placeholder::make('not_helpful_count')
+                                    ->state(fn (?KbArticle $record) => $record?->helpful_count ?? 0),
+                                Infolists\Components\TextEntry::make('not_helpful_count')
                                     ->label(__('filament-service-desk::service-desk.fields.not_helpful_count'))
-                                    ->content(fn (?KbArticle $record) => $record?->not_helpful_count ?? 0),
+                                    ->state(fn (?KbArticle $record) => $record?->not_helpful_count ?? 0),
                             ])
                             ->hiddenOn('create'),
                     ])
@@ -178,12 +181,12 @@ class KbArticleResource extends Resource
                     ->relationship('category', 'name'),
             ])
             ->recordActions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Actions\EditAction::make(),
+                Actions\DeleteAction::make(),
             ])
             ->toolbarActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+                Actions\BulkActionGroup::make([
+                    Actions\DeleteBulkAction::make(),
                 ]),
             ]);
     }

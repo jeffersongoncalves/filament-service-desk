@@ -3,9 +3,11 @@
 namespace JeffersonGoncalves\FilamentServiceDesk\Admin\Resources;
 
 use BackedEnum;
+use Filament\Actions;
 use Filament\Forms;
 use Filament\Infolists;
 use Filament\Resources\Resource;
+use Filament\Schemas;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables;
@@ -48,9 +50,9 @@ class TicketResource extends Resource
     {
         return $schema
             ->schema([
-                Forms\Components\Group::make()
+                Schemas\Components\Group::make()
                     ->schema([
-                        Forms\Components\Section::make(__('filament-service-desk::service-desk.sections.ticket_details'))
+                        Schemas\Components\Section::make(__('filament-service-desk::service-desk.sections.ticket_details'))
                             ->schema([
                                 Forms\Components\TextInput::make('title')
                                     ->label(__('filament-service-desk::service-desk.fields.title'))
@@ -65,9 +67,9 @@ class TicketResource extends Resource
                     ])
                     ->columnSpan(['lg' => 2]),
 
-                Forms\Components\Group::make()
+                Schemas\Components\Group::make()
                     ->schema([
-                        Forms\Components\Section::make(__('filament-service-desk::service-desk.sections.ticket_metadata'))
+                        Schemas\Components\Section::make(__('filament-service-desk::service-desk.sections.ticket_metadata'))
                             ->schema([
                                 Forms\Components\Select::make('department_id')
                                     ->label(__('filament-service-desk::service-desk.fields.department'))
@@ -117,17 +119,17 @@ class TicketResource extends Resource
                                     ->searchable()
                                     ->preload(),
                             ]),
-                        Forms\Components\Section::make(__('filament-service-desk::service-desk.sections.reference'))
+                        Schemas\Components\Section::make(__('filament-service-desk::service-desk.sections.reference'))
                             ->schema([
-                                Forms\Components\Placeholder::make('reference_number')
+                                Infolists\Components\TextEntry::make('reference_number')
                                     ->label(__('filament-service-desk::service-desk.fields.reference_number'))
-                                    ->content(fn (?Ticket $record) => $record?->reference_number ?? __('filament-service-desk::service-desk.messages.auto_generated')),
-                                Forms\Components\Placeholder::make('created_at')
+                                    ->state(fn (?Ticket $record) => $record?->reference_number ?? __('filament-service-desk::service-desk.messages.auto_generated')),
+                                Infolists\Components\TextEntry::make('created_at')
                                     ->label(__('filament-service-desk::service-desk.fields.created_at'))
-                                    ->content(fn (?Ticket $record) => $record?->created_at?->diffForHumans() ?? '-'),
-                                Forms\Components\Placeholder::make('updated_at')
+                                    ->state(fn (?Ticket $record) => $record?->created_at?->diffForHumans() ?? '-'),
+                                Infolists\Components\TextEntry::make('updated_at')
                                     ->label(__('filament-service-desk::service-desk.fields.updated_at'))
-                                    ->content(fn (?Ticket $record) => $record?->updated_at?->diffForHumans() ?? '-'),
+                                    ->state(fn (?Ticket $record) => $record?->updated_at?->diffForHumans() ?? '-'),
                             ])
                             ->hiddenOn('create'),
                     ])
@@ -140,9 +142,9 @@ class TicketResource extends Resource
     {
         return $schema
             ->schema([
-                Infolists\Components\Group::make()
+                Schemas\Components\Group::make()
                     ->schema([
-                        Infolists\Components\Section::make(__('filament-service-desk::service-desk.sections.ticket_details'))
+                        Schemas\Components\Section::make(__('filament-service-desk::service-desk.sections.ticket_details'))
                             ->schema([
                                 Infolists\Components\TextEntry::make('title')
                                     ->label(__('filament-service-desk::service-desk.fields.title'))
@@ -158,9 +160,9 @@ class TicketResource extends Resource
                     ])
                     ->columnSpan(['lg' => 2]),
 
-                Infolists\Components\Group::make()
+                Schemas\Components\Group::make()
                     ->schema([
-                        Infolists\Components\Section::make(__('filament-service-desk::service-desk.sections.ticket_metadata'))
+                        Schemas\Components\Section::make(__('filament-service-desk::service-desk.sections.ticket_metadata'))
                             ->schema([
                                 Infolists\Components\TextEntry::make('department.name')
                                     ->label(__('filament-service-desk::service-desk.fields.department'))
@@ -206,7 +208,7 @@ class TicketResource extends Resource
                                     ->badge()
                                     ->placeholder('—'),
                             ]),
-                        Infolists\Components\Section::make(__('filament-service-desk::service-desk.sections.reference'))
+                        Schemas\Components\Section::make(__('filament-service-desk::service-desk.sections.reference'))
                             ->schema([
                                 Infolists\Components\TextEntry::make('reference_number')
                                     ->label(__('filament-service-desk::service-desk.fields.reference_number')),
@@ -217,7 +219,7 @@ class TicketResource extends Resource
                                     ->label(__('filament-service-desk::service-desk.fields.updated_at'))
                                     ->since(),
                             ]),
-                        Infolists\Components\Section::make(__('filament-service-desk::service-desk.sections.sla'))
+                        Schemas\Components\Section::make(__('filament-service-desk::service-desk.sections.sla'))
                             ->schema([
                                 Infolists\Components\TextEntry::make('first_response_due')
                                     ->label(__('filament-service-desk::service-desk.fields.first_response_due'))
@@ -310,12 +312,12 @@ class TicketResource extends Resource
                     ->toggle(),
             ])
             ->recordActions([
-                Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
+                Actions\ViewAction::make(),
+                Actions\EditAction::make(),
             ])
             ->toolbarActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+                Actions\BulkActionGroup::make([
+                    Actions\DeleteBulkAction::make(),
                 ]),
             ]);
     }

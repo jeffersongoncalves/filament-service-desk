@@ -2,6 +2,7 @@
 
 namespace JeffersonGoncalves\FilamentServiceDesk\Admin\Resources\SlaPolicyResource\RelationManagers;
 
+use Filament\Actions;
 use Filament\Forms;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Schemas\Schema;
@@ -79,11 +80,11 @@ class EscalationRulesRelationManager extends RelationManager
             ])
             ->defaultSort('sort_order')
             ->headerActions([
-                Tables\Actions\CreateAction::make(),
+                Actions\CreateAction::make(),
             ])
             ->recordActions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Actions\EditAction::make(),
+                Actions\DeleteAction::make(),
             ]);
     }
 }

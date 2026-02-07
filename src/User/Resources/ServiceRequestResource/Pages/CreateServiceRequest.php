@@ -4,6 +4,7 @@ namespace JeffersonGoncalves\FilamentServiceDesk\User\Resources\ServiceRequestRe
 
 use Filament\Forms;
 use Filament\Forms\Components\Wizard;
+use Filament\Infolists;
 use Filament\Resources\Pages\CreateRecord;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
@@ -38,9 +39,9 @@ class CreateServiceRequest extends CreateRecord
                                 ->preload()
                                 ->live()
                                 ->afterStateUpdated(fn (Forms\Set $set) => $set('form_data', [])),
-                            Forms\Components\Placeholder::make('service_description')
+                            Infolists\Components\TextEntry::make('service_description')
                                 ->label(__('filament-service-desk::service-desk.fields.description'))
-                                ->content(function (Forms\Get $get) {
+                                ->state(function (Forms\Get $get) {
                                     $service = Service::find($get('service_id'));
 
                                     return $service?->description ?? '';
@@ -55,8 +56,8 @@ class CreateServiceRequest extends CreateRecord
 
                             if (! $service) {
                                 return [
-                                    Forms\Components\Placeholder::make('no_service')
-                                        ->content(__('filament-service-desk::service-desk.wizard.select_service_first')),
+                                    Infolists\Components\TextEntry::make('no_service')
+                                        ->state(__('filament-service-desk::service-desk.wizard.select_service_first')),
                                 ];
                             }
 
@@ -71,9 +72,9 @@ class CreateServiceRequest extends CreateRecord
                     Wizard\Step::make(__('filament-service-desk::service-desk.wizard.review'))
                         ->icon(Heroicon::CheckCircle)
                         ->schema([
-                            Forms\Components\Placeholder::make('review_service')
+                            Infolists\Components\TextEntry::make('review_service')
                                 ->label(__('filament-service-desk::service-desk.fields.service'))
-                                ->content(fn (Forms\Get $get) => Service::find($get('service_id'))?->name ?? '—'),
+                                ->state(fn (Forms\Get $get) => Service::find($get('service_id'))?->name ?? '—'),
                             Forms\Components\Textarea::make('notes')
                                 ->label(__('filament-service-desk::service-desk.fields.notes'))
                                 ->maxLength(65535),

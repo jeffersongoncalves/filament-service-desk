@@ -2,6 +2,7 @@
 
 namespace JeffersonGoncalves\FilamentServiceDesk\Admin\Resources\BusinessHoursScheduleResource\RelationManagers;
 
+use Filament\Actions;
 use Filament\Forms;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Schemas\Schema;
@@ -52,11 +53,11 @@ class HolidaysRelationManager extends RelationManager
             ])
             ->defaultSort('date')
             ->headerActions([
-                Tables\Actions\CreateAction::make(),
+                Actions\CreateAction::make(),
             ])
             ->recordActions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Actions\EditAction::make(),
+                Actions\DeleteAction::make(),
             ]);
     }
 }

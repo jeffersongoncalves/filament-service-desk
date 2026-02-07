@@ -2,6 +2,7 @@
 
 namespace JeffersonGoncalves\FilamentServiceDesk\Admin\Resources\TicketResource\RelationManagers;
 
+use Filament\Actions;
 use Filament\Forms;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Schemas\Schema;
@@ -54,12 +55,12 @@ class AttachmentsRelationManager extends RelationManager
             ->filters([])
             ->headerActions([])
             ->recordActions([
-                Tables\Actions\Action::make('download')
+                Actions\Action::make('download')
                     ->label(__('filament-service-desk::service-desk.actions.download'))
                     ->icon(Heroicon::ArrowDownTray)
                     ->url(fn ($record) => $record->getUrl())
                     ->openUrlInNewTab(),
-                Tables\Actions\DeleteAction::make()
+                Actions\DeleteAction::make()
                     ->action(function ($record) {
                         app(AttachmentService::class)->delete($record, auth()->user());
                     }),

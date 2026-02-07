@@ -3,9 +3,11 @@
 namespace JeffersonGoncalves\FilamentServiceDesk\User\Resources;
 
 use BackedEnum;
+use Filament\Actions;
 use Filament\Forms;
 use Filament\Infolists;
 use Filament\Resources\Resource;
+use Filament\Schemas;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables;
@@ -59,7 +61,7 @@ class TicketResource extends Resource
     {
         return $schema
             ->schema([
-                Forms\Components\Section::make(__('filament-service-desk::service-desk.sections.new_ticket'))
+                Schemas\Components\Section::make(__('filament-service-desk::service-desk.sections.new_ticket'))
                     ->schema([
                         Forms\Components\Select::make('department_id')
                             ->label(__('filament-service-desk::service-desk.fields.department'))
@@ -104,7 +106,7 @@ class TicketResource extends Resource
     {
         return $schema
             ->schema([
-                Infolists\Components\Section::make(__('filament-service-desk::service-desk.sections.ticket_details'))
+                Schemas\Components\Section::make(__('filament-service-desk::service-desk.sections.ticket_details'))
                     ->schema([
                         Infolists\Components\TextEntry::make('title')
                             ->label(__('filament-service-desk::service-desk.fields.title'))
@@ -208,7 +210,7 @@ class TicketResource extends Resource
                     ->options(collect(TicketStatus::cases())->mapWithKeys(fn ($s) => [$s->value => $s->label()])),
             ])
             ->recordActions([
-                Tables\Actions\ViewAction::make(),
+                Actions\ViewAction::make(),
             ]);
     }
 
