@@ -4,14 +4,19 @@ A Filament plugin for [jeffersongoncalves/laravel-service-desk](https://github.c
 
 ## Compatibility
 
-| Version | Filament | PHP | Laravel |
-|---------|----------|-----|---------|
-| 1.x | ^3.0 | ^8.1 | ^10.0 |
+| Version | Filament | PHP | Laravel | Tailwind |
+|---------|----------|-----|---------|----------|
+| 1.x | ^3.0 | ^8.1 | ^10.0 | 3.x |
+| 2.x | ^4.0 | ^8.2 | ^11.0 | 4.x |
 
 ## Installation
 
 ```bash
-composer require jeffersongoncalves/filament-service-desk
+# Filament v4 (latest)
+composer require jeffersongoncalves/filament-service-desk:"^2.0"
+
+# Filament v3
+composer require jeffersongoncalves/filament-service-desk:"^1.0"
 ```
 
 Publish the configuration (optional):
