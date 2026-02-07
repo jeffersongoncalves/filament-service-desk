@@ -1,5 +1,5 @@
 <x-filament-panels::page>
-    <div class="space-y-6">
+    <div class="fi-sd-kb">
         {{-- Search --}}
         <div>
             <x-filament::input.wrapper>
@@ -29,13 +29,13 @@
                     {{ $article->title }}
                 </x-slot>
 
-                <div class="prose dark:prose-invert max-w-none">
+                <div class="fi-sd-kb-content prose dark:prose-invert">
                     {!! $article->content !!}
                 </div>
 
                 <x-slot name="footerActions">
-                    <div class="flex items-center gap-4">
-                        <span class="text-sm text-gray-500">
+                    <div class="fi-sd-kb-feedback">
+                        <span class="fi-sd-kb-text-muted">
                             {{ __('filament-service-desk::service-desk.pages.knowledge_base.was_helpful') }}
                         </span>
                         <x-filament::button
@@ -60,18 +60,18 @@
         @else
             {{-- Categories --}}
             @unless($search)
-                <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+                <div class="fi-sd-kb-categories-grid">
                     @foreach ($this->getCategories() as $category)
-                        <x-filament::section class="cursor-pointer" wire:click="selectCategory({{ $category->id }})">
+                        <x-filament::section class="fi-sd-kb-card-clickable" wire:click="selectCategory({{ $category->id }})">
                             <x-slot name="heading">
                                 {{ $category->name }}
                             </x-slot>
 
                             @if ($category->description)
-                                <p class="text-sm text-gray-500">{{ $category->description }}</p>
+                                <p class="fi-sd-kb-text-muted">{{ $category->description }}</p>
                             @endif
 
-                            <p class="text-xs text-gray-400 mt-2">
+                            <p class="fi-sd-kb-text-subtle">
                                 {{ trans_choice('filament-service-desk::service-desk.pages.knowledge_base.articles_count', $category->articles_count) }}
                             </p>
                         </x-filament::section>
@@ -80,19 +80,19 @@
             @endunless
 
             {{-- Articles List --}}
-            <div class="space-y-2">
+            <div class="fi-sd-kb-articles-list">
                 @forelse ($this->getArticles() as $article)
-                    <x-filament::section class="cursor-pointer" wire:click="selectArticle({{ $article->id }})">
+                    <x-filament::section class="fi-sd-kb-card-clickable" wire:click="selectArticle({{ $article->id }})">
                         <x-slot name="heading">
                             {{ $article->title }}
                         </x-slot>
 
                         @if ($article->excerpt)
-                            <p class="text-sm text-gray-500">{{ $article->excerpt }}</p>
+                            <p class="fi-sd-kb-text-muted">{{ $article->excerpt }}</p>
                         @endif
                     </x-filament::section>
                 @empty
-                    <div class="text-center py-8 text-gray-500">
+                    <div class="fi-sd-kb-empty">
                         {{ __('filament-service-desk::service-desk.pages.knowledge_base.no_articles') }}
                     </div>
                 @endforelse

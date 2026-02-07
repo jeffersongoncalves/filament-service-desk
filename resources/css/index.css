@@ -1,13 +1,65 @@
-/* Filament Service Desk - Custom Styles */
+/* Filament Service Desk - Knowledge Base */
 
-.fi-service-desk-kb .prose {
+.fi-sd-kb {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.fi-sd-kb-content {
     max-width: none;
 }
 
-.fi-service-desk-kb-category {
+.fi-sd-kb-feedback {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.fi-sd-kb-text-muted {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    color: var(--gray-500);
+}
+
+.fi-sd-kb-text-subtle {
+    font-size: 0.75rem;
+    line-height: 1rem;
+    color: var(--gray-400);
+    margin-top: 0.5rem;
+}
+
+.fi-sd-kb-categories-grid {
+    display: grid;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+@media (min-width: 768px) {
+    .fi-sd-kb-categories-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 1024px) {
+    .fi-sd-kb-categories-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+.fi-sd-kb-card-clickable {
     cursor: pointer;
 }
 
-.fi-service-desk-kb-article {
-    cursor: pointer;
+.fi-sd-kb-articles-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.fi-sd-kb-empty {
+    text-align: center;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    color: var(--gray-500);
 }
