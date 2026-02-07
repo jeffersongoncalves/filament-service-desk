@@ -8,6 +8,7 @@ use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use JeffersonGoncalves\FilamentServiceDesk\Agent\Resources\TicketResource;
 use JeffersonGoncalves\ServiceDesk\Enums\TicketPriority;
 use JeffersonGoncalves\ServiceDesk\Enums\TicketStatus;
 use JeffersonGoncalves\ServiceDesk\Models\Ticket;
@@ -101,6 +102,8 @@ class TicketQueuePage extends Page implements HasTable
                     ->requiresConfirmation()
                     ->action(function (Ticket $record) {
                         app(TicketService::class)->assign($record, auth()->user(), auth()->user());
+
+                        return redirect(TicketResource::getUrl('view', ['record' => $record]));
                     }),
             ]);
     }

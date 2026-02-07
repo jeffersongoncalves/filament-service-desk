@@ -4,6 +4,8 @@ namespace JeffersonGoncalves\FilamentServiceDesk\User\Resources;
 
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Infolists;
+use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -41,6 +43,48 @@ class ServiceRequestResource extends Resource
         return parent::getEloquentQuery()
             ->where('requester_id', $user->getKey())
             ->where('requester_type', $user->getMorphClass());
+    }
+
+    public static function infolist(Infolist $infolist): Infolist
+    {
+        return $infolist
+            ->schema([
+                Infolists\Components\Section::make(__('filament-service-desk::service-desk.resources.service_request.label'))
+                    ->schema([
+                        Infolists\Components\TextEntry::make('service.name')
+                            ->label(__('filament-service-desk::service-desk.fields.service')),
+                        Infolists\Components\TextEntry::make('status')
+                            ->label(__('filament-service-desk::service-desk.fields.status'))
+                            ->badge()
+                            ->formatStateUsing(fn (ServiceRequestStatus $state) => $state->name)
+                            ->color(fn (ServiceRequestStatus $state) => match ($state) {
+                                ServiceRequestStatus::Pending => 'warning',
+                                ServiceRequestStatus::Approved => 'info',
+                                ServiceRequestStatus::Rejected => 'danger',
+                                ServiceRequestStatus::InProgress => 'primary',
+                                ServiceRequestStatus::Fulfilled => 'success',
+                                ServiceRequestStatus::Cancelled => 'gray',
+                            }),
+                        Infolists\Components\TextEntry::make('ticket.reference_number')
+                            ->label(__('filament-service-desk::service-desk.fields.ticket'))
+                            ->placeholder('—'),
+                        Infolists\Components\TextEntry::make('notes')
+                            ->label(__('filament-service-desk::service-desk.fields.notes'))
+                            ->placeholder('—')
+                            ->columnSpanFull(),
+                        Infolists\Components\KeyValueEntry::make('form_data')
+                            ->label(__('filament-service-desk::service-desk.fields.form_data'))
+                            ->columnSpanFull()
+                            ->visible(fn (ServiceRequest $record) => ! empty($record->form_data)),
+                        Infolists\Components\TextEntry::make('created_at')
+                            ->label(__('filament-service-desk::service-desk.fields.created_at'))
+                            ->since(),
+                        Infolists\Components\TextEntry::make('updated_at')
+                            ->label(__('filament-service-desk::service-desk.fields.updated_at'))
+                            ->since(),
+                    ])
+                    ->columns(2),
+            ]);
     }
 
     public static function form(Form $form): Form
