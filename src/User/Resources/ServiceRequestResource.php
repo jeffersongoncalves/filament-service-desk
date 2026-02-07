@@ -3,10 +3,9 @@
 namespace JeffersonGoncalves\FilamentServiceDesk\User\Resources;
 
 use Filament\Forms;
-use Filament\Forms\Form;
 use Filament\Infolists;
-use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
+use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -45,9 +44,9 @@ class ServiceRequestResource extends Resource
             ->where('requester_type', $user->getMorphClass());
     }
 
-    public static function infolist(Infolist $infolist): Infolist
+    public static function infolist(Schema $schema): Schema
     {
-        return $infolist
+        return $schema
             ->schema([
                 Infolists\Components\Section::make(__('filament-service-desk::service-desk.resources.service_request.label'))
                     ->schema([
@@ -87,9 +86,9 @@ class ServiceRequestResource extends Resource
             ]);
     }
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form->schema([]);
+        return $schema->schema([]);
     }
 
     public static function table(Table $table): Table
@@ -127,7 +126,7 @@ class ServiceRequestResource extends Resource
                     ->label(__('filament-service-desk::service-desk.fields.status'))
                     ->options(collect(ServiceRequestStatus::cases())->mapWithKeys(fn ($s) => [$s->value => $s->name])),
             ])
-            ->actions([
+            ->recordActions([
                 Tables\Actions\ViewAction::make(),
             ]);
     }

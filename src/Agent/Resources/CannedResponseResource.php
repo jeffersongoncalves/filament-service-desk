@@ -57,7 +57,7 @@ class CannedResponseResource extends Resource
                     ->label(__('filament-service-desk::service-desk.fields.department'))
                     ->relationship('department', 'name'),
             ])
-            ->actions([
+            ->recordActions([
                 Tables\Actions\ViewAction::make(),
             ]);
     }

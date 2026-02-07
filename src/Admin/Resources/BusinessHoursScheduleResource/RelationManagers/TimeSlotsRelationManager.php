@@ -3,8 +3,8 @@
 namespace JeffersonGoncalves\FilamentServiceDesk\Admin\Resources\BusinessHoursScheduleResource\RelationManagers;
 
 use Filament\Forms;
-use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
+use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
 use JeffersonGoncalves\ServiceDesk\Enums\DayOfWeek;
@@ -18,9 +18,9 @@ class TimeSlotsRelationManager extends RelationManager
         return __('filament-service-desk::service-desk.relations.time_slots');
     }
 
-    public function form(Form $form): Form
+    public function form(Schema $schema): Schema
     {
-        return $form
+        return $schema
             ->schema([
                 Forms\Components\Select::make('day_of_week')
                     ->label(__('filament-service-desk::service-desk.fields.day_of_week'))
@@ -55,7 +55,7 @@ class TimeSlotsRelationManager extends RelationManager
             ->headerActions([
                 Tables\Actions\CreateAction::make(),
             ])
-            ->actions([
+            ->recordActions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ]);

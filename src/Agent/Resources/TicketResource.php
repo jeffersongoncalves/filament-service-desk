@@ -3,10 +3,9 @@
 namespace JeffersonGoncalves\FilamentServiceDesk\Agent\Resources;
 
 use Filament\Forms;
-use Filament\Forms\Form;
 use Filament\Infolists;
-use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
+use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -60,9 +59,9 @@ class TicketResource extends Resource
             });
     }
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form
+        return $schema
             ->schema([
                 Forms\Components\Group::make()
                     ->schema([
@@ -118,9 +117,9 @@ class TicketResource extends Resource
             ->columns(3);
     }
 
-    public static function infolist(Infolist $infolist): Infolist
+    public static function infolist(Schema $schema): Schema
     {
-        return $infolist
+        return $schema
             ->schema([
                 Infolists\Components\Group::make()
                     ->schema([
@@ -245,7 +244,7 @@ class TicketResource extends Resource
                     ->label(__('filament-service-desk::service-desk.fields.priority'))
                     ->options(collect(TicketPriority::cases())->mapWithKeys(fn ($p) => [$p->value => $p->label()])),
             ])
-            ->actions([
+            ->recordActions([
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\Action::make('close')

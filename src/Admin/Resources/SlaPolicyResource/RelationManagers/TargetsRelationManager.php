@@ -3,8 +3,8 @@
 namespace JeffersonGoncalves\FilamentServiceDesk\Admin\Resources\SlaPolicyResource\RelationManagers;
 
 use Filament\Forms;
-use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
+use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
 use JeffersonGoncalves\ServiceDesk\Enums\TicketPriority;
@@ -18,9 +18,9 @@ class TargetsRelationManager extends RelationManager
         return __('filament-service-desk::service-desk.relations.sla_targets');
     }
 
-    public function form(Form $form): Form
+    public function form(Schema $schema): Schema
     {
-        return $form
+        return $schema
             ->schema([
                 Forms\Components\Select::make('priority')
                     ->label(__('filament-service-desk::service-desk.fields.priority'))
@@ -73,7 +73,7 @@ class TargetsRelationManager extends RelationManager
             ->headerActions([
                 Tables\Actions\CreateAction::make(),
             ])
-            ->actions([
+            ->recordActions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ]);

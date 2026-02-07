@@ -48,7 +48,7 @@ class WatchersRelationManager extends RelationManager
                         app(TicketService::class)->addWatcher($this->getOwnerRecord(), $watcher);
                     }),
             ])
-            ->actions([
+            ->recordActions([
                 Tables\Actions\DeleteAction::make()
                     ->label(__('filament-service-desk::service-desk.actions.remove_watcher'))
                     ->action(function ($record) {

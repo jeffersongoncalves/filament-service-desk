@@ -3,8 +3,8 @@
 namespace JeffersonGoncalves\FilamentServiceDesk\Admin\Resources;
 
 use Filament\Forms;
-use Filament\Forms\Form;
 use Filament\Resources\Resource;
+use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
 use JeffersonGoncalves\FilamentServiceDesk\Admin\Resources\BusinessHoursScheduleResource\Pages;
@@ -33,9 +33,9 @@ class BusinessHoursScheduleResource extends Resource
         return __('filament-service-desk::service-desk.resources.business_hours.plural_label');
     }
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form
+        return $schema
             ->schema([
                 Forms\Components\Section::make()
                     ->schema([
@@ -91,11 +91,11 @@ class BusinessHoursScheduleResource extends Resource
                 Tables\Filters\TernaryFilter::make('is_active')
                     ->label(__('filament-service-desk::service-desk.fields.is_active')),
             ])
-            ->actions([
+            ->recordActions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])
-            ->bulkActions([
+            ->toolbarActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),

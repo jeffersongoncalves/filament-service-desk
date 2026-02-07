@@ -3,8 +3,8 @@
 namespace JeffersonGoncalves\FilamentServiceDesk\Admin\Resources;
 
 use Filament\Forms;
-use Filament\Forms\Form;
 use Filament\Resources\Resource;
+use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
 use JeffersonGoncalves\FilamentServiceDesk\Admin\Resources\KbArticleResource\Pages;
@@ -35,9 +35,9 @@ class KbArticleResource extends Resource
         return __('filament-service-desk::service-desk.resources.kb_article.plural_label');
     }
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form
+        return $schema
             ->schema([
                 Forms\Components\Group::make()
                     ->schema([
@@ -175,11 +175,11 @@ class KbArticleResource extends Resource
                     ->label(__('filament-service-desk::service-desk.fields.category'))
                     ->relationship('category', 'name'),
             ])
-            ->actions([
+            ->recordActions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])
-            ->bulkActions([
+            ->toolbarActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
