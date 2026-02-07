@@ -13,18 +13,12 @@ class SlaBreachWidget extends TableWidget
 
     protected int | string | array $columnSpan = 'full';
 
-    protected ?string $heading = null;
-
-    public function getTableHeading(): ?string
-    {
-        return __('filament-service-desk::service-desk.widgets.sla_breach.heading');
-    }
-
     public function table(Table $table): Table
     {
         $user = auth()->user();
 
         return $table
+            ->heading(__('filament-service-desk::service-desk.widgets.sla_breach.heading'))
             ->query(
                 TicketSla::query()
                     ->whereHas('ticket', function ($q) use ($user) {
