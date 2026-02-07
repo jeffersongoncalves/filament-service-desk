@@ -2,6 +2,8 @@
 
 namespace JeffersonGoncalves\FilamentServiceDesk\Concerns;
 
+use BackedEnum;
+
 trait HasServiceDeskPluginConfig
 {
     protected bool $knowledgeBaseEnabled = true;
@@ -16,7 +18,7 @@ trait HasServiceDeskPluginConfig
 
     protected ?int $navigationSort = null;
 
-    protected ?string $navigationIcon = null;
+    protected string|BackedEnum|null $navigationIcon = null;
 
     public function knowledgeBase(bool $enabled = true): static
     {
@@ -90,14 +92,14 @@ trait HasServiceDeskPluginConfig
         return $this->navigationSort;
     }
 
-    public function navigationIcon(string $icon): static
+    public function navigationIcon(string|BackedEnum $icon): static
     {
         $this->navigationIcon = $icon;
 
         return $this;
     }
 
-    public function getNavigationIcon(): ?string
+    public function getNavigationIcon(): string|BackedEnum|null
     {
         return $this->navigationIcon;
     }

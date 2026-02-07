@@ -2,9 +2,11 @@
 
 namespace JeffersonGoncalves\FilamentServiceDesk\Admin\Resources;
 
+use BackedEnum;
 use Filament\Forms;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
+use Filament\Support\Icons\Heroicon;
 use Filament\Tables;
 use Filament\Tables\Table;
 use JeffersonGoncalves\FilamentServiceDesk\Admin\Resources\KbCategoryResource\Pages;
@@ -14,7 +16,7 @@ class KbCategoryResource extends Resource
 {
     protected static ?string $model = KbCategory::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-folder-open';
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedFolderOpen;
     protected static ?int $navigationSort = 31;
 
     public static function getNavigationGroup(): ?string
