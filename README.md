@@ -8,6 +8,7 @@ A Filament plugin for [jeffersongoncalves/laravel-service-desk](https://github.c
 |---------|----------|-----|---------|----------|
 | 1.x | ^3.0 | ^8.1 | ^10.0 | 3.x |
 | 2.x | ^4.0 | ^8.2 | ^11.0 | 4.x |
+| 3.x | ^5.0 | ^8.2 | ^11.28 | 4.x |
 
 ## Installation
 
