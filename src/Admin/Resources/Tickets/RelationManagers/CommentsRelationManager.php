@@ -23,6 +23,7 @@ class CommentsRelationManager extends RelationManager
     public function form(Schema $schema): Schema
     {
         return $schema
+            ->columns(null)
             ->schema([
                 Forms\Components\RichEditor::make('body')
                     ->label(__('filament-service-desk::service-desk.fields.body'))

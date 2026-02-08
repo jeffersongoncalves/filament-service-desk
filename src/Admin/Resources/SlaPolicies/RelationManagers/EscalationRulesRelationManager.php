@@ -23,6 +23,7 @@ class EscalationRulesRelationManager extends RelationManager
     public function form(Schema $schema): Schema
     {
         return $schema
+            ->columns(null)
             ->schema([
                 Forms\Components\Select::make('breach_type')
                     ->label(__('filament-service-desk::service-desk.fields.breach_type'))

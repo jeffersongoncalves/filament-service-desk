@@ -11,6 +11,7 @@ class CategoryForm
     public static function configure(Schema $schema): Schema
     {
         return $schema
+            ->columns(null)
             ->schema([
                 Schemas\Components\Section::make()
                     ->schema([

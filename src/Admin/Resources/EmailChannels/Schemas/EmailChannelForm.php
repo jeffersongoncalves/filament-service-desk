@@ -11,6 +11,7 @@ class EmailChannelForm
     public static function configure(Schema $schema): Schema
     {
         return $schema
+            ->columns(null)
             ->schema([
                 Schemas\Components\Section::make(__('filament-service-desk::service-desk.sections.general'))
                     ->schema([

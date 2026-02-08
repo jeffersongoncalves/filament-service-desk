@@ -51,7 +51,7 @@ class ServiceRequestResource extends Resource
 
     public static function form(Schema $schema): Schema
     {
-        return $schema->schema([]);
+        return $schema->columns(null)->schema([]);
     }
 
     public static function table(Table $table): Table
