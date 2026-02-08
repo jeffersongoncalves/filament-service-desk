@@ -11,7 +11,7 @@ class SlaComplianceWidget extends ChartWidget
 
     protected static ?int $sort = 2;
 
-    protected int | string | array $columnSpan = 'full';
+    protected int|string|array $columnSpan = 'full';
 
     public function getHeading(): ?string
     {
