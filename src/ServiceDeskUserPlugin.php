@@ -31,7 +31,7 @@ class ServiceDeskUserPlugin implements Plugin
     public function register(Panel $panel): void
     {
         $resources = [
-            User\Resources\TicketResource::class,
+            User\Resources\Tickets\TicketResource::class,
         ];
 
         $pages = [];
@@ -41,7 +41,7 @@ class ServiceDeskUserPlugin implements Plugin
         ];
 
         if ($this->hasServiceCatalog()) {
-            $resources[] = User\Resources\ServiceRequestResource::class;
+            $resources[] = User\Resources\ServiceRequests\ServiceRequestResource::class;
         }
 
         if ($this->hasKnowledgeBase()) {

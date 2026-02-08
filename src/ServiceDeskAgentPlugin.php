@@ -31,8 +31,8 @@ class ServiceDeskAgentPlugin implements Plugin
     public function register(Panel $panel): void
     {
         $resources = [
-            Agent\Resources\TicketResource::class,
-            Agent\Resources\CannedResponseResource::class,
+            Agent\Resources\Tickets\TicketResource::class,
+            Agent\Resources\CannedResponses\CannedResponseResource::class,
         ];
 
         $pages = [
