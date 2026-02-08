@@ -22,6 +22,7 @@ class TargetsRelationManager extends RelationManager
     public function form(Schema $schema): Schema
     {
         return $schema
+            ->columns(null)
             ->schema([
                 Forms\Components\Select::make('priority')
                     ->label(__('filament-service-desk::service-desk.fields.priority'))

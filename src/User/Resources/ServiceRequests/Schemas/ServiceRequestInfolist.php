@@ -13,6 +13,7 @@ class ServiceRequestInfolist
     public static function configure(Schema $schema): Schema
     {
         return $schema
+            ->columns(null)
             ->schema([
                 Schemas\Components\Section::make(__('filament-service-desk::service-desk.resources.service_request.label'))
                     ->schema([

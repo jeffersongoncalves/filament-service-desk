@@ -23,6 +23,7 @@ class AttachmentsRelationManager extends RelationManager
     public function form(Schema $schema): Schema
     {
         return $schema
+            ->columns(null)
             ->schema([
                 Forms\Components\FileUpload::make('file')
                     ->label(__('filament-service-desk::service-desk.fields.file'))
