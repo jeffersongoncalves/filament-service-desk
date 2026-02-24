@@ -1,3 +1,9 @@
+<div class="filament-hidden">
+
+![Filament Service Desk](https://raw.githubusercontent.com/jeffersongoncalves/filament-service-desk/1.x/art/jeffersongoncalves-filament-service-desk.png)
+
+</div>
+
 # Filament Service Desk
 
 A Filament plugin for [jeffersongoncalves/laravel-service-desk](https://github.com/jeffersongoncalves/laravel-service-desk) that provides Admin, Agent, and User panels for complete service desk management.
