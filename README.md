@@ -18,6 +18,8 @@ A Filament plugin for [jeffersongoncalves/laravel-service-desk](https://github.c
 
 ## Installation
 
+You can install the package via composer:
+
 ```bash
 composer require jeffersongoncalves/filament-service-desk:"^3.0"
 ```
@@ -131,6 +133,10 @@ php artisan vendor:publish --tag="filament-service-desk-translations"
 ```bash
 composer test
 ```
+
+## Changelog
+
+Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
 
 ## Contributing
 
