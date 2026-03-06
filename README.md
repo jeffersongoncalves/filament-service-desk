@@ -6,6 +6,10 @@
 
 # Filament Service Desk
 
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/jeffersongoncalves/filament-service-desk.svg?style=flat-square)](https://packagist.org/packages/jeffersongoncalves/filament-service-desk)
+[![Total Downloads](https://img.shields.io/packagist/dt/jeffersongoncalves/filament-service-desk.svg?style=flat-square)](https://packagist.org/packages/jeffersongoncalves/filament-service-desk)
+[![License](https://img.shields.io/packagist/l/jeffersongoncalves/filament-service-desk.svg?style=flat-square)](LICENSE.md)
+
 A Filament plugin for [jeffersongoncalves/laravel-service-desk](https://github.com/jeffersongoncalves/laravel-service-desk) that provides Admin, Agent, and User panels for complete service desk management.
 
 ## Compatibility
