@@ -48,4 +48,9 @@ class CannedResponseResource extends Resource
             'index' => Pages\ListCannedResponses::route('/'),
         ];
     }
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return config()->has('filament-service-desk.resources.agent.canned_response');
+    }
 }

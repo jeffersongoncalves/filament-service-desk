@@ -52,4 +52,9 @@ class EscalationRuleResource extends Resource
             'edit' => Pages\EditEscalationRule::route('/{record}/edit'),
         ];
     }
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return config()->has('filament-service-desk.resources.admin.escalation_rule');
+    }
 }
