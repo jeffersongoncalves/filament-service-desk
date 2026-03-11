@@ -3,6 +3,7 @@
 namespace JeffersonGoncalves\FilamentServiceDesk\User\Pages;
 
 use Filament\Pages\Page;
+use Illuminate\Database\Eloquent\Builder;
 use JeffersonGoncalves\ServiceDesk\Models\KbArticle;
 use JeffersonGoncalves\ServiceDesk\Models\KbCategory;
 use JeffersonGoncalves\ServiceDesk\Services\KnowledgeBaseService;
@@ -42,9 +43,12 @@ class KnowledgeBasePage extends Page
 
     public function getCategories()
     {
-        return KbCategory::query()
+        /** @var Builder<KbCategory> $query */
+        $query = KbCategory::query()
             ->where('is_active', true)
-            ->whereNull('parent_id')
+            ->whereNull('parent_id');
+
+        return $query // @phpstan-ignore method.notFound
             ->withCount(['articles' => fn ($q) => $q->where('status', 'published')])
             ->ordered()
             ->get();
@@ -105,12 +109,12 @@ class KnowledgeBasePage extends Page
 
     public function submitFeedback(int $articleId, bool $isHelpful): void
     {
-        $article = KbArticle::findOrFail($articleId);
+        $article = KbArticle::findOrFail($articleId); // @phpstan-ignore staticMethod.notFound
 
         app(KnowledgeBaseService::class)->addFeedback(
             $article,
             $isHelpful,
-            auth()->user(),
+            auth()->guard()->user(),
             null,
             request()->ip(),
         );

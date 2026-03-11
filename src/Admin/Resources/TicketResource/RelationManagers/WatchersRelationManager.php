@@ -2,16 +2,18 @@
 
 namespace JeffersonGoncalves\FilamentServiceDesk\Admin\Resources\TicketResource\RelationManagers;
 
+use Filament\Forms\Components\Select;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Model;
 use JeffersonGoncalves\ServiceDesk\Services\TicketService;
 
 class WatchersRelationManager extends RelationManager
 {
     protected static string $relationship = 'watchers';
 
-    public static function getTitle(\Illuminate\Database\Eloquent\Model $ownerRecord, string $pageClass): string
+    public static function getTitle(Model $ownerRecord, string $pageClass): string
     {
         return __('filament-service-desk::service-desk.relations.watchers');
     }
@@ -36,7 +38,7 @@ class WatchersRelationManager extends RelationManager
                 Tables\Actions\Action::make('addWatcher')
                     ->label(__('filament-service-desk::service-desk.actions.add_watcher'))
                     ->form([
-                        \Filament\Forms\Components\Select::make('watcher_id')
+                        Select::make('watcher_id')
                             ->label(__('filament-service-desk::service-desk.fields.user'))
                             ->options(fn () => config('service-desk.models.user')::pluck('name', 'id'))
                             ->searchable()

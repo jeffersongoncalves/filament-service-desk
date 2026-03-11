@@ -4,6 +4,7 @@ namespace JeffersonGoncalves\FilamentServiceDesk\Agent\Widgets;
 
 use Filament\Widgets\StatsOverviewWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
+use Illuminate\Database\Eloquent\Model;
 use JeffersonGoncalves\ServiceDesk\Enums\TicketStatus;
 use JeffersonGoncalves\ServiceDesk\Models\Ticket;
 
@@ -13,9 +14,10 @@ class AgentTicketStatsWidget extends StatsOverviewWidget
 
     protected function getStats(): array
     {
-        $user = auth()->user();
+        /** @var Model $user */
+        $user = auth()->guard()->user();
 
-        $myTicketsQuery = Ticket::where('assigned_to_id', $user->getKey())
+        $myTicketsQuery = Ticket::where('assigned_to_id', $user->getKey()) // @phpstan-ignore staticMethod.notFound
             ->where('assigned_to_type', $user->getMorphClass());
 
         return [
@@ -42,7 +44,7 @@ class AgentTicketStatsWidget extends StatsOverviewWidget
                 ->color('success'),
             Stat::make(
                 __('filament-service-desk::service-desk.widgets.agent_stats.queue_size'),
-                Ticket::whereNull('assigned_to_id')
+                Ticket::whereNull('assigned_to_id') // @phpstan-ignore staticMethod.notFound
                     ->whereNotIn('status', [TicketStatus::Closed->value, TicketStatus::Resolved->value])
                     ->count()
             )

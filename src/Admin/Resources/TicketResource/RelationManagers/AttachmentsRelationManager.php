@@ -7,13 +7,14 @@ use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Model;
 use JeffersonGoncalves\ServiceDesk\Services\AttachmentService;
 
 class AttachmentsRelationManager extends RelationManager
 {
     protected static string $relationship = 'attachments';
 
-    public static function getTitle(\Illuminate\Database\Eloquent\Model $ownerRecord, string $pageClass): string
+    public static function getTitle(Model $ownerRecord, string $pageClass): string
     {
         return __('filament-service-desk::service-desk.relations.attachments');
     }
@@ -60,7 +61,7 @@ class AttachmentsRelationManager extends RelationManager
                     ->openUrlInNewTab(),
                 Tables\Actions\DeleteAction::make()
                     ->action(function ($record) {
-                        app(AttachmentService::class)->delete($record, auth()->user());
+                        app(AttachmentService::class)->delete($record, auth()->guard()->user());
                     }),
             ]);
     }

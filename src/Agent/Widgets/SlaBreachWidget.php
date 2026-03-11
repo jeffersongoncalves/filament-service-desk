@@ -5,13 +5,14 @@ namespace JeffersonGoncalves\FilamentServiceDesk\Agent\Widgets;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Filament\Widgets\TableWidget;
+use Illuminate\Database\Eloquent\Model;
 use JeffersonGoncalves\ServiceDesk\Models\TicketSla;
 
 class SlaBreachWidget extends TableWidget
 {
     protected static ?int $sort = 2;
 
-    protected int | string | array $columnSpan = 'full';
+    protected int|string|array $columnSpan = 'full';
 
     protected static ?string $heading = null;
 
@@ -22,7 +23,8 @@ class SlaBreachWidget extends TableWidget
 
     public function table(Table $table): Table
     {
-        $user = auth()->user();
+        /** @var Model $user */
+        $user = auth()->guard()->user();
 
         return $table
             ->query(

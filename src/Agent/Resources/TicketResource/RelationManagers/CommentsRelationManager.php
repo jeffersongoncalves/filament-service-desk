@@ -6,6 +6,7 @@ use Filament\Forms;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Model;
 use JeffersonGoncalves\ServiceDesk\Enums\CommentType;
 use JeffersonGoncalves\ServiceDesk\Services\CommentService;
 
@@ -13,7 +14,7 @@ class CommentsRelationManager extends RelationManager
 {
     protected static string $relationship = 'comments';
 
-    public static function getTitle(\Illuminate\Database\Eloquent\Model $ownerRecord, string $pageClass): string
+    public static function getTitle(Model $ownerRecord, string $pageClass): string
     {
         return __('filament-service-desk::service-desk.relations.comments');
     }
@@ -62,7 +63,7 @@ class CommentsRelationManager extends RelationManager
                     ->action(function (array $data) {
                         app(CommentService::class)->addReply(
                             $this->getOwnerRecord(),
-                            auth()->user(),
+                            auth()->guard()->user(),
                             $data['body'],
                         );
                     }),
@@ -77,7 +78,7 @@ class CommentsRelationManager extends RelationManager
                     ->action(function (array $data) {
                         app(CommentService::class)->addNote(
                             $this->getOwnerRecord(),
-                            auth()->user(),
+                            auth()->guard()->user(),
                             $data['body'],
                         );
                     }),

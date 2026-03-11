@@ -41,7 +41,9 @@ class TicketResource extends Resource
 
     public static function getNavigationBadge(): ?string
     {
-        return static::getModel()::where('status', TicketStatus::Open)->count() ?: null;
+        $count = static::getModel()::where('status', TicketStatus::Open)->count();
+
+        return $count > 0 ? (string) $count : null;
     }
 
     public static function form(Form $form): Form
@@ -228,7 +230,7 @@ class TicketResource extends Resource
                                     ->dateTime()
                                     ->placeholder('—'),
                             ])
-                            ->visible(fn (Ticket $record) => $record->first_response_due || $record->resolution_due),
+                            ->visible(fn (Ticket $record) => $record->first_response_due_at || $record->resolution_due_at),
                     ])
                     ->columnSpan(['lg' => 1]),
             ])

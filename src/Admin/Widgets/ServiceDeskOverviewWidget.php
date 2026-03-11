@@ -16,19 +16,19 @@ class ServiceDeskOverviewWidget extends StatsOverviewWidget
         return [
             Stat::make(
                 __('filament-service-desk::service-desk.widgets.overview.open_tickets'),
-                Ticket::where('status', TicketStatus::Open)->count()
+                Ticket::where('status', TicketStatus::Open)->count() // @phpstan-ignore staticMethod.notFound
             )
                 ->icon('heroicon-o-ticket')
                 ->color('info'),
             Stat::make(
                 __('filament-service-desk::service-desk.widgets.overview.in_progress'),
-                Ticket::where('status', TicketStatus::InProgress)->count()
+                Ticket::where('status', TicketStatus::InProgress)->count() // @phpstan-ignore staticMethod.notFound
             )
                 ->icon('heroicon-o-arrow-path')
                 ->color('primary'),
             Stat::make(
                 __('filament-service-desk::service-desk.widgets.overview.unassigned'),
-                Ticket::whereNull('assigned_to_id')
+                Ticket::whereNull('assigned_to_id') // @phpstan-ignore staticMethod.notFound
                     ->whereNotIn('status', [TicketStatus::Closed->value, TicketStatus::Resolved->value])
                     ->count()
             )
@@ -36,7 +36,7 @@ class ServiceDeskOverviewWidget extends StatsOverviewWidget
                 ->color('warning'),
             Stat::make(
                 __('filament-service-desk::service-desk.widgets.overview.resolved_today'),
-                Ticket::where('status', TicketStatus::Resolved)
+                Ticket::where('status', TicketStatus::Resolved) // @phpstan-ignore staticMethod.notFound
                     ->whereDate('resolved_at', today())
                     ->count()
             )

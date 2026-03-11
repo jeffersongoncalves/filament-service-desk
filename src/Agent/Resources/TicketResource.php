@@ -10,6 +10,7 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\HtmlString;
 use JeffersonGoncalves\FilamentServiceDesk\Agent\Resources\TicketResource\Pages;
 use JeffersonGoncalves\FilamentServiceDesk\Agent\Resources\TicketResource\RelationManagers;
@@ -43,14 +44,17 @@ class TicketResource extends Resource
 
     public static function getNavigationBadge(): ?string
     {
-        return static::getEloquentQuery()
+        $count = static::getEloquentQuery()
             ->whereIn('status', [TicketStatus::Open->value, TicketStatus::InProgress->value])
-            ->count() ?: null;
+            ->count();
+
+        return $count > 0 ? (string) $count : null;
     }
 
     public static function getEloquentQuery(): Builder
     {
-        $user = auth()->user();
+        /** @var Model $user */
+        $user = auth()->guard()->user();
 
         return parent::getEloquentQuery()
             ->where(function (Builder $query) use ($user) {
@@ -77,7 +81,7 @@ class TicketResource extends Resource
                                     ->content(fn (Ticket $record) => new HtmlString($record->description)),
                                 Forms\Components\Placeholder::make('user_name')
                                     ->label(__('filament-service-desk::service-desk.fields.requester'))
-                                    ->content(fn (Ticket $record) => $record->user?->name ?? '—'),
+                                    ->content(fn (Ticket $record) => $record->user?->name ?? '—'), // @phpstan-ignore class.notFound
                             ]),
                     ])
                     ->columnSpan(['lg' => 2]),
@@ -102,7 +106,7 @@ class TicketResource extends Resource
                                     ->content(fn (Ticket $record) => $record->reference_number),
                                 Forms\Components\Placeholder::make('department_name')
                                     ->label(__('filament-service-desk::service-desk.fields.department'))
-                                    ->content(fn (Ticket $record) => $record->department?->name ?? '—'),
+                                    ->content(fn (Ticket $record) => $record->department->name),
                                 Forms\Components\Placeholder::make('category_name')
                                     ->label(__('filament-service-desk::service-desk.fields.category'))
                                     ->content(fn (Ticket $record) => $record->category?->name ?? '—'),
@@ -254,7 +258,7 @@ class TicketResource extends Resource
                     ->icon('heroicon-o-x-circle')
                     ->color('danger')
                     ->requiresConfirmation()
-                    ->action(fn (Ticket $record) => app(TicketService::class)->close($record, auth()->user()))
+                    ->action(fn (Ticket $record) => app(TicketService::class)->close($record, auth()->guard()->user()))
                     ->visible(fn (Ticket $record) => $record->isOpen()),
             ]);
     }
