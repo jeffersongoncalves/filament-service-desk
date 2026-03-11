@@ -6,6 +6,7 @@ use Filament\Forms;
 use Filament\Infolists;
 use Filament\Resources\Pages\CreateRecord;
 use Filament\Schemas;
+use Filament\Schemas\Components\Component;
 use Filament\Schemas\Components\Wizard;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
@@ -44,7 +45,7 @@ class CreateServiceRequest extends CreateRecord
                             Infolists\Components\TextEntry::make('service_description')
                                 ->label(__('filament-service-desk::service-desk.fields.description'))
                                 ->state(function (Schemas\Components\Utilities\Get $get) {
-                                    $service = Service::find($get('service_id'));
+                                    $service = Service::find($get('service_id')); // @phpstan-ignore staticMethod.notFound
 
                                     return $service?->description ?? '';
                                 })
@@ -54,8 +55,7 @@ class CreateServiceRequest extends CreateRecord
                     Wizard\Step::make(__('filament-service-desk::service-desk.wizard.fill_form'))
                         ->icon(Heroicon::DocumentText)
                         ->schema(function (Schemas\Components\Utilities\Get $get): array {
-                            $service = Service::find($get('service_id'));
-
+                            $service = Service::find($get('service_id')); // @phpstan-ignore staticMethod.notFound
                             if (! $service) {
                                 return [
                                     Infolists\Components\TextEntry::make('no_service')
@@ -76,7 +76,7 @@ class CreateServiceRequest extends CreateRecord
                         ->schema([
                             Infolists\Components\TextEntry::make('review_service')
                                 ->label(__('filament-service-desk::service-desk.fields.service'))
-                                ->state(fn (Schemas\Components\Utilities\Get $get) => Service::find($get('service_id'))?->name ?? '—'),
+                                ->state(fn (Schemas\Components\Utilities\Get $get) => Service::find($get('service_id'))?->name ?? '—'), // @phpstan-ignore staticMethod.notFound
                             Forms\Components\Textarea::make('notes')
                                 ->label(__('filament-service-desk::service-desk.fields.notes'))
                                 ->maxLength(65535),
@@ -88,17 +88,17 @@ class CreateServiceRequest extends CreateRecord
 
     protected function handleRecordCreation(array $data): Model
     {
-        $service = Service::findOrFail($data['service_id']);
+        $service = Service::findOrFail($data['service_id']); // @phpstan-ignore staticMethod.notFound
 
         return app(ServiceRequestService::class)->create(
             $service,
-            auth()->user(),
+            auth()->guard()->user(),
             $data['form_data'] ?? [],
             $data['notes'] ?? null,
         );
     }
 
-    protected static function mapFormField($field): ?Forms\Components\Component
+    protected static function mapFormField($field): ?Component
     {
         $component = match ($field->type) {
             FormFieldType::Text => Forms\Components\TextInput::make("form_data.{$field->name}"),

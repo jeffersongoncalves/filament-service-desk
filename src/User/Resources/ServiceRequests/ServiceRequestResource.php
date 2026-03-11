@@ -8,6 +8,7 @@ use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use JeffersonGoncalves\FilamentServiceDesk\User\Resources\ServiceRequests\Schemas\ServiceRequestInfolist;
 use JeffersonGoncalves\FilamentServiceDesk\User\Resources\ServiceRequests\Tables\ServiceRequestsTable;
 use JeffersonGoncalves\ServiceDesk\Models\ServiceRequest;
@@ -37,7 +38,8 @@ class ServiceRequestResource extends Resource
 
     public static function getEloquentQuery(): Builder
     {
-        $user = auth()->user();
+        /** @var Model $user */
+        $user = auth()->guard()->user();
 
         return parent::getEloquentQuery()
             ->where('requester_id', $user->getKey())

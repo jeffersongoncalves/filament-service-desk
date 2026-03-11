@@ -5,6 +5,7 @@ namespace JeffersonGoncalves\FilamentServiceDesk\User\Widgets;
 use Filament\Support\Icons\Heroicon;
 use Filament\Widgets\StatsOverviewWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
+use Illuminate\Database\Eloquent\Model;
 use JeffersonGoncalves\ServiceDesk\Enums\TicketStatus;
 use JeffersonGoncalves\ServiceDesk\Models\Ticket;
 
@@ -14,8 +15,10 @@ class MyTicketsOverviewWidget extends StatsOverviewWidget
 
     protected function getStats(): array
     {
-        $user = auth()->user();
+        /** @var Model $user */
+        $user = auth()->guard()->user();
 
+        /** @phpstan-ignore staticMethod.notFound */
         $myTicketsQuery = Ticket::where('user_id', $user->getKey())
             ->where('user_type', $user->getMorphClass());
 

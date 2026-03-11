@@ -64,7 +64,7 @@ class AttachmentsRelationManager extends RelationManager
                     ->openUrlInNewTab(),
                 Actions\DeleteAction::make()
                     ->action(function ($record) {
-                        app(AttachmentService::class)->delete($record, auth()->user());
+                        app(AttachmentService::class)->delete($record, auth()->guard()->user());
                     }),
             ]);
     }

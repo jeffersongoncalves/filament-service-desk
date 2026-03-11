@@ -56,7 +56,7 @@ class CommentsRelationManager extends RelationManager
             ->headerActions([
                 Actions\Action::make('addReply')
                     ->label(__('filament-service-desk::service-desk.actions.add_reply'))
-                    ->form([
+                    ->schema([
                         Forms\Components\RichEditor::make('body')
                             ->label(__('filament-service-desk::service-desk.fields.body'))
                             ->required(),
@@ -64,14 +64,14 @@ class CommentsRelationManager extends RelationManager
                     ->action(function (array $data) {
                         app(CommentService::class)->addReply(
                             $this->getOwnerRecord(),
-                            auth()->user(),
+                            auth()->guard()->user(),
                             $data['body'],
                         );
                     }),
                 Actions\Action::make('addNote')
                     ->label(__('filament-service-desk::service-desk.actions.add_note'))
                     ->color('warning')
-                    ->form([
+                    ->schema([
                         Forms\Components\RichEditor::make('body')
                             ->label(__('filament-service-desk::service-desk.fields.body'))
                             ->required(),
@@ -79,7 +79,7 @@ class CommentsRelationManager extends RelationManager
                     ->action(function (array $data) {
                         app(CommentService::class)->addNote(
                             $this->getOwnerRecord(),
-                            auth()->user(),
+                            auth()->guard()->user(),
                             $data['body'],
                         );
                     }),

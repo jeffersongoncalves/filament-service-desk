@@ -5,6 +5,7 @@ namespace JeffersonGoncalves\FilamentServiceDesk\Agent\Widgets;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Filament\Widgets\TableWidget;
+use Illuminate\Database\Eloquent\Model;
 use JeffersonGoncalves\ServiceDesk\Models\TicketSla;
 
 class SlaBreachWidget extends TableWidget
@@ -15,7 +16,8 @@ class SlaBreachWidget extends TableWidget
 
     public function table(Table $table): Table
     {
-        $user = auth()->user();
+        /** @var Model $user */
+        $user = auth()->guard()->user();
 
         return $table
             ->heading(__('filament-service-desk::service-desk.widgets.sla_breach.heading'))

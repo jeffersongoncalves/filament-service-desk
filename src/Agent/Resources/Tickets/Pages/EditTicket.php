@@ -21,6 +21,6 @@ class EditTicket extends EditRecord
 
     protected function handleRecordUpdate(Model $record, array $data): Model
     {
-        return app(TicketService::class)->update($record, $data, auth()->user());
+        return app(TicketService::class)->update($record, $data, auth()->guard()->user());
     }
 }

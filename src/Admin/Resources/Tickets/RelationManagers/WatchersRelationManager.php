@@ -38,7 +38,7 @@ class WatchersRelationManager extends RelationManager
             ->headerActions([
                 Actions\Action::make('addWatcher')
                     ->label(__('filament-service-desk::service-desk.actions.add_watcher'))
-                    ->form([
+                    ->schema([
                         Select::make('watcher_id')
                             ->label(__('filament-service-desk::service-desk.fields.user'))
                             ->options(fn () => config('service-desk.models.user')::pluck('name', 'id'))

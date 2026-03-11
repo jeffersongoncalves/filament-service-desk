@@ -8,6 +8,7 @@ use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use JeffersonGoncalves\FilamentServiceDesk\User\Resources\Tickets\Schemas\TicketForm;
 use JeffersonGoncalves\FilamentServiceDesk\User\Resources\Tickets\Schemas\TicketInfolist;
 use JeffersonGoncalves\FilamentServiceDesk\User\Resources\Tickets\Tables\TicketsTable;
@@ -39,14 +40,17 @@ class TicketResource extends Resource
 
     public static function getNavigationBadge(): ?string
     {
-        return static::getEloquentQuery()
+        $count = static::getEloquentQuery()
             ->whereNotIn('status', [TicketStatus::Closed->value, TicketStatus::Resolved->value])
-            ->count() ?: null;
+            ->count();
+
+        return $count > 0 ? (string) $count : null;
     }
 
     public static function getEloquentQuery(): Builder
     {
-        $user = auth()->user();
+        /** @var Model $user */
+        $user = auth()->guard()->user();
 
         return parent::getEloquentQuery()
             ->where('user_id', $user->getKey())

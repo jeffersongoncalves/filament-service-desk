@@ -18,7 +18,7 @@ class TicketsByDepartmentWidget extends ChartWidget
 
     protected function getData(): array
     {
-        $departments = Department::withCount('tickets')
+        $departments = Department::withCount('tickets') // @phpstan-ignore staticMethod.notFound
             ->where('is_active', true)
             ->orderByDesc('tickets_count')
             ->limit(10)

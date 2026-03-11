@@ -41,7 +41,7 @@ class CommentsRelationManager extends RelationManager
             ->headerActions([
                 Actions\Action::make('reply')
                     ->label(__('filament-service-desk::service-desk.actions.reply'))
-                    ->form([
+                    ->schema([
                         Forms\Components\RichEditor::make('body')
                             ->label(__('filament-service-desk::service-desk.fields.body'))
                             ->required(),
@@ -49,7 +49,7 @@ class CommentsRelationManager extends RelationManager
                     ->action(function (array $data) {
                         app(CommentService::class)->addReply(
                             $this->getOwnerRecord(),
-                            auth()->user(),
+                            auth()->guard()->user(),
                             $data['body'],
                         );
                     }),
