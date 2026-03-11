@@ -16,6 +16,7 @@ class BusinessHoursScheduleResource extends Resource
     protected static ?string $model = BusinessHoursSchedule::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-calendar-days';
+
     protected static ?int $navigationSort = 12;
 
     public static function getNavigationGroup(): ?string
@@ -117,5 +118,10 @@ class BusinessHoursScheduleResource extends Resource
             'create' => Pages\CreateBusinessHoursSchedule::route('/create'),
             'edit' => Pages\EditBusinessHoursSchedule::route('/{record}/edit'),
         ];
+    }
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return config()->has('filament-service-desk.resources.admin.business_hours_schedule');
     }
 }

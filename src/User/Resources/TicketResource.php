@@ -21,6 +21,7 @@ class TicketResource extends Resource
     protected static ?string $model = Ticket::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-ticket';
+
     protected static ?int $navigationSort = 0;
 
     public static function getNavigationGroup(): ?string
@@ -226,5 +227,10 @@ class TicketResource extends Resource
             'create' => Pages\CreateTicket::route('/create'),
             'view' => Pages\ViewTicket::route('/{record}'),
         ];
+    }
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return config()->has('filament-service-desk.resources.user.ticket');
     }
 }

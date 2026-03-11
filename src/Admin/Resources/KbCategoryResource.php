@@ -15,6 +15,7 @@ class KbCategoryResource extends Resource
     protected static ?string $model = KbCategory::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-folder-open';
+
     protected static ?int $navigationSort = 31;
 
     public static function getNavigationGroup(): ?string
@@ -126,5 +127,10 @@ class KbCategoryResource extends Resource
             'create' => Pages\CreateKbCategory::route('/create'),
             'edit' => Pages\EditKbCategory::route('/{record}/edit'),
         ];
+    }
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return config()->has('filament-service-desk.resources.admin.kb_category');
     }
 }

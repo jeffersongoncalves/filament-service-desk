@@ -15,6 +15,7 @@ class DepartmentResource extends Resource
     protected static ?string $model = Department::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-building-office';
+
     protected static ?string $navigationGroup = 'Service Desk';
 
     protected static ?int $navigationSort = 1;
@@ -127,5 +128,10 @@ class DepartmentResource extends Resource
             'create' => Pages\CreateDepartment::route('/create'),
             'edit' => Pages\EditDepartment::route('/{record}/edit'),
         ];
+    }
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return config()->has('filament-service-desk.resources.admin.department');
     }
 }

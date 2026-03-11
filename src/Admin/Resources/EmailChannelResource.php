@@ -15,6 +15,7 @@ class EmailChannelResource extends Resource
     protected static ?string $model = EmailChannel::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-envelope';
+
     protected static ?int $navigationSort = 20;
 
     public static function getNavigationGroup(): ?string
@@ -181,5 +182,10 @@ class EmailChannelResource extends Resource
             'create' => Pages\CreateEmailChannel::route('/create'),
             'edit' => Pages\EditEmailChannel::route('/{record}/edit'),
         ];
+    }
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return config()->has('filament-service-desk.resources.admin.email_channel');
     }
 }

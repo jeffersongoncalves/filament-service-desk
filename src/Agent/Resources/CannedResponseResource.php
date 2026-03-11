@@ -13,6 +13,7 @@ class CannedResponseResource extends Resource
     protected static ?string $model = CannedResponse::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-chat-bubble-bottom-center-text';
+
     protected static ?int $navigationSort = 5;
 
     public static function getNavigationGroup(): ?string
@@ -67,5 +68,10 @@ class CannedResponseResource extends Resource
         return [
             'index' => Pages\ListCannedResponses::route('/'),
         ];
+    }
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return config()->has('filament-service-desk.resources.agent.canned_response');
     }
 }

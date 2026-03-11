@@ -16,6 +16,7 @@ class SlaPolicyResource extends Resource
     protected static ?string $model = SlaPolicy::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-clock';
+
     protected static ?int $navigationSort = 10;
 
     public static function getNavigationGroup(): ?string
@@ -123,5 +124,10 @@ class SlaPolicyResource extends Resource
             'create' => Pages\CreateSlaPolicy::route('/create'),
             'edit' => Pages\EditSlaPolicy::route('/{record}/edit'),
         ];
+    }
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return config()->has('filament-service-desk.resources.admin.sla_policy');
     }
 }

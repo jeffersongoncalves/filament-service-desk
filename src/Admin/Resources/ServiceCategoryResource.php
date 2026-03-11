@@ -15,6 +15,7 @@ class ServiceCategoryResource extends Resource
     protected static ?string $model = ServiceCategory::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+
     protected static ?int $navigationSort = 41;
 
     public static function getNavigationGroup(): ?string
@@ -122,5 +123,10 @@ class ServiceCategoryResource extends Resource
             'create' => Pages\CreateServiceCategory::route('/create'),
             'edit' => Pages\EditServiceCategory::route('/{record}/edit'),
         ];
+    }
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return config()->has('filament-service-desk.resources.admin.service_category');
     }
 }

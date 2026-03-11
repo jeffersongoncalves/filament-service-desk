@@ -9,13 +9,13 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use JeffersonGoncalves\FilamentServiceDesk\Admin\Resources\CategoryResource\Pages;
 use JeffersonGoncalves\ServiceDesk\Models\Category;
-use JeffersonGoncalves\ServiceDesk\Models\Department;
 
 class CategoryResource extends Resource
 {
     protected static ?string $model = Category::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-folder';
+
     protected static ?int $navigationSort = 2;
 
     public static function getNavigationGroup(): ?string
@@ -139,5 +139,10 @@ class CategoryResource extends Resource
             'create' => Pages\CreateCategory::route('/create'),
             'edit' => Pages\EditCategory::route('/{record}/edit'),
         ];
+    }
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return config()->has('filament-service-desk.resources.admin.category');
     }
 }

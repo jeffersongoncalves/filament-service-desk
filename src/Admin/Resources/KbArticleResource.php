@@ -18,6 +18,7 @@ class KbArticleResource extends Resource
     protected static ?string $model = KbArticle::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-document-text';
+
     protected static ?int $navigationSort = 30;
 
     public static function getNavigationGroup(): ?string
@@ -201,5 +202,10 @@ class KbArticleResource extends Resource
             'create' => Pages\CreateKbArticle::route('/create'),
             'edit' => Pages\EditKbArticle::route('/{record}/edit'),
         ];
+    }
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return config()->has('filament-service-desk.resources.admin.kb_article');
     }
 }

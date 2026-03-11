@@ -17,6 +17,7 @@ class EscalationRuleResource extends Resource
     protected static ?string $model = EscalationRule::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-arrow-trending-up';
+
     protected static ?int $navigationSort = 11;
 
     public static function getNavigationGroup(): ?string
@@ -129,5 +130,10 @@ class EscalationRuleResource extends Resource
             'create' => Pages\CreateEscalationRule::route('/create'),
             'edit' => Pages\EditEscalationRule::route('/{record}/edit'),
         ];
+    }
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return config()->has('filament-service-desk.resources.admin.escalation_rule');
     }
 }

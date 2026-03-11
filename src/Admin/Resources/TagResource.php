@@ -15,6 +15,7 @@ class TagResource extends Resource
     protected static ?string $model = Tag::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-tag';
+
     protected static ?int $navigationSort = 3;
 
     public static function getNavigationGroup(): ?string
@@ -99,5 +100,10 @@ class TagResource extends Resource
             'create' => Pages\CreateTag::route('/create'),
             'edit' => Pages\EditTag::route('/{record}/edit'),
         ];
+    }
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return config()->has('filament-service-desk.resources.admin.tag');
     }
 }

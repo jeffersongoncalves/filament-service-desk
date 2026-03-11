@@ -2,7 +2,6 @@
 
 namespace JeffersonGoncalves\FilamentServiceDesk\User\Resources;
 
-use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Infolists;
 use Filament\Infolists\Infolist;
@@ -19,6 +18,7 @@ class ServiceRequestResource extends Resource
     protected static ?string $model = ServiceRequest::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-clipboard-document-list';
+
     protected static ?int $navigationSort = 5;
 
     public static function getNavigationGroup(): ?string
@@ -139,5 +139,10 @@ class ServiceRequestResource extends Resource
             'create' => Pages\CreateServiceRequest::route('/create'),
             'view' => Pages\ViewServiceRequest::route('/{record}'),
         ];
+    }
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return config()->has('filament-service-desk.resources.user.service_request');
     }
 }

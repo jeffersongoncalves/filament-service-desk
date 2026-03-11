@@ -17,6 +17,7 @@ class ServiceResource extends Resource
     protected static ?string $model = Service::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-squares-2x2';
+
     protected static ?int $navigationSort = 40;
 
     public static function getNavigationGroup(): ?string
@@ -178,5 +179,10 @@ class ServiceResource extends Resource
             'create' => Pages\CreateService::route('/create'),
             'edit' => Pages\EditService::route('/{record}/edit'),
         ];
+    }
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return config()->has('filament-service-desk.resources.admin.service');
     }
 }

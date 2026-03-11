@@ -10,6 +10,7 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\HtmlString;
 use JeffersonGoncalves\FilamentServiceDesk\Agent\Resources\TicketResource\Pages;
 use JeffersonGoncalves\FilamentServiceDesk\Agent\Resources\TicketResource\RelationManagers;
 use JeffersonGoncalves\ServiceDesk\Enums\TicketPriority;
@@ -22,6 +23,7 @@ class TicketResource extends Resource
     protected static ?string $model = Ticket::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-ticket';
+
     protected static ?int $navigationSort = 0;
 
     public static function getNavigationGroup(): ?string
@@ -72,7 +74,7 @@ class TicketResource extends Resource
                                     ->content(fn (Ticket $record) => $record->title),
                                 Forms\Components\Placeholder::make('description')
                                     ->label(__('filament-service-desk::service-desk.fields.description'))
-                                    ->content(fn (Ticket $record) => new \Illuminate\Support\HtmlString($record->description)),
+                                    ->content(fn (Ticket $record) => new HtmlString($record->description)),
                                 Forms\Components\Placeholder::make('user_name')
                                     ->label(__('filament-service-desk::service-desk.fields.requester'))
                                     ->content(fn (Ticket $record) => $record->user?->name ?? '—'),
@@ -272,5 +274,10 @@ class TicketResource extends Resource
             'view' => Pages\ViewTicket::route('/{record}'),
             'edit' => Pages\EditTicket::route('/{record}/edit'),
         ];
+    }
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return config()->has('filament-service-desk.resources.agent.ticket');
     }
 }
