@@ -52,4 +52,9 @@ class ServiceCategoryResource extends Resource
             'edit' => Pages\EditServiceCategory::route('/{record}/edit'),
         ];
     }
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return config()->has('filament-service-desk.resources.admin.service_category');
+    }
 }

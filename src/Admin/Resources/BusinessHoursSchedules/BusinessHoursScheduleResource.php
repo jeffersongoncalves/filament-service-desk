@@ -60,4 +60,9 @@ class BusinessHoursScheduleResource extends Resource
             'edit' => Pages\EditBusinessHoursSchedule::route('/{record}/edit'),
         ];
     }
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return config()->has('filament-service-desk.resources.admin.business_hours_schedule');
+    }
 }

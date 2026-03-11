@@ -57,4 +57,9 @@ class CannedResponseResource extends Resource
             'edit' => Pages\EditCannedResponse::route('/{record}/edit'),
         ];
     }
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return config()->has('filament-service-desk.resources.admin.canned_response');
+    }
 }

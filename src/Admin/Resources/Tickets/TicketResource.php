@@ -75,4 +75,9 @@ class TicketResource extends Resource
             'edit' => Pages\EditTicket::route('/{record}/edit'),
         ];
     }
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return config()->has('filament-service-desk.resources.admin.ticket');
+    }
 }

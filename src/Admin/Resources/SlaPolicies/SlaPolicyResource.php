@@ -60,4 +60,9 @@ class SlaPolicyResource extends Resource
             'edit' => Pages\EditSlaPolicy::route('/{record}/edit'),
         ];
     }
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return config()->has('filament-service-desk.resources.admin.sla_policy');
+    }
 }

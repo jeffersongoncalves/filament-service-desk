@@ -84,4 +84,9 @@ class TicketResource extends Resource
             'view' => Pages\ViewTicket::route('/{record}'),
         ];
     }
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return config()->has('filament-service-desk.resources.user.ticket');
+    }
 }

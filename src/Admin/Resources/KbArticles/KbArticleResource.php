@@ -60,4 +60,9 @@ class KbArticleResource extends Resource
             'edit' => Pages\EditKbArticle::route('/{record}/edit'),
         ];
     }
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return config()->has('filament-service-desk.resources.admin.kb_article');
+    }
 }

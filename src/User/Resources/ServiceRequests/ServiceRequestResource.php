@@ -67,4 +67,9 @@ class ServiceRequestResource extends Resource
             'view' => Pages\ViewServiceRequest::route('/{record}'),
         ];
     }
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return config()->has('filament-service-desk.resources.user.service_request');
+    }
 }

@@ -52,4 +52,9 @@ class KbCategoryResource extends Resource
             'edit' => Pages\EditKbCategory::route('/{record}/edit'),
         ];
     }
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return config()->has('filament-service-desk.resources.admin.kb_category');
+    }
 }

@@ -52,4 +52,9 @@ class EmailChannelResource extends Resource
             'edit' => Pages\EditEmailChannel::route('/{record}/edit'),
         ];
     }
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return config()->has('filament-service-desk.resources.admin.email_channel');
+    }
 }
