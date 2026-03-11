@@ -104,7 +104,7 @@ class TicketInfolist
                                     ->dateTime()
                                     ->placeholder('—'),
                             ])
-                            ->visible(fn (Ticket $record) => $record->first_response_due || $record->resolution_due),
+                            ->visible(fn (Ticket $record) => $record->first_response_due_at || $record->resolution_due_at),
                     ])
                     ->columnSpan(['lg' => 1]),
             ])

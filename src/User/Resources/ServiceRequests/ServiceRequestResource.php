@@ -37,7 +37,8 @@ class ServiceRequestResource extends Resource
 
     public static function getEloquentQuery(): Builder
     {
-        $user = auth()->user();
+        /** @var \Illuminate\Database\Eloquent\Model $user */
+        $user = auth()->guard()->user();
 
         return parent::getEloquentQuery()
             ->where('requester_id', $user->getKey())

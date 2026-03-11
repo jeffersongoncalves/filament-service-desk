@@ -12,6 +12,6 @@ class CreateKbArticle extends CreateRecord
 
     protected function handleRecordCreation(array $data): \Illuminate\Database\Eloquent\Model
     {
-        return app(KnowledgeBaseService::class)->createArticle($data, auth()->user());
+        return app(KnowledgeBaseService::class)->createArticle($data, auth()->guard()->user());
     }
 }

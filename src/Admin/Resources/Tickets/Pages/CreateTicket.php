@@ -12,6 +12,6 @@ class CreateTicket extends CreateRecord
 
     protected function handleRecordCreation(array $data): \Illuminate\Database\Eloquent\Model
     {
-        return app(TicketService::class)->create($data, auth()->user());
+        return app(TicketService::class)->create($data, auth()->guard()->user());
     }
 }

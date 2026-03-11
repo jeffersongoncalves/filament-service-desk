@@ -10,7 +10,7 @@ use Filament\Tables;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Table;
-use JeffersonGoncalves\FilamentServiceDesk\Agent\Resources\TicketResource;
+use JeffersonGoncalves\FilamentServiceDesk\Agent\Resources\Tickets\TicketResource;
 use JeffersonGoncalves\ServiceDesk\Enums\TicketPriority;
 use JeffersonGoncalves\ServiceDesk\Enums\TicketStatus;
 use JeffersonGoncalves\ServiceDesk\Models\Ticket;
@@ -43,9 +43,12 @@ class TicketQueuePage extends Page implements HasTable
 
     public static function getNavigationBadge(): ?string
     {
-        return Ticket::whereNull('assigned_to_id')
+        /** @phpstan-ignore staticMethod.notFound */
+        $count = Ticket::whereNull('assigned_to_id')
             ->whereIn('status', [TicketStatus::Open->value, TicketStatus::Pending->value])
-            ->count() ?: null;
+            ->count();
+
+        return $count ? (string) $count : null;
     }
 
     public function table(Table $table): Table
@@ -103,7 +106,7 @@ class TicketQueuePage extends Page implements HasTable
                     ->color('primary')
                     ->requiresConfirmation()
                     ->action(function (Ticket $record) {
-                        app(TicketService::class)->assign($record, auth()->user(), auth()->user());
+                        app(TicketService::class)->assign($record, auth()->guard()->user(), auth()->guard()->user());
 
                         return redirect(TicketResource::getUrl('view', ['record' => $record]));
                     }),

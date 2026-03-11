@@ -75,7 +75,7 @@ class TicketsTable
                     ->icon(Heroicon::XCircle)
                     ->color('danger')
                     ->requiresConfirmation()
-                    ->action(fn (Ticket $record) => app(TicketService::class)->close($record, auth()->user()))
+                    ->action(fn (Ticket $record) => app(TicketService::class)->close($record, auth()->guard()->user()))
                     ->visible(fn (Ticket $record) => $record->isOpen()),
             ]);
     }

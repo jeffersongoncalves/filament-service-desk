@@ -15,7 +15,8 @@ class SlaBreachWidget extends TableWidget
 
     public function table(Table $table): Table
     {
-        $user = auth()->user();
+        /** @var \Illuminate\Database\Eloquent\Model $user */
+        $user = auth()->guard()->user();
 
         return $table
             ->heading(__('filament-service-desk::service-desk.widgets.sla_breach.heading'))

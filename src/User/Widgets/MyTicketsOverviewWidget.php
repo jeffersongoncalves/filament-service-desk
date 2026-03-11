@@ -14,9 +14,10 @@ class MyTicketsOverviewWidget extends StatsOverviewWidget
 
     protected function getStats(): array
     {
-        $user = auth()->user();
+        /** @var \Illuminate\Database\Eloquent\Model $user */
+        $user = auth()->guard()->user();
 
-        $myTicketsQuery = Ticket::where('user_id', $user->getKey())
+        $myTicketsQuery = Ticket::where('user_id', $user->getKey()) /** @phpstan-ignore staticMethod.notFound */
             ->where('user_type', $user->getMorphClass());
 
         return [

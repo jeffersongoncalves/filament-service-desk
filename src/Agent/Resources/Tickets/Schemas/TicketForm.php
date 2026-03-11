@@ -29,7 +29,7 @@ class TicketForm
                                     ->state(fn (Ticket $record) => $record->description),
                                 Infolists\Components\TextEntry::make('user_name')
                                     ->label(__('filament-service-desk::service-desk.fields.requester'))
-                                    ->state(fn (Ticket $record) => $record->user?->name ?? '—'),
+                                    ->state(fn (Ticket $record) => $record->user?->name ?? '—'), // @phpstan-ignore class.notFound
                             ]),
                     ])
                     ->columnSpan(['lg' => 2]),

@@ -39,14 +39,17 @@ class TicketResource extends Resource
 
     public static function getNavigationBadge(): ?string
     {
-        return static::getEloquentQuery()
+        $count = static::getEloquentQuery()
             ->whereIn('status', [TicketStatus::Open->value, TicketStatus::InProgress->value])
-            ->count() ?: null;
+            ->count();
+
+        return $count ? (string) $count : null;
     }
 
     public static function getEloquentQuery(): Builder
     {
-        $user = auth()->user();
+        /** @var \Illuminate\Database\Eloquent\Model $user */
+        $user = auth()->guard()->user();
 
         return parent::getEloquentQuery()
             ->where(function (Builder $query) use ($user) {

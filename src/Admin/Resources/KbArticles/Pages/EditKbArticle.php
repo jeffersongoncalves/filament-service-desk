@@ -20,19 +20,19 @@ class EditKbArticle extends EditRecord
                 ->icon(Heroicon::GlobeAlt)
                 ->color('success')
                 ->action(fn () => app(KnowledgeBaseService::class)->publishArticle($this->record))
-                ->visible(fn () => $this->record->status !== \JeffersonGoncalves\ServiceDesk\Enums\ArticleStatus::Published),
+                ->visible(fn () => $this->record->status !== \JeffersonGoncalves\ServiceDesk\Enums\ArticleStatus::Published), // @phpstan-ignore property.nonObject
             Actions\Action::make('archive')
                 ->label(__('filament-service-desk::service-desk.actions.archive'))
                 ->icon(Heroicon::ArchiveBox)
                 ->color('warning')
                 ->action(fn () => app(KnowledgeBaseService::class)->archiveArticle($this->record))
-                ->visible(fn () => $this->record->status === \JeffersonGoncalves\ServiceDesk\Enums\ArticleStatus::Published),
+                ->visible(fn () => $this->record->status === \JeffersonGoncalves\ServiceDesk\Enums\ArticleStatus::Published), // @phpstan-ignore property.nonObject
             Actions\DeleteAction::make(),
         ];
     }
 
     protected function handleRecordUpdate(\Illuminate\Database\Eloquent\Model $record, array $data): \Illuminate\Database\Eloquent\Model
     {
-        return app(KnowledgeBaseService::class)->updateArticle($record, $data, auth()->user());
+        return app(KnowledgeBaseService::class)->updateArticle($record, $data, auth()->guard()->user());
     }
 }
