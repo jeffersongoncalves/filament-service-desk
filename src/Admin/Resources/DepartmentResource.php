@@ -132,6 +132,6 @@ class DepartmentResource extends Resource
 
     public static function shouldRegisterNavigation(): bool
     {
-        return config()->has('filament-service-desk.resources.admin.department');
+        return config('filament-service-desk.resources.admin.department') !== null;
     }
 }

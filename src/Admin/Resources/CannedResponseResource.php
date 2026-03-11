@@ -126,6 +126,6 @@ class CannedResponseResource extends Resource
 
     public static function shouldRegisterNavigation(): bool
     {
-        return config()->has('filament-service-desk.resources.admin.canned_response');
+        return config('filament-service-desk.resources.admin.canned_response') !== null;
     }
 }

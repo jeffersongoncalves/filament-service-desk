@@ -131,6 +131,6 @@ class KbCategoryResource extends Resource
 
     public static function shouldRegisterNavigation(): bool
     {
-        return config()->has('filament-service-desk.resources.admin.kb_category');
+        return config('filament-service-desk.resources.admin.kb_category') !== null;
     }
 }

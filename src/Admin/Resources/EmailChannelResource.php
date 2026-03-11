@@ -186,6 +186,6 @@ class EmailChannelResource extends Resource
 
     public static function shouldRegisterNavigation(): bool
     {
-        return config()->has('filament-service-desk.resources.admin.email_channel');
+        return config('filament-service-desk.resources.admin.email_channel') !== null;
     }
 }
