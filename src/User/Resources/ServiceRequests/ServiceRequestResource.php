@@ -70,6 +70,6 @@ class ServiceRequestResource extends Resource
 
     public static function shouldRegisterNavigation(): bool
     {
-        return config()->has('filament-service-desk.resources.user.service_request');
+        return config('filament-service-desk.resources.user.service_request') !== null;
     }
 }

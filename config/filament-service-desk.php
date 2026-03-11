@@ -49,33 +49,33 @@ return [
     |--------------------------------------------------------------------------
     |
     | Override the default resource classes used by the plugins.
-    | Set to null to use the default.
+    | Set to null to disable a resource completely (removes navigation and routes).
     |
     */
 
     'resources' => [
         'admin' => [
-            'department' => null,
-            'category' => null,
-            'tag' => null,
-            'canned_response' => null,
-            'ticket' => null,
-            'sla_policy' => null,
-            'escalation_rule' => null,
-            'business_hours_schedule' => null,
-            'email_channel' => null,
-            'kb_article' => null,
-            'kb_category' => null,
-            'service' => null,
-            'service_category' => null,
+            'department' => \JeffersonGoncalves\FilamentServiceDesk\Admin\Resources\Departments\DepartmentResource::class,
+            'category' => \JeffersonGoncalves\FilamentServiceDesk\Admin\Resources\Categories\CategoryResource::class,
+            'tag' => \JeffersonGoncalves\FilamentServiceDesk\Admin\Resources\Tags\TagResource::class,
+            'canned_response' => \JeffersonGoncalves\FilamentServiceDesk\Admin\Resources\CannedResponses\CannedResponseResource::class,
+            'ticket' => \JeffersonGoncalves\FilamentServiceDesk\Admin\Resources\Tickets\TicketResource::class,
+            'sla_policy' => \JeffersonGoncalves\FilamentServiceDesk\Admin\Resources\SlaPolicies\SlaPolicyResource::class,
+            'escalation_rule' => \JeffersonGoncalves\FilamentServiceDesk\Admin\Resources\EscalationRules\EscalationRuleResource::class,
+            'business_hours_schedule' => \JeffersonGoncalves\FilamentServiceDesk\Admin\Resources\BusinessHoursSchedules\BusinessHoursScheduleResource::class,
+            'email_channel' => \JeffersonGoncalves\FilamentServiceDesk\Admin\Resources\EmailChannels\EmailChannelResource::class,
+            'kb_article' => \JeffersonGoncalves\FilamentServiceDesk\Admin\Resources\KbArticles\KbArticleResource::class,
+            'kb_category' => \JeffersonGoncalves\FilamentServiceDesk\Admin\Resources\KbCategories\KbCategoryResource::class,
+            'service' => \JeffersonGoncalves\FilamentServiceDesk\Admin\Resources\Services\ServiceResource::class,
+            'service_category' => \JeffersonGoncalves\FilamentServiceDesk\Admin\Resources\ServiceCategories\ServiceCategoryResource::class,
         ],
         'agent' => [
-            'ticket' => null,
-            'canned_response' => null,
+            'ticket' => \JeffersonGoncalves\FilamentServiceDesk\Agent\Resources\Tickets\TicketResource::class,
+            'canned_response' => \JeffersonGoncalves\FilamentServiceDesk\Agent\Resources\CannedResponses\CannedResponseResource::class,
         ],
         'user' => [
-            'ticket' => null,
-            'service_request' => null,
+            'ticket' => \JeffersonGoncalves\FilamentServiceDesk\User\Resources\Tickets\TicketResource::class,
+            'service_request' => \JeffersonGoncalves\FilamentServiceDesk\User\Resources\ServiceRequests\ServiceRequestResource::class,
         ],
     ],
 

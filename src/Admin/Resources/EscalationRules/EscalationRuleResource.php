@@ -55,6 +55,6 @@ class EscalationRuleResource extends Resource
 
     public static function shouldRegisterNavigation(): bool
     {
-        return config()->has('filament-service-desk.resources.admin.escalation_rule');
+        return config('filament-service-desk.resources.admin.escalation_rule') !== null;
     }
 }
