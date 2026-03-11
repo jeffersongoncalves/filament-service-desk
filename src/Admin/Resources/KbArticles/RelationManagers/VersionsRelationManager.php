@@ -5,12 +5,13 @@ namespace JeffersonGoncalves\FilamentServiceDesk\Admin\Resources\KbArticles\Rela
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Model;
 
 class VersionsRelationManager extends RelationManager
 {
     protected static string $relationship = 'versions';
 
-    public static function getTitle(\Illuminate\Database\Eloquent\Model $ownerRecord, string $pageClass): string
+    public static function getTitle(Model $ownerRecord, string $pageClass): string
     {
         return __('filament-service-desk::service-desk.relations.versions');
     }

@@ -5,6 +5,8 @@ namespace JeffersonGoncalves\FilamentServiceDesk\Agent\Pages;
 use BackedEnum;
 use Filament\Pages\Page;
 use Filament\Support\Icons\Heroicon;
+use JeffersonGoncalves\FilamentServiceDesk\Agent\Widgets\AgentTicketStatsWidget;
+use JeffersonGoncalves\FilamentServiceDesk\Agent\Widgets\SlaBreachWidget;
 
 class AgentDashboardPage extends Page
 {
@@ -32,8 +34,8 @@ class AgentDashboardPage extends Page
     protected function getHeaderWidgets(): array
     {
         return [
-            \JeffersonGoncalves\FilamentServiceDesk\Agent\Widgets\AgentTicketStatsWidget::class,
-            \JeffersonGoncalves\FilamentServiceDesk\Agent\Widgets\SlaBreachWidget::class,
+            AgentTicketStatsWidget::class,
+            SlaBreachWidget::class,
         ];
     }
 }

@@ -9,6 +9,7 @@ use Filament\Schemas;
 use Filament\Schemas\Components\Wizard;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
+use Illuminate\Database\Eloquent\Model;
 use JeffersonGoncalves\FilamentServiceDesk\User\Resources\ServiceRequests\ServiceRequestResource;
 use JeffersonGoncalves\ServiceDesk\Enums\FormFieldType;
 use JeffersonGoncalves\ServiceDesk\Models\Service;
@@ -85,7 +86,7 @@ class CreateServiceRequest extends CreateRecord
             ]);
     }
 
-    protected function handleRecordCreation(array $data): \Illuminate\Database\Eloquent\Model
+    protected function handleRecordCreation(array $data): Model
     {
         $service = Service::findOrFail($data['service_id']);
 
