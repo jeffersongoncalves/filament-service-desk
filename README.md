@@ -114,6 +114,25 @@ Each plugin supports fluent feature toggles:
 
 Features can also be toggled globally in `config/filament-service-desk.php`.
 
+## Attachments Configuration
+
+Configure file upload settings for ticket attachments in the configuration file:
+
+```php
+// config/filament-service-desk.php
+'attachments' => [
+    'allowed_extensions' => ['jpg', 'jpeg', 'png', 'gif', 'webp', 'pdf', 'doc', 'docx', 'xls', 'xlsx', 'csv', 'txt', 'zip', 'rar'],
+    'max_file_size' => 10240, // in KB (10MB)
+    'disk' => 'local',
+],
+```
+
+| Option | Default | Description |
+|--------|---------|-------------|
+| `allowed_extensions` | Common file types | File extensions resolved to MIME types via Symfony MimeTypes |
+| `max_file_size` | `10240` (10MB) | Maximum file size in kilobytes |
+| `disk` | `local` | Filesystem disk for storing attachments |
+
 ## Localization
 
 Translations are provided for:
