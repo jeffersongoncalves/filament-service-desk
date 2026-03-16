@@ -8,6 +8,7 @@ use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use JeffersonGoncalves\FilamentServiceDesk\Agent\Resources\Tickets\Schemas\TicketForm;
 use JeffersonGoncalves\FilamentServiceDesk\Agent\Resources\Tickets\Schemas\TicketInfolist;
 use JeffersonGoncalves\FilamentServiceDesk\Agent\Resources\Tickets\Tables\TicketsTable;
@@ -48,7 +49,7 @@ class TicketResource extends Resource
 
     public static function getEloquentQuery(): Builder
     {
-        /** @var \Illuminate\Database\Eloquent\Model $user */
+        /** @var Model $user */
         $user = auth()->guard()->user();
 
         return parent::getEloquentQuery()
