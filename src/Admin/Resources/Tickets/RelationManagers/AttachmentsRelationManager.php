@@ -10,6 +10,7 @@ use Filament\Support\Icons\Heroicon;
 use Filament\Tables;
 use Filament\Tables\Table;
 use JeffersonGoncalves\ServiceDesk\Services\AttachmentService;
+use Symfony\Component\Mime\MimeTypes;
 
 class AttachmentsRelationManager extends RelationManager
 {
@@ -28,6 +29,15 @@ class AttachmentsRelationManager extends RelationManager
                 Forms\Components\FileUpload::make('file')
                     ->label(__('filament-service-desk::service-desk.fields.file'))
                     ->required()
+                    ->maxSize(config('filament-service-desk.attachments.max_file_size', 10240))
+                    ->acceptedFileTypes(
+                        collect(config('filament-service-desk.attachments.allowed_extensions', []))
+                            ->flatMap(fn (string $ext): array => MimeTypes::getDefault()->getMimeTypes($ext))
+                            ->unique()
+                            ->values()
+                            ->toArray()
+                    )
+                    ->disk(config('filament-service-desk.attachments.disk', 'local'))
                     ->columnSpanFull(),
             ]);
     }
@@ -54,7 +64,9 @@ class AttachmentsRelationManager extends RelationManager
             ])
             ->defaultSort('created_at', 'desc')
             ->filters([])
-            ->headerActions([])
+            ->headerActions([
+                Actions\CreateAction::make(),
+            ])
             ->recordActions([
                 Actions\Action::make('download')
                     ->label(__('filament-service-desk::service-desk.actions.download'))
