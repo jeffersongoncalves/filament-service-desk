@@ -38,17 +38,12 @@ class ServiceDeskPlugin implements Plugin
             Admin\Resources\Tickets\TicketResource::class,
         ];
 
-        $widgets = [
-            Admin\Widgets\ServiceDeskOverviewWidget::class,
-        ];
-
         if ($this->hasSla()) {
             $resources = array_merge($resources, [
                 Admin\Resources\SlaPolicies\SlaPolicyResource::class,
                 Admin\Resources\EscalationRules\EscalationRuleResource::class,
                 Admin\Resources\BusinessHoursSchedules\BusinessHoursScheduleResource::class,
             ]);
-            $widgets[] = Admin\Widgets\SlaComplianceWidget::class;
         }
 
         if ($this->hasEmailChannels()) {
@@ -69,11 +64,13 @@ class ServiceDeskPlugin implements Plugin
             ]);
         }
 
-        $widgets[] = Admin\Widgets\TicketsByDepartmentWidget::class;
-
         $panel
             ->resources($resources)
-            ->widgets($widgets);
+            ->widgets(config('filament-service-desk.widgets.admin', [
+                Admin\Widgets\ServiceDeskOverviewWidget::class,
+                Admin\Widgets\SlaComplianceWidget::class,
+                Admin\Widgets\TicketsByDepartmentWidget::class,
+            ]));
     }
 
     public function boot(Panel $panel): void
