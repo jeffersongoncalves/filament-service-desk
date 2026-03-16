@@ -36,9 +36,9 @@ class ServiceDeskUserPlugin implements Plugin
 
         $pages = [];
 
-        $widgets = [
+        $widgets = config('filament-service-desk.widgets.user', [
             User\Widgets\MyTicketsOverviewWidget::class,
-        ];
+        ]);
 
         if ($this->hasServiceCatalog()) {
             $resources[] = User\Resources\ServiceRequests\ServiceRequestResource::class;
