@@ -99,22 +99,24 @@ return [
     | Widgets
     |--------------------------------------------------------------------------
     |
-    | Override the default widget classes. Set to null to use the default.
+    | Customize the dashboard widgets registered by each plugin.
+    | You can add, remove, or reorder widgets per panel.
+    | Set to an empty array to disable all widgets for a panel.
     |
     */
 
     'widgets' => [
         'admin' => [
-            'overview' => null,
-            'sla_compliance' => null,
-            'tickets_by_department' => null,
+            \JeffersonGoncalves\FilamentServiceDesk\Admin\Widgets\ServiceDeskOverviewWidget::class,
+            \JeffersonGoncalves\FilamentServiceDesk\Admin\Widgets\SlaComplianceWidget::class,
+            \JeffersonGoncalves\FilamentServiceDesk\Admin\Widgets\TicketsByDepartmentWidget::class,
         ],
         'agent' => [
-            'ticket_stats' => null,
-            'sla_breach' => null,
+            \JeffersonGoncalves\FilamentServiceDesk\Agent\Widgets\AgentTicketStatsWidget::class,
+            \JeffersonGoncalves\FilamentServiceDesk\Agent\Widgets\SlaBreachWidget::class,
         ],
         'user' => [
-            'my_tickets_overview' => null,
+            \JeffersonGoncalves\FilamentServiceDesk\User\Widgets\MyTicketsOverviewWidget::class,
         ],
     ],
 

@@ -114,6 +114,37 @@ Each plugin supports fluent feature toggles:
 
 Features can also be toggled globally in `config/filament-service-desk.php`.
 
+## Customizing Widgets
+
+Each panel's dashboard widgets can be customized via the configuration file. You can add, remove, or reorder widgets:
+
+```php
+// config/filament-service-desk.php
+'widgets' => [
+    'admin' => [
+        \JeffersonGoncalves\FilamentServiceDesk\Admin\Widgets\ServiceDeskOverviewWidget::class,
+        \JeffersonGoncalves\FilamentServiceDesk\Admin\Widgets\SlaComplianceWidget::class,
+        \JeffersonGoncalves\FilamentServiceDesk\Admin\Widgets\TicketsByDepartmentWidget::class,
+        // Add your custom widgets here
+    ],
+    'agent' => [
+        \JeffersonGoncalves\FilamentServiceDesk\Agent\Widgets\AgentTicketStatsWidget::class,
+        \JeffersonGoncalves\FilamentServiceDesk\Agent\Widgets\SlaBreachWidget::class,
+    ],
+    'user' => [
+        \JeffersonGoncalves\FilamentServiceDesk\User\Widgets\MyTicketsOverviewWidget::class,
+    ],
+],
+```
+
+To disable all widgets for a panel, set it to an empty array:
+
+```php
+'widgets' => [
+    'admin' => [], // No widgets on admin dashboard
+],
+```
+
 ## Localization
 
 Translations are provided for:
