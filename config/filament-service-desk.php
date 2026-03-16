@@ -118,4 +118,20 @@ return [
         ],
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Attachments
+    |--------------------------------------------------------------------------
+    |
+    | Configure file upload settings for ticket attachments.
+    | The allowed_extensions are resolved to MIME types using Symfony MimeTypes.
+    |
+    */
+
+    'attachments' => [
+        'allowed_extensions' => ['jpg', 'jpeg', 'png', 'gif', 'webp', 'pdf', 'doc', 'docx', 'xls', 'xlsx', 'csv', 'txt', 'zip', 'rar'],
+        'max_file_size' => 10240, // in KB (10MB)
+        'disk' => 'local',
+    ],
+
 ];
