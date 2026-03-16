@@ -40,15 +40,13 @@ class ServiceDeskAgentPlugin implements Plugin
             Agent\Pages\AgentDashboardPage::class,
         ];
 
-        $widgets = [
-            Agent\Widgets\AgentTicketStatsWidget::class,
-            Agent\Widgets\SlaBreachWidget::class,
-        ];
-
         $panel
             ->resources($resources)
             ->pages($pages)
-            ->widgets($widgets);
+            ->widgets(config('filament-service-desk.widgets.agent', [
+                Agent\Widgets\AgentTicketStatsWidget::class,
+                Agent\Widgets\SlaBreachWidget::class,
+            ]));
     }
 
     public function boot(Panel $panel): void
