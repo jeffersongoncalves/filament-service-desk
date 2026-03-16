@@ -68,7 +68,7 @@ class TicketInfolist
                                     }),
                                 Infolists\Components\TextEntry::make('source')
                                     ->label(__('filament-service-desk::service-desk.fields.source'))
-                                    ->formatStateUsing(fn (TicketSource $state) => $state->name)
+                                    ->formatStateUsing(fn (string $state) => TicketSource::tryFrom($state)?->name ?? $state)
                                     ->placeholder('—'),
                                 Infolists\Components\TextEntry::make('assignedTo.name')
                                     ->label(__('filament-service-desk::service-desk.fields.assigned_to'))
