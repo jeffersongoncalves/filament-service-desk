@@ -13,7 +13,13 @@ use JeffersonGoncalves\FilamentServiceDesk\Admin\Resources\Services\ServiceResou
 use JeffersonGoncalves\FilamentServiceDesk\Admin\Resources\SlaPolicies\SlaPolicyResource;
 use JeffersonGoncalves\FilamentServiceDesk\Admin\Resources\Tags\TagResource;
 use JeffersonGoncalves\FilamentServiceDesk\Admin\Resources\Tickets\TicketResource;
+use JeffersonGoncalves\FilamentServiceDesk\Admin\Widgets\ServiceDeskOverviewWidget;
+use JeffersonGoncalves\FilamentServiceDesk\Admin\Widgets\SlaComplianceWidget;
+use JeffersonGoncalves\FilamentServiceDesk\Admin\Widgets\TicketsByDepartmentWidget;
+use JeffersonGoncalves\FilamentServiceDesk\Agent\Widgets\AgentTicketStatsWidget;
+use JeffersonGoncalves\FilamentServiceDesk\Agent\Widgets\SlaBreachWidget;
 use JeffersonGoncalves\FilamentServiceDesk\User\Resources\ServiceRequests\ServiceRequestResource;
+use JeffersonGoncalves\FilamentServiceDesk\User\Widgets\MyTicketsOverviewWidget;
 
 return [
 
@@ -107,16 +113,16 @@ return [
 
     'widgets' => [
         'admin' => [
-            \JeffersonGoncalves\FilamentServiceDesk\Admin\Widgets\ServiceDeskOverviewWidget::class,
-            \JeffersonGoncalves\FilamentServiceDesk\Admin\Widgets\SlaComplianceWidget::class,
-            \JeffersonGoncalves\FilamentServiceDesk\Admin\Widgets\TicketsByDepartmentWidget::class,
+            ServiceDeskOverviewWidget::class,
+            SlaComplianceWidget::class,
+            TicketsByDepartmentWidget::class,
         ],
         'agent' => [
-            \JeffersonGoncalves\FilamentServiceDesk\Agent\Widgets\AgentTicketStatsWidget::class,
-            \JeffersonGoncalves\FilamentServiceDesk\Agent\Widgets\SlaBreachWidget::class,
+            AgentTicketStatsWidget::class,
+            SlaBreachWidget::class,
         ],
         'user' => [
-            \JeffersonGoncalves\FilamentServiceDesk\User\Widgets\MyTicketsOverviewWidget::class,
+            MyTicketsOverviewWidget::class,
         ],
     ],
 
