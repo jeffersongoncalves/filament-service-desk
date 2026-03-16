@@ -70,12 +70,14 @@ class TicketForm
                                     ->label(__('filament-service-desk::service-desk.fields.source'))
                                     ->options(collect(TicketSource::cases())->mapWithKeys(fn ($source) => [$source->value => $source->name]))
                                     ->default(TicketSource::Web->value),
-                                Forms\Components\Select::make('assigned_to_id')
+                                Forms\Components\MorphToSelect::make('assignedTo')
                                     ->label(__('filament-service-desk::service-desk.fields.assigned_to'))
-                                    ->relationship('assignedTo', 'name')
+                                    ->types([
+                                        Forms\Components\MorphToSelect\Type::make(config('service-desk.models.operator', 'App\\Models\\User'))
+                                            ->titleAttribute('name'),
+                                    ])
                                     ->searchable()
-                                    ->preload()
-                                    ->nullable(),
+                                    ->preload(),
                                 Forms\Components\DateTimePicker::make('due_at')
                                     ->label(__('filament-service-desk::service-desk.fields.due_at'))
                                     ->nullable(),
