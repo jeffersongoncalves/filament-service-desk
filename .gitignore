@@ -14,3 +14,5 @@
 Thumbs.db
 .env
 .phpunit.result.cache
+
+.claude/settings.local.json
