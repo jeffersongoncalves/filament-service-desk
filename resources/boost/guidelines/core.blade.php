@@ -5,7 +5,7 @@
 ## Overview
 This is a Filament plugin that integrates `jeffersongoncalves/laravel-service-desk` with Filament, providing 3 separate panel plugins:
 
-- **ServiceDeskPlugin** - Admin panel with full CRUD for all resources
+- **ServiceDeskAdminPlugin** - Admin panel with full CRUD for all resources
 - **ServiceDeskAgentPlugin** - Agent panel for ticket handling
 - **ServiceDeskUserPlugin** - User panel for self-service
 
@@ -19,9 +19,9 @@ composer require jeffersongoncalves/filament-service-desk
 
 ### Admin Panel
 ```php
-use JeffersonGoncalves\FilamentServiceDesk\ServiceDeskPlugin;
+use JeffersonGoncalves\FilamentServiceDesk\ServiceDeskAdminPlugin;
 
-$panel->plugin(ServiceDeskPlugin::make()
+$panel->plugin(ServiceDeskAdminPlugin::make()
     ->knowledgeBase(true)
     ->sla(true)
     ->emailChannels(true)
@@ -47,14 +47,14 @@ $panel->plugin(ServiceDeskUserPlugin::make()
 ## Architecture
 
 ### Namespace Structure
-- `Resources\Admin\*` - Admin resources (13 resources)
-- `Resources\Agent\*` - Agent resources (2 resources)
-- `Resources\User\*` - User resources (2 resources)
-- `Pages\Agent\*` - Agent pages (queue, dashboard)
-- `Pages\User\*` - User pages (knowledge base)
-- `Widgets\Admin\*` - Admin widgets (overview, SLA, departments)
-- `Widgets\Agent\*` - Agent widgets (stats, breaches)
-- `Widgets\User\*` - User widgets (my tickets)
+- `Admin\Resources\*` - Admin resources (13 resources)
+- `Agent\Resources\*` - Agent resources (2 resources)
+- `User\Resources\*` - User resources (2 resources)
+- `Agent\Pages\*` - Agent pages (queue, dashboard)
+- `User\Pages\*` - User pages (knowledge base)
+- `Admin\Widgets\*` - Admin widgets (overview, SLA, departments)
+- `Agent\Widgets\*` - Agent widgets (stats, breaches)
+- `User\Widgets\*` - User widgets (my tickets)
 
 ### Service Delegation
 All mutations delegate to the underlying `laravel-service-desk` services:
@@ -72,8 +72,25 @@ Features can be toggled per-plugin:
 - `serviceCatalog(bool)` - Service catalog/requests
 
 ## Configuration
-Published to `config/filament-service-desk.php`:
-- Navigation groups and sorting
-- Feature toggles
-- Resource class overrides
-- Widget class overrides
+Published to `config/filament-service-desk.php`, using a panel-scoped shape:
+
+```php
+return [
+    'admin' => [
+        'navigation_group' => 'Service Desk',
+        'navigation_icon' => 'heroicon-o-lifebuoy',
+        'navigation_sort' => null,
+        'resources' => [/* per-resource overrides */],
+        'widgets' => [/* admin widgets */],
+    ],
+    'agent' => [/* ... */],
+    'user' => [/* ... */],
+    'features' => [
+        'knowledge_base' => true,
+        'sla' => true,
+        'email_channels' => true,
+        'service_catalog' => true,
+    ],
+    'attachments' => [/* uploads config */],
+];
+```

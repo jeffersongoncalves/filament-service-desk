@@ -7,7 +7,7 @@ Develop and extend the Filament Service Desk plugin, which provides admin, agent
 
 ### Three Plugins, One Package
 The package provides 3 independent Filament plugins that can be used in different panels:
-- `ServiceDeskPlugin` (Admin) - Full management capabilities
+- `ServiceDeskAdminPlugin` (Admin) - Full management capabilities
 - `ServiceDeskAgentPlugin` (Agent) - Ticket handling and response
 - `ServiceDeskUserPlugin` (User) - Self-service and ticket creation
 
@@ -45,45 +45,45 @@ The `mapFormField()` method converts `FormFieldType` enums to Filament form comp
 ## Common Tasks
 
 ### Adding a New Admin Resource
-1. Create the resource class in `src/Resources/Admin/`
+1. Create the resource class in `src/Admin/Resources/`
 2. Create Pages (List, Create, Edit) in a subdirectory
 3. Create RelationManagers if needed
-4. Register in `ServiceDeskPlugin::register()`
+4. Register in `ServiceDeskAdminPlugin::register()`
 5. Add translation keys
 
 ### Extending a Resource
-Override in `config/filament-service-desk.php`:
+Override in `config/filament-service-desk.php` (panel-scoped shape):
 ```php
-'resources' => [
-    'admin' => [
+'admin' => [
+    'resources' => [
         'ticket' => App\Filament\Resources\CustomTicketResource::class,
     ],
 ],
 ```
 
 ### Adding a Widget
-1. Create widget class in `src/Widgets/{Admin|Agent|User}/`
+1. Create widget class in `src/{Admin|Agent|User}/Widgets/`
 2. Register in the corresponding plugin's `register()` method
 3. Add translation keys for heading/labels
 
 ## File Structure
 ```
 src/
-├── ServiceDeskPlugin.php          # Admin plugin
+├── ServiceDeskAdminPlugin.php     # Admin plugin
 ├── ServiceDeskAgentPlugin.php     # Agent plugin
 ├── ServiceDeskUserPlugin.php      # User plugin
 ├── Concerns/HasServiceDeskPluginConfig.php  # Shared trait
-├── Resources/
-│   ├── Admin/                     # 13 resources
-│   ├── Agent/                     # 2 resources
-│   └── User/                      # 2 resources
-├── Pages/
-│   ├── Agent/                     # Queue, Dashboard
-│   └── User/                      # Knowledge Base
-└── Widgets/
-    ├── Admin/                     # Overview, SLA, Departments
-    ├── Agent/                     # Stats, Breaches
-    └── User/                      # My Tickets
+├── Admin/
+│   ├── Resources/                 # 13 resources
+│   └── Widgets/                   # Overview, SLA, Departments
+├── Agent/
+│   ├── Pages/                     # Queue, Dashboard
+│   ├── Resources/                 # 2 resources
+│   └── Widgets/                   # Stats, Breaches
+└── User/
+    ├── Pages/                     # Knowledge Base
+    ├── Resources/                 # 2 resources
+    └── Widgets/                   # My Tickets
 ```
 
 ## Dependencies
