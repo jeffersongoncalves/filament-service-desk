@@ -81,6 +81,6 @@ class TicketResource extends Resource
 
     public static function shouldRegisterNavigation(): bool
     {
-        return config('filament-service-desk.resources.admin.ticket') !== null;
+        return config('filament-service-desk.admin.resources.ticket') !== null;
     }
 }

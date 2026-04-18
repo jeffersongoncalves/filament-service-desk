@@ -25,25 +25,69 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Navigation
+    | Admin Panel Configuration
     |--------------------------------------------------------------------------
     */
+    'admin' => [
+        'navigation_group' => 'Service Desk',
+        'navigation_icon' => 'heroicon-o-lifebuoy',
+        'navigation_sort' => null,
+        'resources' => [
+            'department' => DepartmentResource::class,
+            'category' => CategoryResource::class,
+            'tag' => TagResource::class,
+            'canned_response' => CannedResponseResource::class,
+            'ticket' => TicketResource::class,
+            'sla_policy' => SlaPolicyResource::class,
+            'escalation_rule' => EscalationRuleResource::class,
+            'business_hours_schedule' => BusinessHoursScheduleResource::class,
+            'email_channel' => EmailChannelResource::class,
+            'kb_article' => KbArticleResource::class,
+            'kb_category' => KbCategoryResource::class,
+            'service' => ServiceResource::class,
+            'service_category' => ServiceCategoryResource::class,
+        ],
+        'widgets' => [
+            ServiceDeskOverviewWidget::class,
+            SlaComplianceWidget::class,
+            TicketsByDepartmentWidget::class,
+        ],
+    ],
 
-    'navigation' => [
-        'admin' => [
-            'group' => 'Service Desk',
-            'sort' => null,
-            'icon' => 'heroicon-o-lifebuoy',
+    /*
+    |--------------------------------------------------------------------------
+    | Agent Panel Configuration
+    |--------------------------------------------------------------------------
+    */
+    'agent' => [
+        'navigation_group' => 'Service Desk',
+        'navigation_icon' => 'heroicon-o-headset',
+        'navigation_sort' => null,
+        'resources' => [
+            'ticket' => JeffersonGoncalves\FilamentServiceDesk\Agent\Resources\Tickets\TicketResource::class,
+            'canned_response' => JeffersonGoncalves\FilamentServiceDesk\Agent\Resources\CannedResponses\CannedResponseResource::class,
         ],
-        'agent' => [
-            'group' => 'Service Desk',
-            'sort' => null,
-            'icon' => 'heroicon-o-headset',
+        'widgets' => [
+            AgentTicketStatsWidget::class,
+            SlaBreachWidget::class,
         ],
-        'user' => [
-            'group' => 'Support',
-            'sort' => null,
-            'icon' => 'heroicon-o-ticket',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | User Panel Configuration
+    |--------------------------------------------------------------------------
+    */
+    'user' => [
+        'navigation_group' => 'Support',
+        'navigation_icon' => 'heroicon-o-ticket',
+        'navigation_sort' => null,
+        'resources' => [
+            'ticket' => JeffersonGoncalves\FilamentServiceDesk\User\Resources\Tickets\TicketResource::class,
+            'service_request' => ServiceRequestResource::class,
+        ],
+        'widgets' => [
+            MyTicketsOverviewWidget::class,
         ],
     ],
 
@@ -62,68 +106,6 @@ return [
         'sla' => true,
         'email_channels' => true,
         'service_catalog' => true,
-    ],
-
-    /*
-    |--------------------------------------------------------------------------
-    | Resources
-    |--------------------------------------------------------------------------
-    |
-    | Override the default resource classes used by the plugins.
-    | Set to null to disable a resource completely (removes navigation and routes).
-    |
-    */
-
-    'resources' => [
-        'admin' => [
-            'department' => DepartmentResource::class,
-            'category' => CategoryResource::class,
-            'tag' => TagResource::class,
-            'canned_response' => CannedResponseResource::class,
-            'ticket' => TicketResource::class,
-            'sla_policy' => SlaPolicyResource::class,
-            'escalation_rule' => EscalationRuleResource::class,
-            'business_hours_schedule' => BusinessHoursScheduleResource::class,
-            'email_channel' => EmailChannelResource::class,
-            'kb_article' => KbArticleResource::class,
-            'kb_category' => KbCategoryResource::class,
-            'service' => ServiceResource::class,
-            'service_category' => ServiceCategoryResource::class,
-        ],
-        'agent' => [
-            'ticket' => JeffersonGoncalves\FilamentServiceDesk\Agent\Resources\Tickets\TicketResource::class,
-            'canned_response' => JeffersonGoncalves\FilamentServiceDesk\Agent\Resources\CannedResponses\CannedResponseResource::class,
-        ],
-        'user' => [
-            'ticket' => JeffersonGoncalves\FilamentServiceDesk\User\Resources\Tickets\TicketResource::class,
-            'service_request' => ServiceRequestResource::class,
-        ],
-    ],
-
-    /*
-    |--------------------------------------------------------------------------
-    | Widgets
-    |--------------------------------------------------------------------------
-    |
-    | Customize the dashboard widgets registered by each plugin.
-    | You can add, remove, or reorder widgets per panel.
-    | Set to an empty array to disable all widgets for a panel.
-    |
-    */
-
-    'widgets' => [
-        'admin' => [
-            ServiceDeskOverviewWidget::class,
-            SlaComplianceWidget::class,
-            TicketsByDepartmentWidget::class,
-        ],
-        'agent' => [
-            AgentTicketStatsWidget::class,
-            SlaBreachWidget::class,
-        ],
-        'user' => [
-            MyTicketsOverviewWidget::class,
-        ],
     ],
 
     /*

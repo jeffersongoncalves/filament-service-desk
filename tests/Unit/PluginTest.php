@@ -1,13 +1,13 @@
 <?php
 
+use JeffersonGoncalves\FilamentServiceDesk\ServiceDeskAdminPlugin;
 use JeffersonGoncalves\FilamentServiceDesk\ServiceDeskAgentPlugin;
-use JeffersonGoncalves\FilamentServiceDesk\ServiceDeskPlugin;
 use JeffersonGoncalves\FilamentServiceDesk\ServiceDeskUserPlugin;
 
 it('can create admin plugin', function () {
-    $plugin = ServiceDeskPlugin::make();
+    $plugin = ServiceDeskAdminPlugin::make();
 
-    expect($plugin->getId())->toBe('filament-service-desk');
+    expect($plugin->getId())->toBe('filament-service-desk-admin');
 });
 
 it('can create agent plugin', function () {
@@ -23,7 +23,7 @@ it('can create user plugin', function () {
 });
 
 it('can toggle features on admin plugin', function () {
-    $plugin = ServiceDeskPlugin::make()
+    $plugin = ServiceDeskAdminPlugin::make()
         ->knowledgeBase(false)
         ->sla(false)
         ->emailChannels(false)
@@ -36,7 +36,7 @@ it('can toggle features on admin plugin', function () {
 });
 
 it('can set navigation group', function () {
-    $plugin = ServiceDeskPlugin::make()
+    $plugin = ServiceDeskAdminPlugin::make()
         ->navigationGroup('Custom Group');
 
     expect($plugin->getNavigationGroup())->toBe('Custom Group');

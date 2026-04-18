@@ -60,6 +60,6 @@ class CategoryResource extends Resource
 
     public static function shouldRegisterNavigation(): bool
     {
-        return config('filament-service-desk.resources.admin.category') !== null;
+        return config('filament-service-desk.admin.resources.category') !== null;
     }
 }
