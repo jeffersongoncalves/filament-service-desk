@@ -30,9 +30,11 @@ class ServiceDeskAgentPlugin implements Plugin
 
     public function register(Panel $panel): void
     {
-        $resources = [
-            Agent\Resources\Tickets\TicketResource::class,
-            Agent\Resources\CannedResponses\CannedResponseResource::class,
+        $resources = config('filament-service-desk.agent.resources', []);
+
+        $enabled = [
+            $resources['ticket'] ?? Agent\Resources\Tickets\TicketResource::class,
+            $resources['canned_response'] ?? Agent\Resources\CannedResponses\CannedResponseResource::class,
         ];
 
         $pages = [
@@ -41,9 +43,9 @@ class ServiceDeskAgentPlugin implements Plugin
         ];
 
         $panel
-            ->resources($resources)
+            ->resources(array_values(array_filter($enabled)))
             ->pages($pages)
-            ->widgets(config('filament-service-desk.widgets.agent', [
+            ->widgets(config('filament-service-desk.agent.widgets', [
                 Agent\Widgets\AgentTicketStatsWidget::class,
                 Agent\Widgets\SlaBreachWidget::class,
             ]));

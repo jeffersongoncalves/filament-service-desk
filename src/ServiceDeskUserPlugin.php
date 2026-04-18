@@ -30,18 +30,16 @@ class ServiceDeskUserPlugin implements Plugin
 
     public function register(Panel $panel): void
     {
-        $resources = [
-            User\Resources\Tickets\TicketResource::class,
+        $resources = config('filament-service-desk.user.resources', []);
+
+        $enabled = [
+            $resources['ticket'] ?? User\Resources\Tickets\TicketResource::class,
         ];
 
         $pages = [];
 
-        $widgets = config('filament-service-desk.widgets.user', [
-            User\Widgets\MyTicketsOverviewWidget::class,
-        ]);
-
         if ($this->hasServiceCatalog()) {
-            $resources[] = User\Resources\ServiceRequests\ServiceRequestResource::class;
+            $enabled[] = $resources['service_request'] ?? User\Resources\ServiceRequests\ServiceRequestResource::class;
         }
 
         if ($this->hasKnowledgeBase()) {
@@ -49,9 +47,11 @@ class ServiceDeskUserPlugin implements Plugin
         }
 
         $panel
-            ->resources($resources)
+            ->resources(array_values(array_filter($enabled)))
             ->pages($pages)
-            ->widgets($widgets);
+            ->widgets(config('filament-service-desk.user.widgets', [
+                User\Widgets\MyTicketsOverviewWidget::class,
+            ]));
     }
 
     public function boot(Panel $panel): void

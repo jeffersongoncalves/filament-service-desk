@@ -41,13 +41,13 @@ php artisan vendor:publish --tag="filament-service-desk-config"
 Full management capabilities: departments, categories, tags, tickets, SLA, email channels, knowledge base, and service catalog.
 
 ```php
-use JeffersonGoncalves\FilamentServiceDesk\ServiceDeskPlugin;
+use JeffersonGoncalves\FilamentServiceDesk\ServiceDeskAdminPlugin;
 
 public function panel(Panel $panel): Panel
 {
     return $panel
         ->plugins([
-            ServiceDeskPlugin::make()
+            ServiceDeskAdminPlugin::make()
                 ->knowledgeBase(true)
                 ->sla(true)
                 ->emailChannels(true)
@@ -122,33 +122,68 @@ Features can also be toggled globally in `config/filament-service-desk.php`.
 
 ## Customizing Widgets
 
-Each panel's dashboard widgets can be customized via the configuration file. You can add, remove, or reorder widgets:
+Each panel's dashboard widgets can be customized via the configuration file. Widgets are now scoped under each panel key (`admin`, `agent`, `user`):
 
 ```php
 // config/filament-service-desk.php
-'widgets' => [
-    'admin' => [
+'admin' => [
+    // ...
+    'widgets' => [
         \JeffersonGoncalves\FilamentServiceDesk\Admin\Widgets\ServiceDeskOverviewWidget::class,
         \JeffersonGoncalves\FilamentServiceDesk\Admin\Widgets\SlaComplianceWidget::class,
         \JeffersonGoncalves\FilamentServiceDesk\Admin\Widgets\TicketsByDepartmentWidget::class,
         // Add your custom widgets here
     ],
-    'agent' => [
+],
+'agent' => [
+    // ...
+    'widgets' => [
         \JeffersonGoncalves\FilamentServiceDesk\Agent\Widgets\AgentTicketStatsWidget::class,
         \JeffersonGoncalves\FilamentServiceDesk\Agent\Widgets\SlaBreachWidget::class,
     ],
-    'user' => [
+],
+'user' => [
+    // ...
+    'widgets' => [
         \JeffersonGoncalves\FilamentServiceDesk\User\Widgets\MyTicketsOverviewWidget::class,
     ],
 ],
 ```
 
-To disable all widgets for a panel, set it to an empty array:
+To disable all widgets for a panel, set its `widgets` key to an empty array:
 
 ```php
-'widgets' => [
-    'admin' => [], // No widgets on admin dashboard
+'admin' => [
+    // ...
+    'widgets' => [], // No widgets on admin dashboard
 ],
+```
+
+## Upgrade from 3.0.x
+
+Breaking changes introduced in `v3.1.0`:
+
+- Class `ServiceDeskPlugin` was renamed to `ServiceDeskAdminPlugin`.
+- Plugin ID changed from `filament-service-desk` to `filament-service-desk-admin`.
+- The published `config/filament-service-desk.php` was restructured from the feature-scoped shape (`navigation.admin|agent|user`, `resources.admin|agent|user`, `widgets.admin|agent|user`) to a panel-scoped shape that matches `jeffersongoncalves/filament-help-desk`.
+
+Update your panel providers:
+
+```diff
+-use JeffersonGoncalves\FilamentServiceDesk\ServiceDeskPlugin;
++use JeffersonGoncalves\FilamentServiceDesk\ServiceDeskAdminPlugin;
+
+ return $panel->plugins([
+-    ServiceDeskPlugin::make(),
++    ServiceDeskAdminPlugin::make(),
+ ]);
+```
+
+If you previously published the config, delete and republish it:
+
+```bash
+rm config/filament-service-desk.php
+php artisan vendor:publish --tag="filament-service-desk-config"
 ```
 
 ## Attachments Configuration

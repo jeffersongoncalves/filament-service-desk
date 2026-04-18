@@ -60,6 +60,6 @@ class DepartmentResource extends Resource
 
     public static function shouldRegisterNavigation(): bool
     {
-        return config('filament-service-desk.resources.admin.department') !== null;
+        return config('filament-service-desk.admin.resources.department') !== null;
     }
 }

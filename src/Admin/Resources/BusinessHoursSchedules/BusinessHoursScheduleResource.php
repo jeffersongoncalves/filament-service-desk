@@ -63,6 +63,6 @@ class BusinessHoursScheduleResource extends Resource
 
     public static function shouldRegisterNavigation(): bool
     {
-        return config('filament-service-desk.resources.admin.business_hours_schedule') !== null;
+        return config('filament-service-desk.admin.resources.business_hours_schedule') !== null;
     }
 }
