@@ -173,11 +173,10 @@ Update your panel providers:
  ]);
 ```
 
-If you previously published the config, delete and republish it:
+If you previously published the config, republish it with `--force`:
 
 ```bash
-rm config/filament-service-desk.php
-php artisan vendor:publish --tag="filament-service-desk-config"
+php artisan vendor:publish --tag="filament-service-desk-config" --force
 ```
 
 ## Attachments Configuration
