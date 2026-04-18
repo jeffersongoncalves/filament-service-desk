@@ -183,6 +183,6 @@ class ServiceResource extends Resource
 
     public static function shouldRegisterNavigation(): bool
     {
-        return config('filament-service-desk.resources.admin.service') !== null;
+        return config('filament-service-desk.admin.resources.service') !== null;
     }
 }

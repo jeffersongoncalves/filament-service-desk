@@ -104,6 +104,6 @@ class TagResource extends Resource
 
     public static function shouldRegisterNavigation(): bool
     {
-        return config('filament-service-desk.resources.admin.tag') !== null;
+        return config('filament-service-desk.admin.resources.tag') !== null;
     }
 }

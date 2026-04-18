@@ -206,6 +206,6 @@ class KbArticleResource extends Resource
 
     public static function shouldRegisterNavigation(): bool
     {
-        return config('filament-service-desk.resources.admin.kb_article') !== null;
+        return config('filament-service-desk.admin.resources.kb_article') !== null;
     }
 }

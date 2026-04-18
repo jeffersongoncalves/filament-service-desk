@@ -128,6 +128,6 @@ class SlaPolicyResource extends Resource
 
     public static function shouldRegisterNavigation(): bool
     {
-        return config('filament-service-desk.resources.admin.sla_policy') !== null;
+        return config('filament-service-desk.admin.resources.sla_policy') !== null;
     }
 }

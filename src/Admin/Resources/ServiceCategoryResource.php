@@ -127,6 +127,6 @@ class ServiceCategoryResource extends Resource
 
     public static function shouldRegisterNavigation(): bool
     {
-        return config('filament-service-desk.resources.admin.service_category') !== null;
+        return config('filament-service-desk.admin.resources.service_category') !== null;
     }
 }

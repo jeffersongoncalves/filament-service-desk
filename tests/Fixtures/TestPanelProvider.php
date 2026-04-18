@@ -5,7 +5,7 @@ namespace JeffersonGoncalves\FilamentServiceDesk\Tests\Fixtures;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Panel;
 use Filament\PanelProvider;
-use JeffersonGoncalves\FilamentServiceDesk\ServiceDeskPlugin;
+use JeffersonGoncalves\FilamentServiceDesk\ServiceDeskAdminPlugin;
 
 class TestPanelProvider extends PanelProvider
 {
@@ -17,7 +17,7 @@ class TestPanelProvider extends PanelProvider
             ->path('test')
             ->login()
             ->plugins([
-                ServiceDeskPlugin::make(),
+                ServiceDeskAdminPlugin::make(),
             ])
             ->middleware([
                 'web',
