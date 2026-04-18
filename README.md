@@ -161,7 +161,7 @@ To disable all widgets for a panel, set its `widgets` key to an empty array:
 
 ## Upgrade from 2.0.x
 
-Breaking changes introduced in `v2.1.0`:
+Breaking changes introduced in `2.2.0`:
 
 - Class `ServiceDeskPlugin` was renamed to `ServiceDeskAdminPlugin`.
 - Plugin ID changed from `filament-service-desk` to `filament-service-desk-admin`.
