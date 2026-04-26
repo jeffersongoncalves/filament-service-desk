@@ -1,6 +1,6 @@
 <div class="filament-hidden">
 
-![Filament Service Desk](https://raw.githubusercontent.com/jeffersongoncalves/filament-service-desk/2.x/art/jeffersongoncalves-filament-service-desk.jpg)
+![Filament Service Desk](https://raw.githubusercontent.com/jeffersongoncalves/filament-service-desk/2.x/art/jeffersongoncalves-filament-service-desk.png)
 
 </div>
 
