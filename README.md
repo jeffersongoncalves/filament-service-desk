@@ -6,6 +6,8 @@
 
 # Filament Service Desk
 
+[![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20A%20Coffee-support-FFDD00?style=flat-square&logo=buy-me-a-coffee&logoColor=black)](https://buymeacoffee.com/jeffersongoncalves)
+
 A Filament plugin for [jeffersongoncalves/laravel-service-desk](https://github.com/jeffersongoncalves/laravel-service-desk) that provides Admin, Agent, and User panels for complete service desk management.
 
 ## Compatibility
