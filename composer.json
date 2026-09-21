@@ -21,7 +21,7 @@
     "require": {
         "php": "^8.2",
         "filament/filament": "^4.8",
-        "jeffersongoncalves/laravel-service-desk": "^1.0",
+        "jeffersongoncalves/laravel-service-desk": "^1.1",
         "spatie/laravel-package-tools": "^1.14.0"
     },
     "require-dev": {
