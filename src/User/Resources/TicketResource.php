@@ -16,6 +16,7 @@ use JeffersonGoncalves\FilamentServiceDesk\User\Resources\TicketResource\Relatio
 use JeffersonGoncalves\ServiceDesk\Enums\TicketPriority;
 use JeffersonGoncalves\ServiceDesk\Enums\TicketStatus;
 use JeffersonGoncalves\ServiceDesk\Models\Ticket;
+use JeffersonGoncalves\ServiceDesk\Services\KnowledgeBaseService;
 
 class TicketResource extends Resource
 {
@@ -89,10 +90,27 @@ class TicketResource extends Resource
                             ->label(__('filament-service-desk::service-desk.fields.title'))
                             ->required()
                             ->maxLength(255)
+                            ->live(debounce: 500)
                             ->columnSpanFull(),
                         Forms\Components\RichEditor::make('description')
                             ->label(__('filament-service-desk::service-desk.fields.description'))
                             ->required()
+                            ->live(debounce: 500)
+                            ->columnSpanFull(),
+                        Forms\Components\Placeholder::make('suggested_articles')
+                            ->hiddenLabel()
+                            ->content(function (Forms\Get $get) {
+                                $query = trim(($get('title') ?? '').' '.strip_tags((string) ($get('description') ?? '')));
+
+                                if ($query === '') {
+                                    return null;
+                                }
+
+                                $articles = app(KnowledgeBaseService::class)->search($query, ['limit' => 3]);
+
+                                return $articles->isEmpty() ? null : view('filament-service-desk::components.kb-suggestions', ['articles' => $articles]);
+                            })
+                            ->visible(fn (Forms\Get $get) => filled($get('title')))
                             ->columnSpanFull(),
                         Forms\Components\Select::make('priority')
                             ->label(__('filament-service-desk::service-desk.fields.priority'))
@@ -117,24 +135,16 @@ class TicketResource extends Resource
                             ->label(__('filament-service-desk::service-desk.fields.description'))
                             ->html()
                             ->columnSpanFull(),
+                        Infolists\Components\ViewEntry::make('status')
+                            ->label(__('filament-service-desk::service-desk.fields.status_pipeline'))
+                            ->view('filament-service-desk::components.ticket-status-stepper')
+                            ->columnSpanFull(),
                         Infolists\Components\TextEntry::make('department.name')
                             ->label(__('filament-service-desk::service-desk.fields.department'))
                             ->placeholder('—'),
                         Infolists\Components\TextEntry::make('category.name')
                             ->label(__('filament-service-desk::service-desk.fields.category'))
                             ->placeholder('—'),
-                        Infolists\Components\TextEntry::make('status')
-                            ->label(__('filament-service-desk::service-desk.fields.status'))
-                            ->badge()
-                            ->formatStateUsing(fn (TicketStatus $state) => $state->label())
-                            ->color(fn (TicketStatus $state) => match ($state) {
-                                TicketStatus::Open => 'info',
-                                TicketStatus::Pending => 'warning',
-                                TicketStatus::InProgress => 'primary',
-                                TicketStatus::OnHold => 'gray',
-                                TicketStatus::Resolved => 'success',
-                                TicketStatus::Closed => 'gray',
-                            }),
                         Infolists\Components\TextEntry::make('priority')
                             ->label(__('filament-service-desk::service-desk.fields.priority'))
                             ->badge()
@@ -213,7 +223,10 @@ class TicketResource extends Resource
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
-            ]);
+            ])
+            ->emptyStateIcon('heroicon-o-inbox')
+            ->emptyStateHeading(__('filament-service-desk::service-desk.empty_states.my_tickets.heading'))
+            ->emptyStateDescription(__('filament-service-desk::service-desk.empty_states.my_tickets.description'));
     }
 
     public static function getRelations(): array
