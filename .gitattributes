@@ -13,6 +13,14 @@
 
 * text=auto eol=lf
 
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.woff binary
+*.woff2 binary
+
 *.blade.php diff=html
 *.md diff=markdown
 *.php diff=php
