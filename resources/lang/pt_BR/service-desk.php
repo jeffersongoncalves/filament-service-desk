@@ -56,6 +56,7 @@ return [
         'due_at' => 'Vencimento',
         'tags' => 'Tags',
         'reference_number' => 'Referência',
+        'application' => 'Aplicação',
         'tickets_count' => 'Tickets',
         'all_departments' => 'Todos os Departamentos',
         'unassigned' => 'Não atribuído',
@@ -193,6 +194,7 @@ return [
         'unassigned' => 'Apenas Não Atribuídos',
         'overdue' => 'Apenas Atrasados',
         'root_only' => 'Apenas Categorias Raiz',
+        'this_app' => 'Esta aplicação',
     ],
 
     'comment_types' => [

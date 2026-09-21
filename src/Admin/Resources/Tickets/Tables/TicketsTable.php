@@ -18,6 +18,12 @@ class TicketsTable
                     ->label(__('filament-service-desk::service-desk.fields.reference_number'))
                     ->searchable()
                     ->sortable(),
+                Tables\Columns\TextColumn::make('app_key')
+                    ->label(__('filament-service-desk::service-desk.fields.application'))
+                    ->placeholder(__('filament-service-desk::service-desk.filters.this_app'))
+                    ->badge()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('title')
                     ->label(__('filament-service-desk::service-desk.fields.title'))
                     ->searchable()
@@ -75,6 +81,10 @@ class TicketsTable
                 Tables\Filters\SelectFilter::make('department_id')
                     ->label(__('filament-service-desk::service-desk.fields.department'))
                     ->relationship('department', 'name'),
+                Tables\Filters\SelectFilter::make('app_key')
+                    ->label(__('filament-service-desk::service-desk.fields.application'))
+                    ->options(fn () => $table->getQuery()->toBase()->distinct()->whereNotNull('app_key')->pluck('app_key', 'app_key')->all())
+                    ->visible(fn () => $table->getQuery()->toBase()->whereNotNull('app_key')->exists()),
                 Tables\Filters\Filter::make('unassigned')
                     ->label(__('filament-service-desk::service-desk.filters.unassigned'))
                     ->query(fn ($query) => $query->whereNull('assigned_to_id'))

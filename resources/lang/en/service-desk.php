@@ -56,6 +56,7 @@ return [
         'due_at' => 'Due At',
         'tags' => 'Tags',
         'reference_number' => 'Reference',
+        'application' => 'Application',
         'tickets_count' => 'Tickets',
         'all_departments' => 'All Departments',
         'unassigned' => 'Unassigned',
@@ -193,6 +194,7 @@ return [
         'unassigned' => 'Unassigned Only',
         'overdue' => 'Overdue Only',
         'root_only' => 'Root Categories Only',
+        'this_app' => 'This app',
     ],
 
     'comment_types' => [
