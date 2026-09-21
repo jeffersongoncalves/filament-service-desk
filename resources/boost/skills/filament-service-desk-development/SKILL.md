@@ -77,7 +77,7 @@ src/
 │   ├── Resources/                 # 13 resources
 │   └── Widgets/                   # Overview, SLA, Departments
 ├── Agent/
-│   ├── Pages/                     # Queue, Dashboard
+│   ├── Pages/                     # Queue, Dashboard, optional Kanban board
 │   ├── Resources/                 # 2 resources
 │   └── Widgets/                   # Stats, Breaches
 └── User/
