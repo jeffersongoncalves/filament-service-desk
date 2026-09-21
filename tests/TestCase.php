@@ -2,6 +2,8 @@
 
 namespace JeffersonGoncalves\FilamentServiceDesk\Tests;
 
+use BladeUI\Heroicons\BladeHeroiconsServiceProvider;
+use BladeUI\Icons\BladeIconsServiceProvider;
 use Filament\FilamentServiceProvider;
 use Filament\Support\SupportServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -24,6 +26,8 @@ class TestCase extends Orchestra
     protected function getPackageProviders($app): array
     {
         return [
+            BladeIconsServiceProvider::class,
+            BladeHeroiconsServiceProvider::class,
             LivewireServiceProvider::class,
             FilamentServiceProvider::class,
             SupportServiceProvider::class,
