@@ -4,11 +4,32 @@ namespace JeffersonGoncalves\FilamentServiceDesk;
 
 use Filament\Contracts\Plugin;
 use Filament\Panel;
+use JeffersonGoncalves\Filament\Kanban\Pages\KanbanBoard;
 use JeffersonGoncalves\FilamentServiceDesk\Concerns\HasServiceDeskPluginConfig;
 
 class ServiceDeskAgentPlugin implements Plugin
 {
     use HasServiceDeskPluginConfig;
+
+    protected bool $kanbanEnabled = false;
+
+    /**
+     * Registers the optional drag-and-drop Kanban page alongside the ticket
+     * queue. Requires jeffersongoncalves/filament-kanban -- see the README --
+     * and is silently skipped if it is not installed, so calling this on a
+     * host app without the dependency never breaks panel boot.
+     */
+    public function kanban(bool $condition = true): static
+    {
+        $this->kanbanEnabled = $condition;
+
+        return $this;
+    }
+
+    public function hasKanban(): bool
+    {
+        return $this->kanbanEnabled;
+    }
 
     public static function make(): static
     {
@@ -48,9 +69,12 @@ class ServiceDeskAgentPlugin implements Plugin
 
         $pages = [
             Agent\Pages\TicketQueuePage::class,
-            Agent\Pages\TicketBoardPage::class,
             Agent\Pages\AgentDashboardPage::class,
         ];
+
+        if ($this->hasKanban() && class_exists(KanbanBoard::class)) {
+            $pages[] = Agent\Pages\TicketBoardPage::class;
+        }
 
         $panel
             ->resources(array_values(array_filter($enabled)))
