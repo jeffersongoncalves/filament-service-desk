@@ -5,6 +5,33 @@ All notable changes to `filament-service-desk` will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 3.3.0 - 2026-09-21
+
+### Added
+
+- **Multi-app support**: `app_key` column + filter on the Admin Tickets table, for installs sharing one database across multiple apps. See #22.
+- **Satellite mode**: the User panel (create/view/close/reopen a ticket, attachments) now fully works under `service-desk.ticket.transport = api`. Admin/Agent panels refuse to register under that transport with a clear error instead of silently rendering broken. See #23, #35.
+- Optional Kanban board for the Agent panel (drag-and-drop). See #15.
+- Knowledge Base deflection MVP on ticket creation — suggested articles as you type. See #19.
+- "Test Connection" action on the EmailChannel form (Admin). See #20.
+- Status pipeline stepper on the User ticket view. See #21.
+- Inline claim action on the Agent tickets table, standardized empty states across User/Agent, and a visual highlight for internal notes on the comments list. See #16, #17, #18.
+- CI: lint/PHPStan/Pest pipeline testing against Laravel 13, Dependabot (weekly, grouped, no auto-merge), automated `CHANGELOG.md` on release. See #12, #13, #14.
+
+### Fixed
+
+- `seo_keywords` on Knowledge Base articles no longer throws "Array to string conversion" (the core column is a plain string, the form now round-trips it correctly). See #10, #24.
+- `DayOfWeek` `TypeError` when listing Business Hours time slots (the column is already cast to the enum by the model). See #11.
+- Status pipeline stepper crashed the User ticket view (`$state` isn't available in a schema component's view — read it via `$getState()` instead). See #46.
+
+### Changed
+
+- Requires `jeffersongoncalves/laravel-service-desk: ^1.1`.
+
+### Known issue
+
+- The Kanban board uses a hand-rolled drag-and-drop instead of `jeffersongoncalves/filament-kanban` (the package the sibling `filament-help-desk` uses for this) -- tracked in #48.
+
 ## [Unreleased]
 
 ## [3.0.0] - 2026-02-06
@@ -30,6 +57,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Migration Guide
 
 If upgrading from 1.x, ensure your project meets these requirements:
+
 - PHP 8.2 or higher
 - Laravel 11 or higher
 - Filament 4.x
