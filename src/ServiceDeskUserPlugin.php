@@ -5,10 +5,12 @@ namespace JeffersonGoncalves\FilamentServiceDesk;
 use Filament\Contracts\Plugin;
 use Filament\Panel;
 use JeffersonGoncalves\FilamentServiceDesk\Concerns\HasServiceDeskPluginConfig;
+use JeffersonGoncalves\FilamentServiceDesk\Concerns\InteractsWithTicketApiTransport;
 
 class ServiceDeskUserPlugin implements Plugin
 {
     use HasServiceDeskPluginConfig;
+    use InteractsWithTicketApiTransport;
 
     public static function make(): static
     {
@@ -46,12 +48,21 @@ class ServiceDeskUserPlugin implements Plugin
             $pages[] = User\Pages\KnowledgeBasePage::class;
         }
 
+        $widgets = config('filament-service-desk.user.widgets', [
+            User\Widgets\MyTicketsOverviewWidget::class,
+        ]);
+
+        // MyTicketsOverviewWidget queries Eloquent directly for stats, which
+        // returns nothing meaningful under the API transport (no local rows) --
+        // strip it even if a published config explicitly listed it.
+        if (static::isTicketApiTransport()) {
+            $widgets = array_values(array_diff($widgets, [User\Widgets\MyTicketsOverviewWidget::class]));
+        }
+
         $panel
             ->resources(array_values(array_filter($enabled)))
             ->pages($pages)
-            ->widgets(config('filament-service-desk.user.widgets', [
-                User\Widgets\MyTicketsOverviewWidget::class,
-            ]));
+            ->widgets($widgets);
     }
 
     public function boot(Panel $panel): void

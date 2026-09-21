@@ -186,11 +186,13 @@ return [
         'add_watcher' => 'Add Watcher',
         'remove_watcher' => 'Remove',
         'close' => 'Close Ticket',
+        'reopen' => 'Reopen Ticket',
         'claim' => 'Claim Ticket',
         'reply' => 'Reply',
         'publish' => 'Publish',
         'archive' => 'Archive',
         'test_connection' => 'Test Connection',
+        'upload_attachment' => 'Upload Attachment',
     ],
 
     'filters' => [
@@ -203,6 +205,7 @@ return [
     'notifications' => [
         'connection_successful' => 'Connection successful',
         'connection_failed' => 'Connection failed',
+        'attachment_uploaded' => 'Attachment uploaded',
     ],
 
     'empty_states' => [
@@ -221,6 +224,10 @@ return [
         'service_requests' => [
             'heading' => 'No service requests yet',
             'description' => 'When you submit a service request, it will show up here.',
+        ],
+        'satellite_listing' => [
+            'heading' => 'Listing not available',
+            'description' => 'This app talks to the service desk over the API and cannot list existing tickets yet -- open a ticket by its reference, or create a new one.',
         ],
     ],
 

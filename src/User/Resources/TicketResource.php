@@ -11,15 +11,19 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use JeffersonGoncalves\FilamentServiceDesk\Concerns\InteractsWithTicketApiTransport;
 use JeffersonGoncalves\FilamentServiceDesk\User\Resources\TicketResource\Pages;
 use JeffersonGoncalves\FilamentServiceDesk\User\Resources\TicketResource\RelationManagers;
 use JeffersonGoncalves\ServiceDesk\Enums\TicketPriority;
 use JeffersonGoncalves\ServiceDesk\Enums\TicketStatus;
 use JeffersonGoncalves\ServiceDesk\Models\Ticket;
 use JeffersonGoncalves\ServiceDesk\Services\KnowledgeBaseService;
+use JeffersonGoncalves\ServiceDesk\Services\Transports\ApiTicketTransport;
 
 class TicketResource extends Resource
 {
+    use InteractsWithTicketApiTransport;
+
     protected static ?string $model = Ticket::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-ticket';
@@ -43,6 +47,10 @@ class TicketResource extends Resource
 
     public static function getNavigationBadge(): ?string
     {
+        if (static::isTicketApiTransport()) {
+            return null;
+        }
+
         $count = static::getEloquentQuery()
             ->whereNotIn('status', [TicketStatus::Closed->value, TicketStatus::Resolved->value])
             ->count();
@@ -125,7 +133,7 @@ class TicketResource extends Resource
     public static function infolist(Infolist $infolist): Infolist
     {
         return $infolist
-            ->schema([
+            ->schema(array_filter([
                 Infolists\Components\Section::make(__('filament-service-desk::service-desk.sections.ticket_details'))
                     ->schema([
                         Infolists\Components\TextEntry::make('title')
@@ -165,6 +173,46 @@ class TicketResource extends Resource
                             ->since(),
                     ])
                     ->columns(2),
+
+                static::isTicketApiTransport() ? static::attachmentsSection() : null,
+            ]));
+    }
+
+    /**
+     * Attachments under the API transport have no local Eloquent relation
+     * (see getRelations()) -- rendered here straight from
+     * ApiTicketTransport::listAttachments()/downloadAttachment(), inlined
+     * as data: URIs since the API only accepts/returns attachments small
+     * enough for that (service-desk.api.max_inline_attachment).
+     */
+    protected static function attachmentsSection(): Infolists\Components\Section
+    {
+        return Infolists\Components\Section::make(__('filament-service-desk::service-desk.relations.attachments'))
+            ->schema([
+                Infolists\Components\TextEntry::make('satellite_attachments')
+                    ->hiddenLabel()
+                    ->html()
+                    ->state(function (Ticket $record) {
+                        $transport = app(ApiTicketTransport::class);
+
+                        // Metadata only from listAttachments(); a data: URI needs the
+                        // actual bytes, one extra request per file, so this is capped
+                        // -- fine for the "small enough to inline" files this API
+                        // accepts in the first place (service-desk.api.max_inline_attachment).
+                        $attachments = collect($transport->listAttachments($record))
+                            ->take(10)
+                            ->map(function (array $attachment) use ($transport, $record) {
+                                $contents = $transport->downloadAttachment($record, $attachment['uuid']);
+                                $attachment['dataUri'] = 'data:'.$attachment['mime_type'].';base64,'.base64_encode($contents);
+
+                                return $attachment;
+                            });
+
+                        return view('filament-service-desk::components.satellite-attachments', [
+                            'attachments' => $attachments,
+                        ]);
+                    })
+                    ->columnSpanFull(),
             ]);
     }
 
@@ -231,6 +279,14 @@ class TicketResource extends Resource
 
     public static function getRelations(): array
     {
+        if (static::isTicketApiTransport()) {
+            // Comments have no equivalent on TicketTransport -- the API driver
+            // was scoped to CRUD/status/attachments only (see #35). Attachments
+            // use a dedicated satellite-mode section on ViewTicket instead of
+            // this Eloquent-relationship-backed manager.
+            return [];
+        }
+
         return [
             RelationManagers\CommentsRelationManager::class,
             RelationManagers\AttachmentsRelationManager::class,
