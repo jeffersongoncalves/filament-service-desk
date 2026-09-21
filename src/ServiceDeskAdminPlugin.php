@@ -30,6 +30,15 @@ class ServiceDeskAdminPlugin implements Plugin
 
     public function register(Panel $panel): void
     {
+        if (config('service-desk.ticket.transport') === 'api') {
+            throw new \RuntimeException(
+                'ServiceDeskAdminPlugin cannot run under service-desk.ticket.transport=api: '
+                .'the Admin panel lists, filters and manages tickets through direct Eloquent '
+                .'relationships, which only exist on the side holding the ticket database. '
+                .'Register this plugin on the central instance only.'
+            );
+        }
+
         $resources = config('filament-service-desk.admin.resources', []);
 
         $enabled = [
