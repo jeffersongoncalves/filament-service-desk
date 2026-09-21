@@ -9,6 +9,7 @@ use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use JeffersonGoncalves\FilamentServiceDesk\Concerns\InteractsWithTicketApiTransport;
 use JeffersonGoncalves\FilamentServiceDesk\User\Resources\Tickets\Schemas\TicketForm;
 use JeffersonGoncalves\FilamentServiceDesk\User\Resources\Tickets\Schemas\TicketInfolist;
 use JeffersonGoncalves\FilamentServiceDesk\User\Resources\Tickets\Tables\TicketsTable;
@@ -17,6 +18,8 @@ use JeffersonGoncalves\ServiceDesk\Models\Ticket;
 
 class TicketResource extends Resource
 {
+    use InteractsWithTicketApiTransport;
+
     protected static ?string $model = Ticket::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedTicket;
@@ -40,6 +43,10 @@ class TicketResource extends Resource
 
     public static function getNavigationBadge(): ?string
     {
+        if (static::isTicketApiTransport()) {
+            return null;
+        }
+
         $count = static::getEloquentQuery()
             ->whereNotIn('status', [TicketStatus::Closed->value, TicketStatus::Resolved->value])
             ->count();
@@ -74,6 +81,14 @@ class TicketResource extends Resource
 
     public static function getRelations(): array
     {
+        if (static::isTicketApiTransport()) {
+            // Comments have no equivalent on TicketTransport -- the API driver
+            // was scoped to CRUD/status/attachments only (see #35). Attachments
+            // use a dedicated satellite-mode section on ViewTicket instead of
+            // this Eloquent-relationship-backed manager.
+            return [];
+        }
+
         return [
             RelationManagers\CommentsRelationManager::class,
             RelationManagers\AttachmentsRelationManager::class,

@@ -56,6 +56,9 @@ return [
         'due_at' => 'Due At',
         'tags' => 'Tags',
         'reference_number' => 'Reference',
+        'application' => 'Application',
+        'status_pipeline' => 'Progress',
+        'suggested_articles' => 'You might find these helpful',
         'tickets_count' => 'Tickets',
         'all_departments' => 'All Departments',
         'unassigned' => 'Unassigned',
@@ -183,16 +186,49 @@ return [
         'add_watcher' => 'Add Watcher',
         'remove_watcher' => 'Remove',
         'close' => 'Close Ticket',
+        'reopen' => 'Reopen Ticket',
         'claim' => 'Claim Ticket',
         'reply' => 'Reply',
         'publish' => 'Publish',
         'archive' => 'Archive',
+        'test_connection' => 'Test Connection',
+        'upload_attachment' => 'Upload Attachment',
     ],
 
     'filters' => [
         'unassigned' => 'Unassigned Only',
         'overdue' => 'Overdue Only',
         'root_only' => 'Root Categories Only',
+        'this_app' => 'This app',
+    ],
+
+    'notifications' => [
+        'connection_successful' => 'Connection successful',
+        'connection_failed' => 'Connection failed',
+        'attachment_uploaded' => 'Attachment uploaded',
+    ],
+
+    'empty_states' => [
+        'my_tickets' => [
+            'heading' => 'No tickets yet',
+            'description' => 'When you open a ticket, it will show up here.',
+        ],
+        'queue' => [
+            'heading' => 'Queue is empty',
+            'description' => 'There are no unassigned tickets waiting right now.',
+        ],
+        'assigned_tickets' => [
+            'heading' => 'No tickets',
+            'description' => 'Tickets matching the current filters will show up here.',
+        ],
+        'service_requests' => [
+            'heading' => 'No service requests yet',
+            'description' => 'When you submit a service request, it will show up here.',
+        ],
+        'satellite_listing' => [
+            'heading' => 'Listing not available',
+            'description' => 'This app talks to the service desk over the API and can\'t list existing tickets yet -- open a ticket by its reference, or create a new one.',
+        ],
     ],
 
     'comment_types' => [
@@ -214,6 +250,10 @@ return [
         'ticket_queue' => [
             'label' => 'Ticket Queue',
             'title' => 'Ticket Queue',
+        ],
+        'ticket_board' => [
+            'label' => 'Board',
+            'title' => 'Ticket Board',
         ],
         'agent_dashboard' => [
             'label' => 'Dashboard',

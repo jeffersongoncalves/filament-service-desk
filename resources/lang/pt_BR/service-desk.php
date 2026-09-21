@@ -56,6 +56,9 @@ return [
         'due_at' => 'Vencimento',
         'tags' => 'Tags',
         'reference_number' => 'Referência',
+        'application' => 'Aplicação',
+        'status_pipeline' => 'Progresso',
+        'suggested_articles' => 'Estes artigos podem ajudar',
         'tickets_count' => 'Tickets',
         'all_departments' => 'Todos os Departamentos',
         'unassigned' => 'Não atribuído',
@@ -183,16 +186,49 @@ return [
         'add_watcher' => 'Adicionar Observador',
         'remove_watcher' => 'Remover',
         'close' => 'Fechar Ticket',
+        'reopen' => 'Reabrir Ticket',
         'claim' => 'Assumir Ticket',
         'reply' => 'Responder',
         'publish' => 'Publicar',
         'archive' => 'Arquivar',
+        'test_connection' => 'Testar Conexão',
+        'upload_attachment' => 'Enviar Anexo',
     ],
 
     'filters' => [
         'unassigned' => 'Apenas Não Atribuídos',
         'overdue' => 'Apenas Atrasados',
         'root_only' => 'Apenas Categorias Raiz',
+        'this_app' => 'Esta aplicação',
+    ],
+
+    'notifications' => [
+        'connection_successful' => 'Conexão bem-sucedida',
+        'connection_failed' => 'Falha na conexão',
+        'attachment_uploaded' => 'Anexo enviado',
+    ],
+
+    'empty_states' => [
+        'my_tickets' => [
+            'heading' => 'Nenhum ticket ainda',
+            'description' => 'Quando você abrir um ticket, ele aparece aqui.',
+        ],
+        'queue' => [
+            'heading' => 'Fila vazia',
+            'description' => 'Não há tickets não atribuídos aguardando no momento.',
+        ],
+        'assigned_tickets' => [
+            'heading' => 'Nenhum ticket',
+            'description' => 'Tickets que correspondem aos filtros atuais aparecem aqui.',
+        ],
+        'service_requests' => [
+            'heading' => 'Nenhuma solicitação ainda',
+            'description' => 'Quando você enviar uma solicitação de serviço, ela aparece aqui.',
+        ],
+        'satellite_listing' => [
+            'heading' => 'Listagem não disponível',
+            'description' => 'Esta aplicação fala com o service desk via API e ainda não consegue listar tickets existentes -- abra um ticket pela referência, ou crie um novo.',
+        ],
     ],
 
     'comment_types' => [
@@ -214,6 +250,10 @@ return [
         'ticket_queue' => [
             'label' => 'Fila de Tickets',
             'title' => 'Fila de Tickets',
+        ],
+        'ticket_board' => [
+            'label' => 'Quadro',
+            'title' => 'Quadro de Tickets',
         ],
         'agent_dashboard' => [
             'label' => 'Painel',
