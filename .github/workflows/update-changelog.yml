@@ -1,0 +1,55 @@
+name: "Update Changelog"
+
+on:
+  release:
+    types: [released]
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.release.target_commitish }}
+
+      # A release can target a full commit SHA, which is not a branch the
+      # changelog commit could be pushed to. Fail here with a clear message
+      # rather than letting the commit step push to a branch named after a SHA.
+      - name: Resolve the destination branch
+        id: destination
+        env:
+          TARGET: ${{ github.event.release.target_commitish }}
+        run: |
+          if ! git show-ref --verify --quiet "refs/remotes/origin/${TARGET}"; then
+            echo "::error::Release target '${TARGET}' is not a branch, so the changelog has nowhere to be committed. Re-create the release targeting a branch."
+            exit 1
+          fi
+
+          echo "branch=${TARGET}" >> "$GITHUB_OUTPUT"
+
+      - name: Extract release date from git tag
+        id: release_date
+        env:
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+        run: |
+          echo "date=$(git log -1 --date=short --format=%ad "${RELEASE_TAG}")" >> "$GITHUB_OUTPUT"
+
+      - name: Update Changelog
+        uses: stefanzweifel/changelog-updater-action@a938690fad7edf25368f37e43a1ed1b34303eb36 # v1
+        with:
+          release-date: ${{ steps.release_date.outputs.date }}
+          release-notes: ${{ github.event.release.body }}
+          latest-version: ${{ github.event.release.tag_name }}
+
+      - name: Commit updated CHANGELOG
+        uses: stefanzweifel/git-auto-commit-action@4a55954c782fc1ea30b9056cd3e7a2b40ca8887d # v7
+        with:
+          branch: ${{ steps.destination.outputs.branch }}
+          commit_message: Update CHANGELOG
+          file_pattern: CHANGELOG.md
