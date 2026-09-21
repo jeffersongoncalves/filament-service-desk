@@ -47,7 +47,7 @@ class TimeSlotsRelationManager extends RelationManager
             ->columns([
                 Tables\Columns\TextColumn::make('day_of_week')
                     ->label(__('filament-service-desk::service-desk.fields.day_of_week'))
-                    ->formatStateUsing(fn ($state) => DayOfWeek::from($state)->label())
+                    ->formatStateUsing(fn (DayOfWeek $state) => $state->label())
                     ->sortable(),
                 Tables\Columns\TextColumn::make('start_time')
                     ->label(__('filament-service-desk::service-desk.fields.start_time')),
