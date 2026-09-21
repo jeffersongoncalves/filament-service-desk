@@ -48,6 +48,7 @@ class ServiceDeskAgentPlugin implements Plugin
 
         $pages = [
             Agent\Pages\TicketQueuePage::class,
+            Agent\Pages\TicketBoardPage::class,
             Agent\Pages\AgentDashboardPage::class,
         ];
 

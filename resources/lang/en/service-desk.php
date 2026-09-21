@@ -57,6 +57,8 @@ return [
         'tags' => 'Tags',
         'reference_number' => 'Reference',
         'application' => 'Application',
+        'status_pipeline' => 'Progress',
+        'suggested_articles' => 'You might find these helpful',
         'tickets_count' => 'Tickets',
         'all_departments' => 'All Departments',
         'unassigned' => 'Unassigned',
@@ -188,6 +190,7 @@ return [
         'reply' => 'Reply',
         'publish' => 'Publish',
         'archive' => 'Archive',
+        'test_connection' => 'Test Connection',
     ],
 
     'filters' => [
@@ -195,6 +198,30 @@ return [
         'overdue' => 'Overdue Only',
         'root_only' => 'Root Categories Only',
         'this_app' => 'This app',
+    ],
+
+    'notifications' => [
+        'connection_successful' => 'Connection successful',
+        'connection_failed' => 'Connection failed',
+    ],
+
+    'empty_states' => [
+        'my_tickets' => [
+            'heading' => 'No tickets yet',
+            'description' => 'When you open a ticket, it will show up here.',
+        ],
+        'queue' => [
+            'heading' => 'Queue is empty',
+            'description' => 'There are no unassigned tickets waiting right now.',
+        ],
+        'assigned_tickets' => [
+            'heading' => 'No tickets',
+            'description' => 'Tickets matching the current filters will show up here.',
+        ],
+        'service_requests' => [
+            'heading' => 'No service requests yet',
+            'description' => 'When you submit a service request, it will show up here.',
+        ],
     ],
 
     'comment_types' => [
@@ -216,6 +243,10 @@ return [
         'ticket_queue' => [
             'label' => 'Ticket Queue',
             'title' => 'Ticket Queue',
+        ],
+        'ticket_board' => [
+            'label' => 'Board',
+            'title' => 'Ticket Board',
         ],
         'agent_dashboard' => [
             'label' => 'Dashboard',

@@ -46,6 +46,9 @@ class ServiceRequestsTable
             ])
             ->recordActions([
                 Actions\ViewAction::make(),
-            ]);
+            ])
+            ->emptyStateIcon('heroicon-o-clipboard-document-list')
+            ->emptyStateHeading(__('filament-service-desk::service-desk.empty_states.service_requests.heading'))
+            ->emptyStateDescription(__('filament-service-desk::service-desk.empty_states.service_requests.description'));
     }
 }

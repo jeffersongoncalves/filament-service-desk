@@ -3,9 +3,11 @@
 namespace JeffersonGoncalves\FilamentServiceDesk\User\Resources\Tickets\Schemas;
 
 use Filament\Forms;
+use Filament\Infolists;
 use Filament\Schemas;
 use Filament\Schemas\Schema;
 use JeffersonGoncalves\ServiceDesk\Enums\TicketPriority;
+use JeffersonGoncalves\ServiceDesk\Services\KnowledgeBaseService;
 
 class TicketForm
 {
@@ -40,10 +42,28 @@ class TicketForm
                             ->label(__('filament-service-desk::service-desk.fields.title'))
                             ->required()
                             ->maxLength(255)
+                            ->live(debounce: 500)
                             ->columnSpanFull(),
                         Forms\Components\RichEditor::make('description')
                             ->label(__('filament-service-desk::service-desk.fields.description'))
                             ->required()
+                            ->live(debounce: 500)
+                            ->columnSpanFull(),
+                        Infolists\Components\TextEntry::make('suggested_articles')
+                            ->hiddenLabel()
+                            ->html()
+                            ->state(function (Schemas\Components\Utilities\Get $get) {
+                                $query = trim(($get('title') ?? '').' '.strip_tags((string) ($get('description') ?? '')));
+
+                                if ($query === '') {
+                                    return null;
+                                }
+
+                                $articles = app(KnowledgeBaseService::class)->search($query, ['limit' => 3]);
+
+                                return $articles->isEmpty() ? null : view('filament-service-desk::components.kb-suggestions', ['articles' => $articles]);
+                            })
+                            ->visible(fn (Schemas\Components\Utilities\Get $get) => filled($get('title')))
                             ->columnSpanFull(),
                         Forms\Components\Select::make('priority')
                             ->label(__('filament-service-desk::service-desk.fields.priority'))
