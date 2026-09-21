@@ -2,6 +2,7 @@
     use JeffersonGoncalves\ServiceDesk\Enums\TicketStatus;
 
     /** @var TicketStatus $state */
+    $state = $getState();
     $steps = TicketStatus::pipelineSteps();
     $currentStep = $state->pipelineStep();
     $isWaiting = in_array($state, [TicketStatus::Pending, TicketStatus::OnHold], true);
