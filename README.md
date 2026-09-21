@@ -85,6 +85,20 @@ public function panel(Panel $panel): Panel
 
 **Widgets:** Agent Ticket Stats, SLA Breach Table.
 
+#### Optional: Kanban board
+
+A drag-and-drop alternative to the ticket table, backed by [`jeffersongoncalves/filament-kanban`](https://github.com/jeffersongoncalves/filament-kanban). It's a `suggest`, not a hard dependency — the table stays the default view either way, and calling `->kanban()` without the package installed is a no-op rather than an error.
+
+```bash
+composer require jeffersongoncalves/filament-kanban
+```
+
+```php
+ServiceDeskAgentPlugin::make()->kanban(),
+```
+
+Columns are `Open`, `Pending`, `In Progress`, `On Hold` and `Resolved` — `Closed` is left off, since a Kanban is a working queue. Dragging a card calls `TicketService::changeStatus()`, so it respects `TicketStatus::allowedTransitions()` the same way the table's status actions do; an illegal move snaps back with no server-side change. There's no order column on `service_desk_tickets`, so cards within a column are read in `created_at` order and reordering within a column is visual only — it doesn't persist across a reload.
+
 ### User Panel
 
 Self-service portal for end users.

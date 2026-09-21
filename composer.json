@@ -25,6 +25,7 @@
         "spatie/laravel-package-tools": "^1.14.0"
     },
     "require-dev": {
+        "jeffersongoncalves/filament-kanban": "^2.0",
         "laravel/pint": "^1.0",
         "nunomaduro/collision": "^7.0|^8.0",
         "orchestra/testbench": "^9.0|^10.0|^11.0",
@@ -34,6 +35,9 @@
         "phpstan/phpstan": "^1.10",
         "phpstan/phpstan-deprecation-rules": "^1.0",
         "phpstan/phpstan-phpunit": "^1.0"
+    },
+    "suggest": {
+        "jeffersongoncalves/filament-kanban": "Adds an optional drag-and-drop Kanban board to the Agent panel. Enable it with ServiceDeskAgentPlugin::make()->kanban()."
     },
     "autoload": {
         "psr-4": {
