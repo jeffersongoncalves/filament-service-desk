@@ -186,11 +186,13 @@ return [
         'add_watcher' => 'Adicionar Observador',
         'remove_watcher' => 'Remover',
         'close' => 'Fechar Ticket',
+        'reopen' => 'Reabrir Ticket',
         'claim' => 'Assumir Ticket',
         'reply' => 'Responder',
         'publish' => 'Publicar',
         'archive' => 'Arquivar',
         'test_connection' => 'Testar Conexão',
+        'upload_attachment' => 'Enviar Anexo',
     ],
 
     'filters' => [
@@ -203,6 +205,7 @@ return [
     'notifications' => [
         'connection_successful' => 'Conexão bem-sucedida',
         'connection_failed' => 'Falha na conexão',
+        'attachment_uploaded' => 'Anexo enviado',
     ],
 
     'empty_states' => [
@@ -221,6 +224,10 @@ return [
         'service_requests' => [
             'heading' => 'Nenhuma solicitação ainda',
             'description' => 'Quando você enviar uma solicitação de serviço, ela aparece aqui.',
+        ],
+        'satellite_listing' => [
+            'heading' => 'Listagem não disponível',
+            'description' => 'Esta aplicação fala com o service desk via API e ainda não consegue listar tickets existentes -- abra um ticket pela referência, ou crie um novo.',
         ],
     ],
 

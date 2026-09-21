@@ -15,4 +15,12 @@ class CreateTicket extends CreateRecord
     {
         return app(TicketService::class)->create($data, auth()->guard()->user());
     }
+
+    protected function getRedirectUrl(): string
+    {
+        // Explicit rather than relying on Filament's default (which could
+        // land on the 'index' listing -- unsupported under the API
+        // transport, see TicketResource::getRelations()).
+        return TicketResource::getUrl('view', ['record' => $this->getRecord()]);
+    }
 }

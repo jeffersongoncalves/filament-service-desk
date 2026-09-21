@@ -4,6 +4,7 @@ use Filament\Panel;
 use JeffersonGoncalves\FilamentServiceDesk\ServiceDeskAdminPlugin;
 use JeffersonGoncalves\FilamentServiceDesk\ServiceDeskAgentPlugin;
 use JeffersonGoncalves\FilamentServiceDesk\ServiceDeskUserPlugin;
+use JeffersonGoncalves\FilamentServiceDesk\User\Widgets\MyTicketsOverviewWidget;
 
 it('can create admin plugin', function () {
     $plugin = ServiceDeskAdminPlugin::make();
@@ -54,3 +55,13 @@ it('refuses to register the agent panel under the api ticket transport', functio
 
     ServiceDeskAgentPlugin::make()->register(Panel::make());
 })->throws(RuntimeException::class, 'service-desk.ticket.transport=api');
+
+it('registers the user panel under the api ticket transport without the stats widget', function () {
+    config()->set('service-desk.ticket.transport', 'api');
+
+    $panel = Panel::make()->id('user');
+
+    ServiceDeskUserPlugin::make()->register($panel);
+
+    expect($panel->getWidgets())->not->toContain(MyTicketsOverviewWidget::class);
+});
