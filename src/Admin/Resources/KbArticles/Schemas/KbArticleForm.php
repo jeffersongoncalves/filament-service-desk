@@ -47,7 +47,9 @@ class KbArticleForm
                                     ->label(__('filament-service-desk::service-desk.fields.seo_description'))
                                     ->maxLength(255),
                                 Forms\Components\TagsInput::make('seo_keywords')
-                                    ->label(__('filament-service-desk::service-desk.fields.seo_keywords')),
+                                    ->label(__('filament-service-desk::service-desk.fields.seo_keywords'))
+                                    ->afterStateHydrated(fn (Forms\Components\TagsInput $component, $state) => $component->state(static::seoKeywordsToArray($state)))
+                                    ->dehydrateStateUsing(fn (array $state) => static::seoKeywordsToString($state)),
                             ])
                             ->collapsed(),
                     ])
@@ -99,5 +101,18 @@ class KbArticleForm
                     ->columnSpan(['lg' => 1]),
             ])
             ->columns(3);
+    }
+
+    /**
+     * The core `seo_keywords` column is a plain string; TagsInput works on arrays.
+     */
+    public static function seoKeywordsToArray(?string $state): array
+    {
+        return filled($state) ? array_map('trim', explode(',', $state)) : [];
+    }
+
+    public static function seoKeywordsToString(array $state): string
+    {
+        return implode(', ', $state);
     }
 }
