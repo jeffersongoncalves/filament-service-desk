@@ -253,6 +253,13 @@ class TicketResource extends Resource
             ->actions([
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\Action::make('claim')
+                    ->label(__('filament-service-desk::service-desk.actions.claim'))
+                    ->icon('heroicon-o-hand-raised')
+                    ->color('primary')
+                    ->requiresConfirmation()
+                    ->action(fn (Ticket $record) => app(TicketService::class)->assign($record, auth()->guard()->user(), auth()->guard()->user()))
+                    ->visible(fn (Ticket $record) => $record->assigned_to_id === null),
                 Tables\Actions\Action::make('close')
                     ->label(__('filament-service-desk::service-desk.actions.close'))
                     ->icon('heroicon-o-x-circle')
@@ -260,7 +267,10 @@ class TicketResource extends Resource
                     ->requiresConfirmation()
                     ->action(fn (Ticket $record) => app(TicketService::class)->close($record, auth()->guard()->user()))
                     ->visible(fn (Ticket $record) => $record->isOpen()),
-            ]);
+            ])
+            ->emptyStateIcon('heroicon-o-inbox')
+            ->emptyStateHeading(__('filament-service-desk::service-desk.empty_states.assigned_tickets.heading'))
+            ->emptyStateDescription(__('filament-service-desk::service-desk.empty_states.assigned_tickets.description'));
     }
 
     public static function getRelations(): array

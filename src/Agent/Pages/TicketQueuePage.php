@@ -107,6 +107,9 @@ class TicketQueuePage extends Page implements HasTable
 
                         return redirect(TicketResource::getUrl('view', ['record' => $record]));
                     }),
-            ]);
+            ])
+            ->emptyStateIcon('heroicon-o-check-circle')
+            ->emptyStateHeading(__('filament-service-desk::service-desk.empty_states.queue.heading'))
+            ->emptyStateDescription(__('filament-service-desk::service-desk.empty_states.queue.description'));
     }
 }

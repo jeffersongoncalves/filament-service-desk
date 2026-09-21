@@ -9,6 +9,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
 use JeffersonGoncalves\ServiceDesk\Enums\CommentType;
+use JeffersonGoncalves\ServiceDesk\Models\TicketComment;
 use JeffersonGoncalves\ServiceDesk\Services\CommentService;
 
 class CommentsRelationManager extends RelationManager
@@ -75,6 +76,7 @@ class CommentsRelationManager extends RelationManager
                     ->sortable(),
             ])
             ->defaultSort('created_at', 'desc')
+            ->recordClasses(fn (TicketComment $record) => $record->isInternal() ? 'bg-warning-50 dark:bg-warning-500/10' : null)
             ->filters([])
             ->headerActions([
                 Tables\Actions\Action::make('addReply')
