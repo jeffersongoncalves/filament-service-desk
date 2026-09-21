@@ -85,6 +85,20 @@ public function panel(Panel $panel): Panel
 
 **Widgets:** Agent Ticket Stats, SLA Breach Table.
 
+#### Optional Kanban board
+
+A drag-and-drop ticket board is available through [`jeffersongoncalves/filament-kanban`](https://github.com/jeffersongoncalves/filament-kanban). It is not a hard dependency — install it and opt in:
+
+```bash
+composer require jeffersongoncalves/filament-kanban
+```
+
+```php
+ServiceDeskAgentPlugin::make()->kanban(),
+```
+
+The page is silently skipped when the package is not installed. Columns cover Open, Pending, In Progress, On Hold and Resolved — Closed is left off, since a board is a working queue and reopening goes through the ticket view. Every drag is applied through `TicketService::changeStatus()`, so status history, SLA pause tracking and transition rules still apply; an invalid or unauthorized move is rejected and the card snaps back.
+
 ### User Panel
 
 Self-service portal for end users.

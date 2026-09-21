@@ -1,6 +1,8 @@
 <?php
 
 use Filament\Panel;
+use JeffersonGoncalves\Filament\Kanban\Pages\KanbanBoard;
+use JeffersonGoncalves\FilamentServiceDesk\Agent\Pages\TicketBoardPage;
 use JeffersonGoncalves\FilamentServiceDesk\ServiceDeskAdminPlugin;
 use JeffersonGoncalves\FilamentServiceDesk\ServiceDeskAgentPlugin;
 use JeffersonGoncalves\FilamentServiceDesk\ServiceDeskUserPlugin;
@@ -42,6 +44,25 @@ it('can set navigation group', function () {
         ->navigationGroup('Custom Group');
 
     expect($plugin->getNavigationGroup())->toBe('Custom Group');
+});
+
+it('does not register the kanban board unless it is opted into', function () {
+    $panel = Panel::make()->id('agent');
+
+    ServiceDeskAgentPlugin::make()->register($panel);
+
+    expect(ServiceDeskAgentPlugin::make()->hasKanban())->toBeFalse()
+        ->and($panel->getPages())->not->toContain(TicketBoardPage::class);
+});
+
+it('registers the kanban board when opted into and the package is installed', function () {
+    expect(class_exists(KanbanBoard::class))->toBeTrue();
+
+    $panel = Panel::make()->id('agent');
+
+    ServiceDeskAgentPlugin::make()->kanban()->register($panel);
+
+    expect($panel->getPages())->toContain(TicketBoardPage::class);
 });
 
 it('refuses to register the admin panel under the api ticket transport', function () {
