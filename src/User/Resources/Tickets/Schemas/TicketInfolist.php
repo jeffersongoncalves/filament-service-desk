@@ -6,7 +6,6 @@ use Filament\Infolists;
 use Filament\Schemas;
 use Filament\Schemas\Schema;
 use JeffersonGoncalves\ServiceDesk\Enums\TicketPriority;
-use JeffersonGoncalves\ServiceDesk\Enums\TicketStatus;
 
 class TicketInfolist
 {
@@ -24,24 +23,16 @@ class TicketInfolist
                             ->label(__('filament-service-desk::service-desk.fields.description'))
                             ->html()
                             ->columnSpanFull(),
+                        Infolists\Components\ViewEntry::make('status')
+                            ->label(__('filament-service-desk::service-desk.fields.status_pipeline'))
+                            ->view('filament-service-desk::components.ticket-status-stepper')
+                            ->columnSpanFull(),
                         Infolists\Components\TextEntry::make('department.name')
                             ->label(__('filament-service-desk::service-desk.fields.department'))
                             ->placeholder('—'),
                         Infolists\Components\TextEntry::make('category.name')
                             ->label(__('filament-service-desk::service-desk.fields.category'))
                             ->placeholder('—'),
-                        Infolists\Components\TextEntry::make('status')
-                            ->label(__('filament-service-desk::service-desk.fields.status'))
-                            ->badge()
-                            ->formatStateUsing(fn (TicketStatus $state) => $state->label())
-                            ->color(fn (TicketStatus $state) => match ($state) {
-                                TicketStatus::Open => 'info',
-                                TicketStatus::Pending => 'warning',
-                                TicketStatus::InProgress => 'primary',
-                                TicketStatus::OnHold => 'gray',
-                                TicketStatus::Resolved => 'success',
-                                TicketStatus::Closed => 'gray',
-                            }),
                         Infolists\Components\TextEntry::make('priority')
                             ->label(__('filament-service-desk::service-desk.fields.priority'))
                             ->badge()

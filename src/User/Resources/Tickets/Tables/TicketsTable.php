@@ -65,6 +65,9 @@ class TicketsTable
             ])
             ->recordActions([
                 Actions\ViewAction::make(),
-            ]);
+            ])
+            ->emptyStateIcon('heroicon-o-inbox')
+            ->emptyStateHeading(__('filament-service-desk::service-desk.empty_states.my_tickets.heading'))
+            ->emptyStateDescription(__('filament-service-desk::service-desk.empty_states.my_tickets.description'));
     }
 }

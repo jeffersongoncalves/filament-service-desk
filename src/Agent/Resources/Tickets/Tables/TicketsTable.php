@@ -70,6 +70,13 @@ class TicketsTable
             ->recordActions([
                 Actions\ViewAction::make(),
                 Actions\EditAction::make(),
+                Actions\Action::make('claim')
+                    ->label(__('filament-service-desk::service-desk.actions.claim'))
+                    ->icon(Heroicon::HandRaised)
+                    ->color('primary')
+                    ->requiresConfirmation()
+                    ->action(fn (Ticket $record) => app(TicketService::class)->assign($record, auth()->guard()->user(), auth()->guard()->user()))
+                    ->visible(fn (Ticket $record) => $record->assigned_to_id === null),
                 Actions\Action::make('close')
                     ->label(__('filament-service-desk::service-desk.actions.close'))
                     ->icon(Heroicon::XCircle)
@@ -77,6 +84,9 @@ class TicketsTable
                     ->requiresConfirmation()
                     ->action(fn (Ticket $record) => app(TicketService::class)->close($record, auth()->guard()->user()))
                     ->visible(fn (Ticket $record) => $record->isOpen()),
-            ]);
+            ])
+            ->emptyStateIcon('heroicon-o-inbox')
+            ->emptyStateHeading(__('filament-service-desk::service-desk.empty_states.assigned_tickets.heading'))
+            ->emptyStateDescription(__('filament-service-desk::service-desk.empty_states.assigned_tickets.description'));
     }
 }
