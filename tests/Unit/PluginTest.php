@@ -1,5 +1,6 @@
 <?php
 
+use Filament\Panel;
 use JeffersonGoncalves\FilamentServiceDesk\ServiceDeskAdminPlugin;
 use JeffersonGoncalves\FilamentServiceDesk\ServiceDeskAgentPlugin;
 use JeffersonGoncalves\FilamentServiceDesk\ServiceDeskUserPlugin;
@@ -41,3 +42,15 @@ it('can set navigation group', function () {
 
     expect($plugin->getNavigationGroup())->toBe('Custom Group');
 });
+
+it('refuses to register the admin panel under the api ticket transport', function () {
+    config()->set('service-desk.ticket.transport', 'api');
+
+    ServiceDeskAdminPlugin::make()->register(Panel::make());
+})->throws(RuntimeException::class, 'service-desk.ticket.transport=api');
+
+it('refuses to register the agent panel under the api ticket transport', function () {
+    config()->set('service-desk.ticket.transport', 'api');
+
+    ServiceDeskAgentPlugin::make()->register(Panel::make());
+})->throws(RuntimeException::class, 'service-desk.ticket.transport=api');
