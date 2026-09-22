@@ -5,6 +5,14 @@ All notable changes to `filament-service-desk` will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 3.4.0 - 2026-09-21
+
+### What's Changed
+
+* feat: replace custom Kanban board with jeffersongoncalves/filament-kanban by @jeffersongoncalves in https://github.com/jeffersongoncalves/filament-service-desk/pull/53
+
+**Full Changelog**: https://github.com/jeffersongoncalves/filament-service-desk/compare/3.3.0...3.4.0
+
 ## 3.3.0 - 2026-09-21
 
 ### Added
