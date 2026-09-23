@@ -32,8 +32,8 @@ jobs:
 
       - name: Install dependencies (Laravel 13)
         run: |
-          composer require "laravel/framework:^13.0" "orchestra/testbench:^11.0" --dev --no-interaction --no-update
+          composer require "laravel/framework:^13.0" "orchestra/testbench:^11.0" "pestphp/pest:^4.0" "pestphp/pest-plugin-laravel:^4.0" --dev --no-interaction --no-update
           composer update --prefer-stable --prefer-dist --no-interaction
 
       - name: Run tests
-        run: vendor/bin/pest
+        run: vendor/bin/pest --no-coverage
