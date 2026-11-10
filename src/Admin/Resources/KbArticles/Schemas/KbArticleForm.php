@@ -105,9 +105,17 @@ class KbArticleForm
 
     /**
      * The core `seo_keywords` column is a plain string; TagsInput works on arrays.
+     * On the create page TagsInput's own `default([])` already hands us an array.
+     *
+     * @param  string|array<int, string>|null  $state
+     * @return array<int, string>
      */
-    public static function seoKeywordsToArray(?string $state): array
+    public static function seoKeywordsToArray(string|array|null $state): array
     {
+        if (is_array($state)) {
+            return $state;
+        }
+
         return filled($state) ? array_map('trim', explode(',', $state)) : [];
     }
 

@@ -5,7 +5,9 @@ use JeffersonGoncalves\FilamentServiceDesk\Admin\Resources\KbArticles\Schemas\Kb
 it('converts seo_keywords string from the core column into an array for TagsInput', function () {
     expect(KbArticleForm::seoKeywordsToArray('foo, bar, baz'))->toBe(['foo', 'bar', 'baz'])
         ->and(KbArticleForm::seoKeywordsToArray(null))->toBe([])
-        ->and(KbArticleForm::seoKeywordsToArray(''))->toBe([]);
+        ->and(KbArticleForm::seoKeywordsToArray(''))->toBe([])
+        ->and(KbArticleForm::seoKeywordsToArray([]))->toBe([])
+        ->and(KbArticleForm::seoKeywordsToArray(['foo', 'bar']))->toBe(['foo', 'bar']);
 });
 
 it('converts TagsInput array back into the string the core column expects', function () {
