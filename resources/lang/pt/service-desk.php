@@ -74,6 +74,9 @@ return [
         ],
     ],
     'fields' => [
+        'role' => 'Função',
+        'operator' => 'Operador',
+        'email_notifications' => 'Notificações por e-mail',
         'name' => 'Nome',
         'slug' => 'Slug',
         'email' => 'E-mail',
@@ -203,6 +206,7 @@ return [
         'new_ticket' => 'Novo pedido',
     ],
     'relations' => [
+        'operators' => 'Operadores',
         'comments' => 'Comentários',
         'attachments' => 'Anexos',
         'history' => 'Histórico',
@@ -216,6 +220,8 @@ return [
         'form_fields' => 'Campos do formulário',
     ],
     'actions' => [
+        'enable_email_notifications' => 'Ativar notificações por e-mail',
+        'disable_email_notifications' => 'Desativar notificações por e-mail',
         'add_reply' => 'Adicionar resposta',
         'add_note' => 'Adicionar nota interna',
         'download' => 'Transferir',
@@ -263,6 +269,11 @@ return [
             'description' => 'Esta aplicação comunica com o service desk através da API e ainda não consegue listar os pedidos existentes -- abra um pedido pela sua referência ou crie um novo.',
         ],
     ],
+    'department_roles' => [
+        'operator' => 'Operador',
+        'manager' => 'Gestor',
+    ],
+
     'comment_types' => [
         'reply' => 'Resposta',
         'note' => 'Nota interna',

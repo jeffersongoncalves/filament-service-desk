@@ -74,6 +74,9 @@ return [
         ],
     ],
     'fields' => [
+        'role' => 'Rol',
+        'operator' => 'Operator',
+        'email_notifications' => 'Email bildirishnomalari',
         'name' => 'Nomi',
         'slug' => 'Slug',
         'email' => 'Elektron pochta',
@@ -203,6 +206,7 @@ return [
         'new_ticket' => 'Yangi murojaat',
     ],
     'relations' => [
+        'operators' => 'Operatorlar',
         'comments' => 'Izohlar',
         'attachments' => 'Ilovalar',
         'history' => 'Tarix',
@@ -216,6 +220,8 @@ return [
         'form_fields' => 'Forma maydonlari',
     ],
     'actions' => [
+        'enable_email_notifications' => 'Email bildirishnomalarini yoqish',
+        'disable_email_notifications' => 'Email bildirishnomalarini o\'chirish',
         'add_reply' => 'Javob qoʻshish',
         'add_note' => 'Ichki izoh qoʻshish',
         'download' => 'Yuklab olish',
@@ -263,6 +269,11 @@ return [
             'description' => 'Ushbu ilova xizmat koʻrsatish markazi bilan API orqali bogʻlanadi va hozircha mavjud murojaatlarni roʻyxatlay olmaydi -- murojaatni raqami orqali oching yoki yangisini yarating.',
         ],
     ],
+    'department_roles' => [
+        'operator' => 'Operator',
+        'manager' => 'Menejer',
+    ],
+
     'comment_types' => [
         'reply' => 'Javob',
         'note' => 'Ichki izoh',

@@ -35,6 +35,9 @@ return [
     ],
 
     'fields' => [
+        'role' => 'Role',
+        'operator' => 'Operator',
+        'email_notifications' => 'Email notifications',
         'name' => 'Name',
         'slug' => 'Slug',
         'email' => 'Email',
@@ -166,6 +169,7 @@ return [
     ],
 
     'relations' => [
+        'operators' => 'Operators',
         'comments' => 'Comments',
         'attachments' => 'Attachments',
         'history' => 'History',
@@ -180,6 +184,8 @@ return [
     ],
 
     'actions' => [
+        'enable_email_notifications' => 'Enable email notifications',
+        'disable_email_notifications' => 'Disable email notifications',
         'add_reply' => 'Add Reply',
         'add_note' => 'Add Internal Note',
         'download' => 'Download',
@@ -229,6 +235,11 @@ return [
             'heading' => 'Listing not available',
             'description' => 'This app talks to the service desk over the API and cannot list existing tickets yet -- open a ticket by its reference, or create a new one.',
         ],
+    ],
+
+    'department_roles' => [
+        'operator' => 'Operator',
+        'manager' => 'Manager',
     ],
 
     'comment_types' => [
