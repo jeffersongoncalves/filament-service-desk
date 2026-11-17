@@ -74,6 +74,9 @@ return [
         ],
     ],
     'fields' => [
+        'role' => 'Rol',
+        'operator' => 'Medewerker',
+        'email_notifications' => 'E-mailmeldingen',
         'name' => 'Naam',
         'slug' => 'Slug',
         'email' => 'E-mail',
@@ -203,6 +206,7 @@ return [
         'new_ticket' => 'Nieuw ticket',
     ],
     'relations' => [
+        'operators' => 'Medewerkers',
         'comments' => 'Opmerkingen',
         'attachments' => 'Bijlagen',
         'history' => 'Geschiedenis',
@@ -216,6 +220,8 @@ return [
         'form_fields' => 'Formuliervelden',
     ],
     'actions' => [
+        'enable_email_notifications' => 'E-mailmeldingen inschakelen',
+        'disable_email_notifications' => 'E-mailmeldingen uitschakelen',
         'add_reply' => 'Antwoord toevoegen',
         'add_note' => 'Interne notitie toevoegen',
         'download' => 'Downloaden',
@@ -263,6 +269,11 @@ return [
             'description' => 'Deze app communiceert via de API met de servicedesk en kan bestaande tickets nog niet weergeven -- open een ticket via de referentie of maak een nieuw ticket aan.',
         ],
     ],
+    'department_roles' => [
+        'operator' => 'Medewerker',
+        'manager' => 'Manager',
+    ],
+
     'comment_types' => [
         'reply' => 'Antwoord',
         'note' => 'Interne notitie',

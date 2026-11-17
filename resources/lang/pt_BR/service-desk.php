@@ -35,6 +35,9 @@ return [
     ],
 
     'fields' => [
+        'role' => 'Função',
+        'operator' => 'Operador',
+        'email_notifications' => 'Notificações por e-mail',
         'name' => 'Nome',
         'slug' => 'Slug',
         'email' => 'E-mail',
@@ -166,6 +169,7 @@ return [
     ],
 
     'relations' => [
+        'operators' => 'Operadores',
         'comments' => 'Comentários',
         'attachments' => 'Anexos',
         'history' => 'Histórico',
@@ -180,6 +184,8 @@ return [
     ],
 
     'actions' => [
+        'enable_email_notifications' => 'Ativar notificações por e-mail',
+        'disable_email_notifications' => 'Desativar notificações por e-mail',
         'add_reply' => 'Responder',
         'add_note' => 'Nota Interna',
         'download' => 'Baixar',
@@ -229,6 +235,11 @@ return [
             'heading' => 'Listagem não disponível',
             'description' => 'Esta aplicação fala com o service desk via API e ainda não consegue listar tickets existentes -- abra um ticket pela referência, ou crie um novo.',
         ],
+    ],
+
+    'department_roles' => [
+        'operator' => 'Operador',
+        'manager' => 'Gerente',
     ],
 
     'comment_types' => [
