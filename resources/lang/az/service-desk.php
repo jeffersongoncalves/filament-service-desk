@@ -74,6 +74,9 @@ return [
         ],
     ],
     'fields' => [
+        'role' => 'Rol',
+        'operator' => 'Operator',
+        'email_notifications' => 'E-poçt bildirişləri',
         'name' => 'Ad',
         'slug' => 'Slug',
         'email' => 'E-poçt',
@@ -203,6 +206,7 @@ return [
         'new_ticket' => 'Yeni bilet',
     ],
     'relations' => [
+        'operators' => 'Operatorlar',
         'comments' => 'Şərhlər',
         'attachments' => 'Qoşmalar',
         'history' => 'Tarixçə',
@@ -216,6 +220,8 @@ return [
         'form_fields' => 'Forma sahələri',
     ],
     'actions' => [
+        'enable_email_notifications' => 'E-poçt bildirişlərini aktiv et',
+        'disable_email_notifications' => 'E-poçt bildirişlərini söndür',
         'add_reply' => 'Cavab əlavə et',
         'add_note' => 'Daxili qeyd əlavə et',
         'download' => 'Yüklə',
@@ -263,6 +269,11 @@ return [
             'description' => 'Bu tətbiq xidmət masası ilə API vasitəsilə əlaqə saxlayır və hələ mövcud biletləri siyahılaya bilmir -- bileti istinad nömrəsi ilə açın və ya yenisini yaradın.',
         ],
     ],
+    'department_roles' => [
+        'operator' => 'Operator',
+        'manager' => 'Menecer',
+    ],
+
     'comment_types' => [
         'reply' => 'Cavab',
         'note' => 'Daxili qeyd',

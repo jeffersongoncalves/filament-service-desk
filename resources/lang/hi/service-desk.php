@@ -74,6 +74,9 @@ return [
         ],
     ],
     'fields' => [
+        'role' => 'भूमिका',
+        'operator' => 'ऑपरेटर',
+        'email_notifications' => 'ईमेल सूचनाएं',
         'name' => 'नाम',
         'slug' => 'स्लग',
         'email' => 'ईमेल',
@@ -203,6 +206,7 @@ return [
         'new_ticket' => 'नया टिकट',
     ],
     'relations' => [
+        'operators' => 'ऑपरेटर',
         'comments' => 'टिप्पणियाँ',
         'attachments' => 'अटैचमेंट',
         'history' => 'इतिहास',
@@ -216,6 +220,8 @@ return [
         'form_fields' => 'फ़ॉर्म फ़ील्ड',
     ],
     'actions' => [
+        'enable_email_notifications' => 'ईमेल सूचनाएं चालू करें',
+        'disable_email_notifications' => 'ईमेल सूचनाएं बंद करें',
         'add_reply' => 'उत्तर जोड़ें',
         'add_note' => 'आंतरिक नोट जोड़ें',
         'download' => 'डाउनलोड करें',
@@ -263,6 +269,11 @@ return [
             'description' => 'यह ऐप API के माध्यम से सर्विस डेस्क से जुड़ता है और अभी मौजूदा टिकटों की सूची नहीं दिखा सकता -- किसी टिकट को उसके संदर्भ से खोलें, या नया टिकट बनाएँ।',
         ],
     ],
+    'department_roles' => [
+        'operator' => 'ऑपरेटर',
+        'manager' => 'प्रबंधक',
+    ],
+
     'comment_types' => [
         'reply' => 'उत्तर',
         'note' => 'आंतरिक नोट',
