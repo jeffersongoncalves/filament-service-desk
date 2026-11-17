@@ -74,6 +74,9 @@ return [
         ],
     ],
     'fields' => [
+        'role' => 'Rol',
+        'operator' => 'Operador',
+        'email_notifications' => 'Notificaciones por correo',
         'name' => 'Nombre',
         'slug' => 'Slug',
         'email' => 'Correo electrónico',
@@ -203,6 +206,7 @@ return [
         'new_ticket' => 'Nuevo ticket',
     ],
     'relations' => [
+        'operators' => 'Operadores',
         'comments' => 'Comentarios',
         'attachments' => 'Adjuntos',
         'history' => 'Historial',
@@ -216,6 +220,8 @@ return [
         'form_fields' => 'Campos del formulario',
     ],
     'actions' => [
+        'enable_email_notifications' => 'Activar notificaciones por correo',
+        'disable_email_notifications' => 'Desactivar notificaciones por correo',
         'add_reply' => 'Añadir respuesta',
         'add_note' => 'Añadir nota interna',
         'download' => 'Descargar',
@@ -263,6 +269,11 @@ return [
             'description' => 'Esta aplicación se comunica con la mesa de servicio a través de la API y aún no puede listar los tickets existentes -- abre un ticket por su referencia o crea uno nuevo.',
         ],
     ],
+    'department_roles' => [
+        'operator' => 'Operador',
+        'manager' => 'Gerente',
+    ],
+
     'comment_types' => [
         'reply' => 'Respuesta',
         'note' => 'Nota interna',

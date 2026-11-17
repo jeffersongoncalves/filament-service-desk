@@ -74,6 +74,9 @@ return [
         ],
     ],
     'fields' => [
+        'role' => 'Rôle',
+        'operator' => 'Opérateur',
+        'email_notifications' => 'Notifications par e-mail',
         'name' => 'Nom',
         'slug' => 'Slug',
         'email' => 'E-mail',
@@ -203,6 +206,7 @@ return [
         'new_ticket' => 'Nouveau ticket',
     ],
     'relations' => [
+        'operators' => 'Opérateurs',
         'comments' => 'Commentaires',
         'attachments' => 'Pièces jointes',
         'history' => 'Historique',
@@ -216,6 +220,8 @@ return [
         'form_fields' => 'Champs du formulaire',
     ],
     'actions' => [
+        'enable_email_notifications' => 'Activer les notifications par e-mail',
+        'disable_email_notifications' => 'Désactiver les notifications par e-mail',
         'add_reply' => 'Ajouter une réponse',
         'add_note' => 'Ajouter une note interne',
         'download' => 'Télécharger',
@@ -263,6 +269,11 @@ return [
             'description' => 'Cette application communique avec le centre de services via l\'API et ne peut pas encore lister les tickets existants -- ouvrez un ticket via sa référence ou créez-en un nouveau.',
         ],
     ],
+    'department_roles' => [
+        'operator' => 'Opérateur',
+        'manager' => 'Responsable',
+    ],
+
     'comment_types' => [
         'reply' => 'Réponse',
         'note' => 'Note interne',

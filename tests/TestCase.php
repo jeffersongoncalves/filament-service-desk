@@ -8,6 +8,8 @@ use Filament\FilamentServiceProvider;
 use Filament\Support\SupportServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use JeffersonGoncalves\FilamentServiceDesk\FilamentServiceDeskServiceProvider;
+use JeffersonGoncalves\FilamentServiceDesk\Tests\Fixtures\AgentPanelProvider;
+use JeffersonGoncalves\FilamentServiceDesk\Tests\Fixtures\UserPanelProvider;
 use JeffersonGoncalves\ServiceDesk\ServiceDeskServiceProvider;
 use Livewire\LivewireServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
@@ -33,6 +35,8 @@ class TestCase extends Orchestra
             SupportServiceProvider::class,
             ServiceDeskServiceProvider::class,
             FilamentServiceDeskServiceProvider::class,
+            AgentPanelProvider::class,
+            UserPanelProvider::class,
         ];
     }
 

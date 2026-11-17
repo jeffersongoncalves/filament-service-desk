@@ -53,7 +53,7 @@ public function panel(Panel $panel): Panel
 }
 ```
 
-**Resources:** Department, Category, Tag, Canned Response, Ticket (with comments, attachments, history, watchers), SLA Policy (with targets, escalation rules), Business Hours Schedule (with time slots, holidays), Email Channel, KB Article (with versions, feedback), KB Category, Service (with form fields), Service Category.
+**Resources:** Department (with operators and their per-department email opt-out), Category, Tag, Canned Response, Ticket (with comments, attachments, history, watchers), SLA Policy (with targets, escalation rules), Business Hours Schedule (with time slots, holidays), Email Channel, KB Article (with versions, feedback), KB Category, Service (with form fields), Service Category.
 
 **Widgets:** Service Desk Overview, SLA Compliance Chart, Tickets by Department Chart.
 
@@ -76,6 +76,8 @@ public function panel(Panel $panel): Panel
 **Resources:** Ticket (scoped to assigned), Canned Responses (read-only).
 
 **Pages:** Ticket Queue (claim unassigned tickets), Agent Dashboard.
+
+**Email links:** notification buttons open the ticket on the Agent panel for operators (the Admin panel when there is no Agent panel) and on the User panel for requesters. Register your own `Ticket::resolveNotificationUrlUsing(...)` in your `AppServiceProvider` to override it.
 
 **Widgets:** Agent Ticket Stats, SLA Breach Table.
 
