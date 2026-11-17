@@ -5,6 +5,14 @@ All notable changes to `filament-service-desk` will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 3.6.0 - 2026-11-17
+
+- Departments get an Operators relation manager in the Admin panel: attach operators with a role and turn the operator emails on or off per department.
+- Notification emails link to the ticket: operators land on the Agent panel (Admin when there is no Agent panel), requesters on the User panel. An app's own `Ticket::resolveNotificationUrlUsing(...)` overrides it.
+- New labels translated into all 19 locales.
+
+Requires `jeffersongoncalves/laravel-service-desk` ^1.3. Publish and run its new migration (`email_notifications` on `service_desk_department_operator`).
+
 ## 3.5.1 - 2026-11-10
 
 ### Fixed
