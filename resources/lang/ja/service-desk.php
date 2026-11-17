@@ -74,6 +74,9 @@ return [
         ],
     ],
     'fields' => [
+        'role' => '役割',
+        'operator' => 'オペレーター',
+        'email_notifications' => 'メール通知',
         'name' => '名前',
         'slug' => 'スラッグ',
         'email' => 'メール',
@@ -203,6 +206,7 @@ return [
         'new_ticket' => '新しいチケット',
     ],
     'relations' => [
+        'operators' => 'オペレーター',
         'comments' => 'コメント',
         'attachments' => '添付ファイル',
         'history' => '履歴',
@@ -216,6 +220,8 @@ return [
         'form_fields' => 'フォーム項目',
     ],
     'actions' => [
+        'enable_email_notifications' => 'メール通知を有効にする',
+        'disable_email_notifications' => 'メール通知を無効にする',
         'add_reply' => '返信を追加',
         'add_note' => '内部メモを追加',
         'download' => 'ダウンロード',
@@ -263,6 +269,11 @@ return [
             'description' => 'このアプリは API 経由でサービスデスクと通信しており、既存のチケットをまだ一覧表示できません -- 参照番号でチケットを開くか、新しいチケットを作成してください。',
         ],
     ],
+    'department_roles' => [
+        'operator' => 'オペレーター',
+        'manager' => 'マネージャー',
+    ],
+
     'comment_types' => [
         'reply' => '返信',
         'note' => '内部メモ',

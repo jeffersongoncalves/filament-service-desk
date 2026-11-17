@@ -46,7 +46,9 @@ class DepartmentResource extends Resource
 
     public static function getRelations(): array
     {
-        return [];
+        return [
+            RelationManagers\OperatorsRelationManager::class,
+        ];
     }
 
     public static function getPages(): array

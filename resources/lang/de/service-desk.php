@@ -74,6 +74,9 @@ return [
         ],
     ],
     'fields' => [
+        'role' => 'Rolle',
+        'operator' => 'Bearbeiter',
+        'email_notifications' => 'E-Mail-Benachrichtigungen',
         'name' => 'Name',
         'slug' => 'Slug',
         'email' => 'E-Mail',
@@ -203,6 +206,7 @@ return [
         'new_ticket' => 'Neues Ticket',
     ],
     'relations' => [
+        'operators' => 'Bearbeiter',
         'comments' => 'Kommentare',
         'attachments' => 'Anhänge',
         'history' => 'Verlauf',
@@ -216,6 +220,8 @@ return [
         'form_fields' => 'Formularfelder',
     ],
     'actions' => [
+        'enable_email_notifications' => 'E-Mail-Benachrichtigungen aktivieren',
+        'disable_email_notifications' => 'E-Mail-Benachrichtigungen deaktivieren',
         'add_reply' => 'Antwort hinzufügen',
         'add_note' => 'Interne Notiz hinzufügen',
         'download' => 'Herunterladen',
@@ -263,6 +269,11 @@ return [
             'description' => 'Diese App kommuniziert über die API mit dem Service Desk und kann bestehende Tickets noch nicht auflisten -- öffnen Sie ein Ticket über seine Referenz oder erstellen Sie ein neues.',
         ],
     ],
+    'department_roles' => [
+        'operator' => 'Bearbeiter',
+        'manager' => 'Manager',
+    ],
+
     'comment_types' => [
         'reply' => 'Antwort',
         'note' => 'Interne Notiz',

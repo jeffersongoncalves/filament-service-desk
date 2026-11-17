@@ -74,6 +74,9 @@ return [
         ],
     ],
     'fields' => [
+        'role' => 'Rol',
+        'operator' => 'Operatör',
+        'email_notifications' => 'E-posta bildirimleri',
         'name' => 'Ad',
         'slug' => 'Slug',
         'email' => 'E-posta',
@@ -203,6 +206,7 @@ return [
         'new_ticket' => 'Yeni talep',
     ],
     'relations' => [
+        'operators' => 'Operatörler',
         'comments' => 'Yorumlar',
         'attachments' => 'Ekler',
         'history' => 'Geçmiş',
@@ -216,6 +220,8 @@ return [
         'form_fields' => 'Form alanları',
     ],
     'actions' => [
+        'enable_email_notifications' => 'E-posta bildirimlerini aç',
+        'disable_email_notifications' => 'E-posta bildirimlerini kapat',
         'add_reply' => 'Yanıt ekle',
         'add_note' => 'Dahili not ekle',
         'download' => 'İndir',
@@ -263,6 +269,11 @@ return [
             'description' => 'Bu uygulama hizmet masasıyla API üzerinden iletişim kurar ve henüz mevcut talepleri listeleyemez -- bir talebi referansıyla açın veya yeni bir talep oluşturun.',
         ],
     ],
+    'department_roles' => [
+        'operator' => 'Operatör',
+        'manager' => 'Yönetici',
+    ],
+
     'comment_types' => [
         'reply' => 'Yanıt',
         'note' => 'Dahili not',
