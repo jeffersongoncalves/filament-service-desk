@@ -74,6 +74,9 @@ return [
         ],
     ],
     'fields' => [
+        'role' => 'نقش',
+        'operator' => 'اپراتور',
+        'email_notifications' => 'اعلان‌های ایمیلی',
         'name' => 'نام',
         'slug' => 'نامک',
         'email' => 'ایمیل',
@@ -203,6 +206,7 @@ return [
         'new_ticket' => 'تیکت جدید',
     ],
     'relations' => [
+        'operators' => 'اپراتورها',
         'comments' => 'نظرات',
         'attachments' => 'پیوست‌ها',
         'history' => 'تاریخچه',
@@ -216,6 +220,8 @@ return [
         'form_fields' => 'فیلدهای فرم',
     ],
     'actions' => [
+        'enable_email_notifications' => 'فعال‌سازی اعلان‌های ایمیلی',
+        'disable_email_notifications' => 'غیرفعال‌سازی اعلان‌های ایمیلی',
         'add_reply' => 'افزودن پاسخ',
         'add_note' => 'افزودن یادداشت داخلی',
         'download' => 'دانلود',
@@ -263,6 +269,11 @@ return [
             'description' => 'این برنامه از طریق API با میز خدمات ارتباط دارد و هنوز نمی‌تواند تیکت‌های موجود را فهرست کند -- تیکت را با شماره مرجع آن باز کنید یا یک تیکت جدید بسازید.',
         ],
     ],
+    'department_roles' => [
+        'operator' => 'اپراتور',
+        'manager' => 'مدیر',
+    ],
+
     'comment_types' => [
         'reply' => 'پاسخ',
         'note' => 'یادداشت داخلی',

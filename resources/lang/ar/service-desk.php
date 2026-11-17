@@ -74,6 +74,9 @@ return [
         ],
     ],
     'fields' => [
+        'role' => 'الدور',
+        'operator' => 'المشغل',
+        'email_notifications' => 'إشعارات البريد الإلكتروني',
         'name' => 'الاسم',
         'slug' => 'المعرّف (Slug)',
         'email' => 'البريد الإلكتروني',
@@ -203,6 +206,7 @@ return [
         'new_ticket' => 'تذكرة جديدة',
     ],
     'relations' => [
+        'operators' => 'المشغلون',
         'comments' => 'التعليقات',
         'attachments' => 'المرفقات',
         'history' => 'السجل',
@@ -216,6 +220,8 @@ return [
         'form_fields' => 'حقول النموذج',
     ],
     'actions' => [
+        'enable_email_notifications' => 'تفعيل إشعارات البريد الإلكتروني',
+        'disable_email_notifications' => 'تعطيل إشعارات البريد الإلكتروني',
         'add_reply' => 'إضافة رد',
         'add_note' => 'إضافة ملاحظة داخلية',
         'download' => 'تنزيل',
@@ -263,6 +269,11 @@ return [
             'description' => 'يتواصل هذا التطبيق مع مكتب الخدمة عبر API ولا يمكنه عرض التذاكر الحالية بعد -- افتح تذكرة برقمها المرجعي، أو أنشئ تذكرة جديدة.',
         ],
     ],
+    'department_roles' => [
+        'operator' => 'مشغل',
+        'manager' => 'مدير',
+    ],
+
     'comment_types' => [
         'reply' => 'رد',
         'note' => 'ملاحظة داخلية',

@@ -74,6 +74,9 @@ return [
         ],
     ],
     'fields' => [
+        'role' => 'Rola',
+        'operator' => 'Operator',
+        'email_notifications' => 'Powiadomienia e-mail',
         'name' => 'Nazwa',
         'slug' => 'Slug',
         'email' => 'E-mail',
@@ -203,6 +206,7 @@ return [
         'new_ticket' => 'Nowe zgłoszenie',
     ],
     'relations' => [
+        'operators' => 'Operatorzy',
         'comments' => 'Komentarze',
         'attachments' => 'Załączniki',
         'history' => 'Historia',
@@ -216,6 +220,8 @@ return [
         'form_fields' => 'Pola formularza',
     ],
     'actions' => [
+        'enable_email_notifications' => 'Włącz powiadomienia e-mail',
+        'disable_email_notifications' => 'Wyłącz powiadomienia e-mail',
         'add_reply' => 'Dodaj odpowiedź',
         'add_note' => 'Dodaj notatkę wewnętrzną',
         'download' => 'Pobierz',
@@ -263,6 +269,11 @@ return [
             'description' => 'Ta aplikacja komunikuje się z service deskiem przez API i nie może jeszcze wyświetlić istniejących zgłoszeń -- otwórz zgłoszenie po jego numerze referencyjnym lub utwórz nowe.',
         ],
     ],
+    'department_roles' => [
+        'operator' => 'Operator',
+        'manager' => 'Kierownik',
+    ],
+
     'comment_types' => [
         'reply' => 'Odpowiedź',
         'note' => 'Notatka wewnętrzna',

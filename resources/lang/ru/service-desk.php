@@ -74,6 +74,9 @@ return [
         ],
     ],
     'fields' => [
+        'role' => 'Роль',
+        'operator' => 'Оператор',
+        'email_notifications' => 'Уведомления по email',
         'name' => 'Название',
         'slug' => 'Слаг',
         'email' => 'Email',
@@ -203,6 +206,7 @@ return [
         'new_ticket' => 'Новая заявка',
     ],
     'relations' => [
+        'operators' => 'Операторы',
         'comments' => 'Комментарии',
         'attachments' => 'Вложения',
         'history' => 'История',
@@ -216,6 +220,8 @@ return [
         'form_fields' => 'Поля формы',
     ],
     'actions' => [
+        'enable_email_notifications' => 'Включить уведомления по email',
+        'disable_email_notifications' => 'Отключить уведомления по email',
         'add_reply' => 'Добавить ответ',
         'add_note' => 'Добавить внутреннюю заметку',
         'download' => 'Скачать',
@@ -263,6 +269,11 @@ return [
             'description' => 'Это приложение взаимодействует со службой поддержки через API и пока не может показывать существующие заявки -- откройте заявку по её номеру или создайте новую.',
         ],
     ],
+    'department_roles' => [
+        'operator' => 'Оператор',
+        'manager' => 'Менеджер',
+    ],
+
     'comment_types' => [
         'reply' => 'Ответ',
         'note' => 'Внутренняя заметка',

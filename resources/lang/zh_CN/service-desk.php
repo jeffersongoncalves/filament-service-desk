@@ -74,6 +74,9 @@ return [
         ],
     ],
     'fields' => [
+        'role' => '角色',
+        'operator' => '操作员',
+        'email_notifications' => '邮件通知',
         'name' => '名称',
         'slug' => '别名',
         'email' => '邮箱',
@@ -203,6 +206,7 @@ return [
         'new_ticket' => '新工单',
     ],
     'relations' => [
+        'operators' => '操作员',
         'comments' => '评论',
         'attachments' => '附件',
         'history' => '历史记录',
@@ -216,6 +220,8 @@ return [
         'form_fields' => '表单字段',
     ],
     'actions' => [
+        'enable_email_notifications' => '开启邮件通知',
+        'disable_email_notifications' => '关闭邮件通知',
         'add_reply' => '添加回复',
         'add_note' => '添加内部备注',
         'download' => '下载',
@@ -263,6 +269,11 @@ return [
             'description' => '此应用通过 API 与服务台通信，暂时无法列出现有工单 -- 请通过编号打开工单，或创建新工单。',
         ],
     ],
+    'department_roles' => [
+        'operator' => '操作员',
+        'manager' => '经理',
+    ],
+
     'comment_types' => [
         'reply' => '回复',
         'note' => '内部备注',
