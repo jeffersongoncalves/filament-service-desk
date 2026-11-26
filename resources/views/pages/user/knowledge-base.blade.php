@@ -30,7 +30,7 @@
                 </x-slot>
 
                 <div class="prose dark:prose-invert max-w-none">
-                    {!! $article->content !!}
+                    {!! str($article->content)->sanitizeHtml() !!}
                 </div>
 
                 <x-slot name="footerActions">
