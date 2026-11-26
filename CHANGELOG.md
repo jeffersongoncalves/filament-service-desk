@@ -5,6 +5,12 @@ All notable changes to `filament-service-desk` will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 1.7.0 - 2026-11-26
+
+### Security
+
+- Knowledge base article content is now sanitized before rendering on the user panel (stored XSS, GHSA-vjff-3ffr-6rqc). #95
+
 ## 1.6.0 - 2026-11-17
 
 - Departments get an Operators relation manager in the Admin panel: attach operators with a role and turn the operator emails on or off per department.
